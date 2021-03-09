@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Basic Details</title>
+    <link rel="stylesheet" href="/course_landing_page.css">
+    <style>
+         :disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="course_name"  style="line-height: 1;">
+        <%=course['courseTitle']%>
+            <% if (!course['courseStatus']) { %>
+                (Draft)
+                <% } else { %>
+                    (
+                    <%=course['courseStatus']%> )
+                        <% } %>
+    </h1>
+    <div class="alldetails">
+        <div class="course_detail">
+            <label class="text_label" style="text-align: right;">
+                Created on <%=course['courseUploadDate'].toLocaleDateString("en-US", {day: "numeric", month: "short", year: "numeric"})%> by <%=course['educator']['name']%><br>
+                <!-- <span style="background-color: #161361; color: #fff; padding: 0 3%;">
+                Status: 
+                <% if (!course['courseStatus']) { %>
+                    Draft
+                    <% } else { %>
+                        <%=course['courseStatus']%>
+                        <% } %>
+                </span> -->
+            </label>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Category</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <%=course['courseCategory']%>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Sub Category</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <%=course['courseSubCat']%>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Basic Information</label>
+            <div class="basic_course">
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Language:</b> <%=course['courseLanguage']%><br>
+                    <b>Level:</b> <% if (course['level']) { %>
+                        <%=course['level']%>
+                            <% } else { %>
+                                Level
+                                <% } %>
+                    <br><b>Pricing:</b> <% if (course['pricing']) { %>
+                        <%=course['pricing']['amount']%>
+                            <%=course['pricing']['type']%>
+                                <% } else { %>
+                                    No Pricing
+                                    <% } %>
+                    <br><br>
+                    <b>Course Type:</b> <%=course['courseType']%><br>
+                    <b>Intended Audience:</b> <%=course['intendedAudience']%><br>
+                    <b>Course Nature:</b> <%=course['courseNature']%>
+                </div>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Pre Requisite</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <% if (!course['coursePrereq'] || course['coursePrereq'] == '') { %>
+                    No information yet
+                    <% } else { %>
+                        <%=course['coursePrereq']%>
+                        <% } %>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Overview</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <% if (!course['courseOverview'] || course['courseOverview'] == '') { %>
+                    No information yet
+                    <% } else { %>
+                        <%=course['courseOverview']%>
+                        <% } %>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Objective</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <%=course['courseObjective']%>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Description</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <%=course['courseDescription']%>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Course Learning Outcomes</label>
+            <div class="inputdata" style="cursor: not-allowed;">
+                <% for (var i=0;i < course['learningOutcomes'].length; i++) { %>
+                    <%=course['learningOutcomes'][i]%><br>
+                        <% } %>
+            </div>
+        </div>
+        <% var cat = course['courseCategory'].replace(/ /g, '_')%>
+            <div class="course_detail">
+                <label class="text_label">MoU</label>
+                <% if (course['mouDetails']) { %>
+                    <div class="inputdata" style="cursor: not-allowed;">
+                        <%=course['mouDetails']['basic']%>
+                    </div>
+
+                    <div class="basic_course" style="margin-top: 3%; width: 100%; display: flex; justify-content: space-around;">
+                        <div class="witnessdetails" style="text-align: center;">
+                            <h3>Educator</h3>
+                            <div class="sigimg">
+                                <img src="/courseVideos/<%=cat%>/<%=course['_id']%>/signatures/<%=course['mouDetails']['file']%>">
+                            </div>
+                            <h3>
+                                <%=course['educator']['name']%>
+                            </h3>
+                            <p>
+                                <%=course['educator']['email']%>
+                            </p>
+                        </div>
+                        <div class="witnessdetails" style="text-align: center;">
+                            <h3>Witness 1</h3>
+                            <div class="sigimg">
+                                <img src="/courseVideos/<%=cat%>/<%=course['_id']%>/signatures/<%=course['mouDetails']['witness1']['file']%>">
+                            </div>
+                            <h3>
+                                <%=course['mouDetails']['witness1']['name']%>
+                            </h3>
+                            <p>
+                                <%=course['mouDetails']['witness1']['address']%>
+                            </p>
+                        </div>
+                        <div class="witnessdetails" style="text-align: center;">
+                            <h3>Witness 2</h3>
+                            <div class="sigimg">
+                                <img src="/courseVideos/<%=cat%>/<%=course['_id']%>/signatures/<%=course['mouDetails']['witness2']['file']%>">
+                            </div>
+                            <h3>
+                                <%=course['mouDetails']['witness2']['name']%>
+                            </h3>
+                            <p>
+                                <%=course['mouDetails']['witness2']['address']%>
+                            </p>
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <p>Not Signed Yet</p>
+                        <% } %>
+            </div>
+            <% if(course['clpage']) { %>
+                <div class="course_detail">
+                    <p class="text_label">Course Image</p>
+                    <div class="course_detail_1">
+                        <div class="file_upload">
+                            <div class="drop-zone" style="cursor: auto; height: max-content;">
+                                <img style="object-fit: contain; border-radius: 10px;" alt="No Thumbnail Yet" src="/courseVideos/<%=cat%>/<%=course['_id']%>/course_thumbnail.png">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="course_detail">
+                    <p class="text_label">Promotional Video</p>
+                    <div class="course_detail_2">
+                        <div class="file_upload" id="promovideo_upload_file">
+                            <div class="drop-zone" style="height: max-content;">
+                                <video controls="controls" style="border-radius: 10px;">
+                                <source src="/courseVideos/<%=cat%>/<%=course['_id']%>/promo_video.mp4" type="video/mp4">
+                                    No Promo Video Yet
+                        </video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% } else { %>
+                    <div style="margin-top: 4%;"></div>
+                    <% } %>
+    </div>
+
+
+
+
+
+    <script>
+    </script>
+
+</body>
+
+</html>
+</body>
+
+</html>

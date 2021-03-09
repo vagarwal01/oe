@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Educator</title>
+    <link rel="stylesheet" href="/course_landing_page.css">
+    <style>
+        @media(max-width: 500px) {
+            .course_details {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ins_profile" id="ins_profile">
+        <h2 class="instructor" style="margin-top: 0;">Educator profile</h2>
+
+        <div>
+            <div class="course_details">
+                <div class="image_file_label">
+                    <img src="/profile_photos/<%=user['dp']%>" class="ins-img" alt="No Profile Yet">
+                </div>
+                <div class="instructor_name">
+                    <h3 style="padding-bottom: 2%;">
+                        <%=user['educatorName']%>
+                    </h3>
+                    <h4>
+                        <%=user['educatorEmail']%>
+                    </h4>
+                </div>
+            </div>
+            <div class="course_detail" style="margin-top: 5px;">
+                <label for="instructor_description" class="text_label">About Educator</label>
+                <% if (user['about']) { %>
+                    <div class="inputdata" style="cursor: not-allowed;">
+                        <%=user['about']%>
+                    </div>
+                    <% } else { %>
+                        <p>No Information Yet</p>
+                        <% } %>
+            </div>
+        </div>
+
+        <% if (status && status == 'Review') { %>
+            <button id="approveCourse" class="cta">Approve</button>
+            <p id="errormssg2" style="margin-top: 2%;"></p>
+            <% } %>
+    </div>
+
+
+
+    <script>
+        $('#approveCourse').click(() => {
+            document.getElementById('gum-local').style.cursor = 'progress'
+            document.getElementById('approveCourse').style.cursor = 'progress'
+            $.ajax({
+                type: "GET",
+                url: "/admin/approveTheCourse",
+                success: (data) => {
+                    if (data == 'success') {
+                        document.getElementById('errormssg2').innerText = 'The course is Live now !.'
+                        setTimeout(function() {
+                            location.href = '/admin/dashboard/courses';
+                        }, 3000);
+                    } else {
+                        console.log(data)
+                        document.getElementById('gum-local').style.cursor = 'auto'
+                        document.getElementById('approveCourse').style.cursor = 'auto'
+                        document.getElementById('errormssg2').innerText = data
+                        document.getElementById('approveCourse').style.display = 'block'
+                    }
+                },
+                error: (e) => {
+                    console.log(e)
+                    document.getElementById('gum-local').style.cursor = 'auto'
+                    document.getElementById('approveCourse').style.cursor = 'auto'
+
+                    document.getElementById('errormssg2').innerText = 'An unexpected error occured !'
+                }
+            });
+
+        })
+    </script>
+
+</body>
+
+
+</html>

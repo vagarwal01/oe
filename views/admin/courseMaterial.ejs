@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/courseUpload.css">
+    <link rel="stylesheet" href="/quiz.css">
+    <title>Course Material</title>
+    <style>
+        .module_main {
+            background: #e9f8fc;
+            box-shadow: inset 15px 15px 15px #2097b6, inset -15px -15px 15px #2097b6;
+        }
+        .video {
+            position: relative;
+        }
+        
+        .video video {
+            width: 400px;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .video video:focus {
+            outline: none;
+        }
+        @media (max-width: 1100px) {
+            .lecture {
+                flex-direction: column;
+            }
+            .lecture_details {
+                width: 100%;
+                margin-bottom: 3%;
+            }
+        }
+        @media (max-width: 700px) {
+            .video video {
+                width: 350px;
+            }
+        }
+        @media (max-width: 560px) {
+            .video video {
+                width: 270px;
+            }
+        }
+        @media (max-width: 400px) {
+            .video video {
+                width: 230px;
+            }
+        }
+        @media (max-width: 350px) {
+            .video video {
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="course_name" style="line-height: 1;">
+        <%=coursetitle%>
+    </h1>
+    <div class="weekmaindiv" id="weekmaindiv">
+        <% for(var i = 0; i < syll.length; i++) { %>
+            <% var wk = syll[i].split("::")[0] %>
+                <div class="weekitem">
+                    <!-- week -->
+                    <div class="week">
+                        <% if(syll[i].split("::")[1] == 'No') { %>
+                            <div class="plus weekBtn" style="background-color: rgb(200,0,0);" onclick="buttonWeek('<%=wk%>')" id="Wbtn_<%=wk%>" style="display: block;">
+                                <%=wk%>
+                            </div>
+                            <i id="Wcheck_<%=wk%>" style="color: green; display:none;" class="fas fa-check-circle"></i>
+                            <% } else { %>
+                                <div class="plus weekBtn" style="background-color: rgb(0,100,0);" id="Wbtn_<%=wk%>" onclick="buttonWeek('<%=wk%>')" style="display: block;">
+                                    <%=wk%>
+                                </div>
+                                <i id="Wcheck_<%=wk%>" style="color: green; display: block;" class="fas fa-check-circle"></i>
+                                <% } %>
+                    </div>
+
+                    <div id="allinoneweekdiv_<%=wk%>" style="display: none">
+                        <!-- week details -->
+                        <div class="weekActive">
+                            <h3 id="weekActiveInfo_<%=wk%>"></h3>
+                        </div>
+
+                        <!-- all module -->
+                        <div id="moduleTable_<%=wk%>"></div>
+
+
+                        <div class="collapseWeek" id="viewQuizbtn_<%=wk%>" style="display: none; margin-bottom: 4%;">
+                            <button class="plus CWbtn" onclick="viewQuiz('<%=wk%>')">View <%=wk%> Quiz</button>
+                        </div>
+
+                        <div class="quizDetails" id="quizUpload_<%=wk%>" style="margin-bottom: 5%;">
+                            <form method="POST" class="quiz_box" id="quizquestionform_<%=wk%>" enctype="multipart/form-data">
+                                <header>
+                                    <div class="form__group field header_div">
+                                        <p style="color: #007bff; text-align: left;">Quiz Title</p>
+                                        <p class="que_text" id='Qtitle_<%=wk%>'></p>
+                                    </div>
+                                </header>
+                                <section>
+                                    <div class="form__group field">
+                                        <p style="color: #007bff; text-align: left;" id="questiontitle_<%=wk%>">Question 1</p>
+                                        <div class="que_div" id="textual_que-div_<%=wk%>">
+                                            <div class="input_que" id="question_<%=wk%>" style="width: 100%;"></div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="que_div" id="image_que-div_<%=wk%>" style="display: none;">
+                                        <div class="input_que image_box">
+                                            <img src="" id="question_image_<%=wk%>">
+                                        </div>
+                                    </div>
+                                    <div class="form__group" style="margin-top: 2%;">
+                                        <p style="color: #007bff;">Answer Type</p>
+                                        <div class="answerTypeRadios" id="answerType_<%=wk%>">
+                                            <label for="at-rd1_<%=wk%>" style="cursor: default;" class="btn-radio">
+                                            <input type="radio" disabled value="multipleChoice" id="at-rd1_<%=wk%>" name="at">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span>Multiple Choice</span>
+                                            </label>
+                                            <label for="at-rd2_<%=wk%>" style="cursor: default;" class="btn-radio">
+                                            <input type="radio" disabled value="checkbox" id="at-rd2_<%=wk%>" name="at">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span>Checkboxes</span>
+                                            </label>
+                                            <label for="at-rd3_<%=wk%>" style="cursor: default;" class="btn-radio">
+                                            <input type="radio" disabled value="shortAnswer" id="at-rd3_<%=wk%>" name="at">
+                                            <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                <circle cx="10" cy="10" r="9"></circle>
+                                                <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                            </svg>
+                                            <span>Short Answer</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <input type="text" hidden value="" id="selectedOptionMC_<%=wk%>">
+                                    <input type="text" hidden value="" id="selectedOptionCB_<%=wk%>">
+                                    <input type="number" hidden value="" id="queno_<%=wk%>">
+                                    <div class="options" id="option_list_<%=wk%>">
+                                        <!-- <div class="option_list"></div> -->
+                                    </div>
+                                    <div class="form__group field" style="margin-top: 3%; margin-bottom: 40px;">
+                                        <p style="color: #007bff; text-align: left;">Explanation</p>
+                                        <p class="que_text" id='explanation_<%=wk%>'></p>
+                                    </div>
+                                    <p id="quizerror_<%=wk%>" style="color: red;"></p>
+                                </section>
+                                <div class="footer" id="footerquiz_<%=wk%>"></div>
+                            </form>
+                        </div>
+
+                        <div class="collapseWeek" id="viewAdditionsbtn_<%=wk%>" style="display: none; margin-bottom: 6%;">
+                            <button class="plus CWbtn" onclick="viewAdditions('<%=wk%>')">View all <%=wk%> Additionals</button>
+                        </div>
+
+                        <center>
+                            <div id="viewallassn_<%=wk%>" class="viewallassn"></div>
+                        </center>
+                        <div class="collapseWeek" style="margin-bottom: 5%;">
+                            <button class="plus CWbtn" onclick="collapseWeek('<%=wk%>')">COLLAPSE <%=wk%></button>
+                        </div>
+                    </div>
+                </div>
+                <% } %>
+    </div>
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#popup_main').css("display", "block");
+            }, 5000);
+        });
+        $('#close_button').click(function() {
+            $('#popup_main').css("display", "none");
+        });
+
+        var quizdet
+        function viewQuiz(week) {
+            $.ajax({
+                type: 'GET',
+                url: '/admin/get/quizDetails/'+week,
+                success: (data) => {
+                    if(data['resp'] == 'suc') {
+                        document.getElementById('quizquestionform_'+week).style.display = 'block'
+                        if(data['quiz']) {
+                            quizdet = data['quiz']
+                            displayQue(week, 1)
+                        } else {
+                            document.getElementById('quizquestionform_'+week).innerHTML = `
+                            <p style="color: red; text-align: center; padding: 3% 0;">No questions uploaded yet !</p>
+                            <div style="width: 100%; margin-bottom: 2%">
+                                <center><button type="button" style="margin-right: 0;" class="qcta submit_btn" onclick="closeQuiz('${week}')">Close</button></center>
+                            </div>`
+                        }
+                    } else {
+                        alert('Something went wrong. Please try again later.')
+                    }
+                },
+                error: (err) => {
+                    alert('Something went wrong. Please try again later.')
+                }
+            })
+        }
+        function closeQuiz(week) {
+            document.getElementById('quizquestionform_'+week).style.display = 'none'
+        }
+        function viewAdditions(week) {
+            if (document.getElementById('viewallassn_' + week).style.display == 'none') {
+                document.getElementById('viewallassn_' + week).style.display = 'block'
+                getallAdditions(week)
+            } else {
+                document.getElementById('viewAdditionsbtn_' + week).style.marginBottom = '6%'
+                document.getElementById('viewallassn_' + week).style.display = 'none'
+            }
+        }
+
+
+        function viewlecturetable(week, mod_num) {
+            document.getElementById('viewLec_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('vidTable_' + week + '_' + mod_num).style.display = 'block'
+            getLectureDetails(week, mod_num)
+        }
+
+        function collapseVidTable(week, mod_num) {
+            document.getElementById('vidTable_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('viewLec_' + week + '_' + mod_num).style.display = 'block'
+        }
+
+        function buttonWeek(week) {
+            if (document.getElementById('allinoneweekdiv_' + week).style.display == 'none') {
+                document.getElementById('allinoneweekdiv_' + week).style.display = 'block'
+                if (document.getElementById('weekActiveInfo_' + week).innerText.length == 0) {
+                    getWeekDetails(week)
+                }
+            } else {
+                document.getElementById('allinoneweekdiv_' + week).style.display = 'none'
+            }
+        }
+
+        function collapseWeek(week) {
+            document.getElementById('allinoneweekdiv_' + week).style.display = 'none'
+        }
+
+
+
+        function getWeekDetails(week) {
+            $.ajax({
+                type: "GET",
+                url: "/admin/get/weekDetails/" + week,
+                success: (data) => {
+                    console.log(data)
+                    if (data['title'].length > 0)
+                        var title = data['title']
+                    else
+                        var title = 'Week Title'
+                    document.getElementById('weekActiveInfo_' + week).innerText = title + ' | ' + data['time']
+                    document.getElementById('viewAdditionsbtn_' + week).style.display = 'flex'
+                    document.getElementById('viewQuizbtn_' + week).style.display = 'flex'
+                    getNumOfModules(week)
+                },
+                error: (err) => {
+                    alert('err')
+                }
+            });
+        }
+
+        function getLectureDetails(week, mod_num) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/admin/get/lectureDetails/" + week + "/" + mod_num,
+                success: (data) => {
+                    var numoflec = 0
+                    document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML = ''
+                    for (lecture in data) {
+                        if (lecture.includes('lec')) {
+                            numoflec++
+                            var i = data[lecture]['sno'].toString().split(".")[1]
+                            if (data[lecture]['videoFile'])
+                                document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `
+                                <div class="lecture_item">
+                                    <div class="lecture">
+                                        <div class="lecture_details" style="display: flex;">
+                                            <h4 style=" flex: 1;">${data[lecture]['sno']}</h4>
+                                            <h4 style="flex: 8;">${data[lecture]['title']}</h4> 
+                                        </div>
+                                        <div class="videofilepluserror" style="display: flex;">
+                                            <div class="video">
+                                                <video controls="controls">
+                                                    <source src="/courseVideos/<%=cat%>/<%=cid%>/${week}/${data[lecture]['videoFile']['filename']}" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                            else
+                                document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `
+                                <div class="lecture_item">
+                                    <div class="lecture">
+                                        <div class="lecture_details" style="display: flex;">
+                                            <h4 style=" flex: 1;">${data[lecture]['sno']}</h4>
+                                            <h4 style="flex: 8;">${data[lecture]['title']}</h4> 
+                                        </div>
+                                        <div class="videofilepluserror" style="display: flex;">
+                                            Video not uploaded
+                                        </div>
+                                    </div>
+                                </div>`
+                        }
+                    }
+                    document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `<button class="plus" onclick="collapseVidTable('${week}', '${mod_num}')" >COLLAPSE</button>`
+                },
+                error: (err) => {
+                    alert('err')
+                }
+            });
+
+        }
+
+        function getNumOfModules(week) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/admin/get/modules/" + week,
+                success: (data) => {
+                    console.log('yeah called')
+                    console.log(data)
+                    for (module in data) {
+                        if (module.includes('module')) {
+                            console.log(module)
+                            var unId = week + "_" + module
+                            if (data[module]['status']) {
+                                var modDisplay = 'block'
+                            } else {
+                                var modDisplay = 'none'
+                            }
+                            var time = 0
+                            for (lec in data[module]) {
+                                if (lec.includes('lec')) {
+                                    time += data[module][lec]['time']
+                                }
+                            }
+                            var hours = Math.floor(time / 60);
+                            var min = time - (hours * 60)
+                            var moduleTime = ''
+                            if (hours == 1) {
+                                moduleTime += '1 Hour '
+                            } else if (hours > 1) {
+                                moduleTime += hours + ' Hours '
+                            }
+                            if (min == 1) {
+                                moduleTime += min + ' Minute'
+                            } else if (min > 1) {
+                                moduleTime += min + ' Minutes'
+                            }
+                            document.getElementById('moduleTable_' + week).innerHTML += `
+                            <div class="module_main" id="modmain_${week}_${module}">
+                                <div class="mod_text">
+                                    <h3 id="${week}_${module}_text" style="display: block;">${module.toUpperCase()}</h3>
+                                    <i id="${week}_${module}_check" style="display: ${modDisplay}; color: #143d3f;" class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="module_leftmargin">
+                                    <h4 id="${week}_${module}_title" style="display: block;" class="mod_title">${data[module]['title']} | ${moduleTime}</h4>
+                                    <center>
+                                        <div class="videoTable" id="vidTable_${week}_${module}" style="display: none;"></div>
+                                    </center>
+                                    <button class="plus viewLec" style="display: block;" onclick="viewlecturetable('${week}', '${module}')" id="viewLec_${week}_${module}">View Lectures</button>
+                                </div>
+                            </div>
+                            `
+                        }
+                    }
+                },
+                error: (err) => {
+                    alert('err')
+                }
+            });
+
+        }
+
+        function displayQue(week, qno) {
+            var quizD = quizdet['Question-'+qno]
+            $('#queno_'+week).val(qno)
+            
+            if(!quizdet['title'] || quizdet['title'] == '')
+                $('#Qtitle_'+week).text('-')
+            else
+                $('#Qtitle_'+week).text(quizdet['title'])
+            document.getElementById('questiontitle_'+week).innerText = 'Question '+qno
+
+            var txt = document.createElement("textarea")
+            txt.innerHTML = `${quizD['question']['text']}`
+            document.getElementById('question_'+week).innerHTML = txt.value
+            
+            // $( 'textarea#question_' + week ).val(quizD['question']['text'])
+            if(quizD['question']['image']) {
+                document.getElementById('image_que-div_'+week).style.display = 'flex'
+                $('#question_image_'+week).attr('src','/courseVideos/<%=cat%>/<%=cid%>/'+week+'/quiz/que'+ qno + '/' + quizD['question']['image']);
+            }
+            if(quizD['answerType'] == 'multipleChoice') {
+                document.getElementById('at-rd1_'+week).checked = true
+                $('#selectedOptionMC_'+week).val(quizD['correct'])
+                $('#selectedOptionCB_'+week).val('')
+                var icon = 'circle' 
+            }
+            else if(quizD['answerType'] == 'checkbox') {
+                document.getElementById('at-rd2_'+week).checked = true
+                $('#selectedOptionCB_'+week).val(quizD['correct'])
+                $('#selectedOptionMC_'+week).val('')
+                var icon = 'square' 
+                var optlist = quizD['correct'].split('&')
+            }
+            else {
+                $('#selectedOptionCB_'+week).val('')
+                $('#selectedOptionMC_'+week).val('')
+                document.getElementById('at-rd3_'+week).checked = true
+                document.getElementById('option_list_'+week).innerHTML = `
+                    <div class="mainOptionDiv">
+                        <div class="form__group field" style="margin-top: 1%; width: 90%">
+                            <p style="color: #007bff; text-align: left;">Short Answer Text</p>
+                            <p class="que_text" id='shortanswer_${week}'>${quizD['correct']}</p>
+                        </div>
+                    </div>`
+            } 
+            if(quizD['answerType'] != 'shortAnswer') {
+                var type = quizD['answerType']
+                document.getElementById('option_list_'+week).innerHTML = ''
+                for(var i = 1; i <= quizD['totalOptions']; i++) {
+                    var opt = 'opt'+i
+                    console.log('num = ' + i)
+                    if(quizD['answerType'] == 'checkbox') {
+                        if(optlist.includes(opt))
+                            var color = 'green'
+                        else
+                            var color = 'grey'
+                    } else {
+                        if(opt == quizD['correct'])
+                            var color = 'green'
+                        else
+                            var color = 'grey'
+                    }
+                    if(quizD['opt'+i]['image'])
+                        $('#option_list_'+week).append(`
+                            <div class="mainOptionDiv" style="margin: 5% 0">
+                                <div class="textoptiondiv">
+                                    <div class="icon_que">
+                                        <i class="fas fa-check-${icon} checkcircle" style="color: ${color}; cursor: default"></i>
+                                    </div>
+                                    <div class="input_que option_div">
+                                        ${quizD['opt'+i]['text']}
+                                        <textarea name="" hidden id='option_${type}_${i}_${week}'>${quizD['opt'+i]['text']}</textarea>
+
+                                    </div>
+                                </div>
+
+                                <div class="image_box" style="display: flex;">
+                                    <img src="/courseVideos/<%=cat%>/<%=cid%>/${week}/quiz/que${qno}/${quizD['opt'+i]['image']}">
+                                </div>
+                            </div>`)
+                        else
+                            $('#option_list_'+week).append(`
+                            <div class="mainOptionDiv" style="margin: 5% 0">
+                                <div class="textoptiondiv">
+                                    <div class="icon_que">
+                                        <i class="fas fa-check-${icon} checkcircle" style="color: ${color}; cursor: default;"></i>
+                                    </div>
+                                    <div class="input_que option_div">
+                                        ${quizD['opt'+i]['text']}
+                                        <textarea name="" hidden id='option_${type}_${i}_${week}'>${quizD['opt'+i]['text']}</textarea>
+                                    </div>
+                                </div>
+                            </div>`)
+                }
+            }
+            if(!quizD['explanation'] || quizD['explanation'] == '')
+                $('#explanation_'+week).text('-')
+            else
+                $('#explanation_'+week).text(quizD['explanation'])
+            if(qno == quizdet['total']) {
+                document.getElementById('footerquiz_'+week).innerHTML = `
+                <button type="button" class="qcta submit_btn" onclick="closeQuiz('${week}')">Exit</button>
+                <button type="button" class="qcta next_btn">No More Ques</button>`
+            } else {
+                document.getElementById('footerquiz_'+week).innerHTML = `
+                <button type="button" class="qcta submit_btn" onclick="closeQuiz('${week}')">Exit</button>
+                <button type="button" class="qcta next_btn" onclick="displayQue('${week}', ${qno+1})">Que ${qno+1} of ${quizdet['total']}</button>`
+            }
+        }
+
+        function getallAdditions(week) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/admin/get/allAdditions/" + week,
+                success: (data) => {
+                    console.log(data)
+                    document.getElementById('viewAdditionsbtn_' + week).style.marginBottom = '2%'
+                    document.getElementById('viewallassn_' + week).style.display = 'block'
+                    document.getElementById('viewallassn_' + week).innerHTML = ''
+                    var count = 0
+                    for (module in data) {
+                        if (module.includes('module')) {
+                            if (data[module]['resources']) {
+                                if (data[module]['resources']['downloadableFiles']) {
+                                    for (df in data[module]['resources']['downloadableFiles']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rdf_${df}">
+                                            <div class="viewassntype">
+                                                <h3>${module.toUpperCase()} Download File</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${df}</p>
+                                                    <p>${data[module]['resources']['downloadableFiles'][df]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['downloadableFiles'][df]['originalName']}</p>
+                                            </div>                                            
+                                            <div class="viewassndel">
+                                                <i style="cursor: pointer;" onclick="location.href='/admin/downloadMaterial/${week}/${data[module]['resources']['downloadableFiles'][df]['locationName']}'" class="fas fa-download"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                                if (data[module]['resources']['url']) {
+                                    for (url in data[module]['resources']['url']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rurl_${url}">
+                                            <div class="viewassntype">
+                                                <h3>${module.toUpperCase()} URL</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${url}</p>
+                                                    <p>${data[module]['resources']['url'][url]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['url'][url]['link']}</p>
+                                            </div>
+                                            <div class="viewassndel">
+                                                <i style="cursor: pointer;" onclick="window.open('${data[module]['resources']['url'][url]['link']}', '_blank')" class="fas fa-external-link-alt"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                                if (data[module]['resources']['sourceCodes']) {
+                                    for (sc in data[module]['resources']['sourceCodes']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rsc_${sc}">
+                                            <div class="viewassntype viewassndet">
+                                                <h3>${module.toUpperCase()} Source Code</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${sc}</p>
+                                                    <p>${data[module]['resources']['sourceCodes'][sc]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['sourceCodes'][sc]['originalName']}</p>
+                                            </div>                                            
+                                            <div class="viewassndel">
+                                                <i style="cursor: pointer;" onclick="location.href='/admin/downloadMaterial/${week}/${data[module]['resources']['sourceCodes'][sc]['locationName']}'" class="fas fa-download"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                            }
+                            if (data[module]['assignments']) {
+                                for (assn in data[module]['assignments']) {
+                                    count++
+                                    document.getElementById('viewallassn_' + week).innerHTML += `
+                                    <div class="viewallassnitem" id="${week}_${module}_massn_${assn}">
+                                        <div class="viewassntype viewassndet">
+                                            <h3>${module.toUpperCase()} Assignment</h3>
+                                        </div>
+                                        <div class="viewassndetails">
+                                            <div class="viewassntitle">
+                                                <p>${assn}</p>
+                                                <p>${data[module]['assignments'][assn]['time']} min</p>
+                                            </div>
+                                            <p class="viewassnfilename">${data[module]['assignments'][assn]['originalName']}</p>
+                                        </div>                                            
+                                        <div class="viewassndel">
+                                            <i style="cursor: pointer;" onclick="location.href='/admin/downloadMaterial/${week}/${data[module]['assignments'][assn]['locationName']}'" class="fas fa-download"></i>
+                                        </div>
+                                    </div>`
+                                }
+                            }
+                        }
+                        if (module == 'assignments') {
+                            for (assn in data[module]) {
+                                count++
+                                document.getElementById('viewallassn_' + week).innerHTML += `
+                                    <div class="viewallassnitem" id="${week}_wassn_${assn}">
+                                        <div class="viewassntype viewassndet">
+                                            <h3>${week.toUpperCase()} Assignment</h3>
+                                        </div>
+                                        <div class="viewassndetails">
+                                            <div class="viewassntitle">
+                                                <p>${assn}</p>
+                                                <p>${data[module][assn]['time']} min</p>
+                                            </div>
+                                            <p class="viewassnfilename">${data[module][assn]['originalName']}</p>
+                                        </div>                                            
+                                        <div class="viewassndel">
+                                            <i style="cursor: pointer;" onclick="location.href='/admin/downloadMaterial/${week}/${data[module][assn]['locationName']}'" class="fas fa-download"></i>
+                                        </div>
+                                    </div>`
+                            }
+                        }
+                    }
+                    if(count == 0) {
+                        document.getElementById('viewallassn_' + week).innerHTML = '<p style="color: red;">There are no additions yet !</p>'
+                    }
+                },
+                error: (err) => {
+                    console.log(err.responseText)
+                    alert('Something went wrong. Please try again later.')
+                }
+            });
+        }
+
+        function downloadaddn(pathtodel, viewassnitem, week) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    'path': pathtodel
+                },
+                url: "/admin/download/additional",
+                success: (data) => {
+                    if (data == 'success') {
+                        document.getElementById(viewassnitem).style.display = 'none'
+                        document.getElementById('viewallassnerror_' + week).innerText = 'Deleted successfully'
+                    } else
+                        document.getElementById('viewallassnerror_' + week).innerText = 'Error while deleting.'
+
+                },
+                error: (e) => {
+                    alert(e)
+                }
+
+            })
+        }
+    </script>
+</body>
+
+</html>
+
+</html>

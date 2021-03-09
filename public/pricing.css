@@ -1,0 +1,51 @@
+.test-feedback h1 {
+    padding-bottom: 20px;
+    color: #161361;
+}
+
+.test-feedback p {
+    color: black;
+    font-size: 1.5rem;
+}
+
+.data {
+    color: #29bde4;
+}
+
+
+
+/* reset input */
+
+/* .form__field:required,
+.form__field:invalid {
+    box-shadow: none;
+} */
+
+.savebtn {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.cta {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+}
+
+.savebtn .cta {
+    margin-top: 0;
+}
+
+@media (min-width: 300px) and (max-width: 700px) {
+    .form__field {
+        width: 100%;
+    }
+    .select {
+        width: 100%;
+    }
+}

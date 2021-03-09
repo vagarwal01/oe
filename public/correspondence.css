@@ -1,0 +1,59 @@
+.test-feedback h1 {
+    padding-bottom: 20px;
+    color: #161361;
+}
+
+.data-stuff {
+    margin-top: 20px;
+    color: black;
+    opacity: 0.6;
+    /* font-size: 1.5rem; */
+    width: 50%;
+    text-align: center;
+}
+
+.data {
+    color: #29bde4;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.forum-image {
+    height: 450px;
+    width: 500px;
+    opacity: 0.6;
+}
+
+@media (min-width: 450px) and (max-width: 650px) {
+    .forum-image {
+        height: 300px;
+        width: 300px;
+    }
+    .data-stuff {
+        margin-top: 20px;
+        padding: 10px;
+        color: black;
+        opacity: 0.6;
+        /* font-size: 1.2rem; */
+        width: 100%;
+    }
+}
+
+@media (min-width: 300px) and (max-width: 450px) {
+    .forum-image {
+        height: 200px;
+        width: 200px;
+    }
+    .data-stuff {
+        margin-top: 20px;
+        padding: 10px;
+        color: black;
+        opacity: 0.6;
+        /* font-size: 1rem; */
+        width: 100%;
+    }
+}

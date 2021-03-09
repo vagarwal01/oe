@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educators</title>
+    <link rel="stylesheet" href="/css/admin/educatorsList.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="header">EDUCATORS DETAIL</div>
+        <% if (users.length == 0) { %>
+            <h3 style="text-align: center;  margin: 5%; color: red;">
+                There are no educators !</h3>
+            <% } else { %>
+                <div class="cards_wrap">
+                    <% for (var i=0;i< users.length; i++) { %>
+                        <% var eduId = users[i]['_id']%>
+                            <div class="card_item">
+                                <div class="card_inner">
+                                    <img src="/profile_photos/<%=users[i]['dp']%>" onerror="this.onerror=null; this.src='/be-an-educator/profiledp.jpg'" style="border-radius: 50%;" alt="No Profile Yet">
+                                    <div class="edu_name">
+                                        <%=users[i]['educatorName']%>
+                                    </div>
+                                    <div class="edu_email">
+                                        <%=users[i]['educatorEmail']%>
+                                    </div>
+                                    <div class="course_no">
+                                        <%=users[i]['total']%> Courses
+                                    </div>
+                                    <button onclick="openEduDetails('<%=eduId%>')" class="cta">SEE MORE</button>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% } %>
+                </div>
+    </div>
+
+
+    <script>
+        function openEduDetails(eduId) {
+            $("#gum-local").load("/admin/setEduId/" + eduId);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,341 @@
+#vision .projects {
+    flex-direction: column;
+    /* max-width: 1100px; */
+    margin: 0;
+    /* border: 2px solid black; */
+    padding: 0;
+}
+
+#vision .projects-header {
+    margin-bottom: 0px;
+    max-width: 600px;
+}
+
+#vision .all-projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#vision .project-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin: 0px auto;
+    margin-top: 10px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+#vision .project-info {
+    padding: 10px;
+    flex-basis: 50%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    background: #33999e;
+    color: white;
+}
+
+#vision .project-info h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    text-align: justify;
+}
+
+#vision .project-info h2 {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+#vision .project-info p {
+    color: white;
+}
+
+#vision .project-img {
+    flex-basis: 50%;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.greenscreen_img {
+    display: flex;
+    flex-direction: column;
+}
+
+#vision .project-img:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+    opacity: .7;
+}
+
+#vision .project-img img {
+    transition: .3s ease transform;
+    position: relative;
+}
+
+#vision .project-item:hover .project-img img {
+    transform: scale(1.1);
+}
+
+#vision .project-img h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* translate: 50% 50%; */
+    font-size: 2.5rem;
+    font-weight: 900;
+    line-height: 1;
+    padding: 1%;
+    text-align: center;
+    color: white;
+    text-shadow: 2px 2px #000;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
+.fa-chevron-circle-left{
+    position: absolute;
+    top: 10px;
+    left: 5px;
+}
+.scrollTop{
+    position: fixed;
+    left: 100px;
+    width: 100px;
+    height: 40px;
+    background: #161361;
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    z-index: 999;
+    transition: 0.5s all;
+}
+.scrollTop:hover{
+    background: #29bde4;
+    color: white;
+}
+
+/* Media Query For Tablet */
+
+@media only screen and (min-width: 768px) {
+    .greenscreen_img {
+        flex-direction: row;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    #vision {
+        background-color: #c5d5cb;
+    }
+    #vision .project-item {
+        flex-direction: row;
+        height: 350px;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        border-radius: 0;
+    }
+    #vision .project-item:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+    #vision .all-projects .project-info {
+        padding: 10px;
+    }
+    #vision .project-img h1 {
+        font-size: 4rem;
+    }
+    #vision .project-item .project-img {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    #vision .project-item .project-img img {
+        height: 100%;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    #vision .project-item {
+        height: 300px;
+    }
+    #vision .all-projects .project-info {
+        padding: 20px 10px;
+    }
+}
+
+.setup-container .setup-title {
+    font-size: 4rem;
+    font-weight: 300;
+    color: black;
+    text-transform: uppercase;
+    text-align: center;
+    height: max-content;
+    padding-top: 0;
+    padding: 2%;
+    line-height: 1;
+}
+
+.setup-container .setup-title span {
+    color: #29bde4;
+    font-weight: bold;
+}
+
+.setup-list {
+    width: 100%;
+}
+
+.setup-list-submain {
+    margin-left: 4%;
+    /* width: 100%; */
+}
+
+.setup-list-item {
+    display: flex;
+    align-items: baseline;
+}
+
+.setup-list-item i {
+    overflow-x: hidden;
+    padding: 1% 2%;
+}
+
+.top-navs {
+    display: flex;
+    width: 100%;
+    /* border: 2px solid black; */
+    justify-content: space-between;
+    position: relative;
+    z-index: 0;
+}
+
+.backBtn {
+    z-index: 2;
+    padding: 1% 4%;
+    border-radius: 5px;
+    height: max-content;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #161361;
+    text-align: center;
+    cursor: pointer;
+    transition-property: background-color, color;
+}
+
+.backBtn:hover {
+    color: #fff;
+    font-weight: bold;
+    background-color: #29bde4;
+}
+
+.backbtndiv {
+    width: 20%;
+    display: flex;
+}
+
+.setupsdiv {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.top-navs:after {
+    content: '';
+    left: 0;
+    top: 50%;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    z-index: 1;
+}
+
+.top-navs .backbtndiv .backBtn {
+    padding: 1% 10%;
+}
+
+@media only screen and (max-width: 768px) {
+    .setup-container .setup-title {
+        font-size: 3rem;
+    }
+    .setup-list-item i {
+        padding-right: 5%;
+    }
+    .setup-list-submain {
+        margin-left: 5%;
+    }
+}
+@media (max-width: 1150px) {
+    .setupsdiv {
+        margin-top: 50px;
+    }
+    .top-navs:after {
+        top: 80%;
+    }
+
+}
+
+@media (max-width: 850px) {
+    .backBtn {
+        padding: 1% 4%;
+    }
+}
+
+@media (max-width: 660px) {
+    .backBtn {
+        padding: 2% 2%;
+    }
+}
+
+@media (max-width: 495px) {
+    .scrollTop{
+        left: 20px;
+    }
+}
+
+@media (max-width: 540px) {
+    /* .setupsdiv {
+        width: 90%;
+    } */
+    .backBtn {
+        padding: 2% 1%;
+    }
+}
+
+@media (max-width: 540px) {
+    /* .setupsdiv {
+        width: 100%;
+    } */
+    .backBtn {
+        padding: 2% 1%;
+        margin: 0 1%;
+    }
+}
+
+@media (max-width: 450px) {
+    /* .setupsdiv {
+        width: 100%;
+    } */
+    .backBtn {
+        padding: 2% 1%;
+        height: max-content;
+        margin: 0 1%;
+    }
+}

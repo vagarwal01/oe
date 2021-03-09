@@ -1,0 +1,151 @@
+.test-feedback h1 {
+    padding-bottom: 20px;
+    color: #161361;
+}
+
+.test-feedback p {
+    color: black;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.data {
+    color: #29bde4;
+}
+
+.matter {
+    color: black;
+    font-weight: bold;
+}
+
+.buttons {
+    position: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    top: 400px;
+    left: 20%;
+}
+
+.cta {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px 15px;
+    font-size: 1.3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+.tbl-header {
+    background-color: #161361;
+    font-weight: bold;
+}
+
+.tbl-content {
+    height: 100px;
+    margin-top: 0px;
+    border: 1px solid #29bde4;
+}
+
+th {
+    padding: 10px 15px;
+    text-align: left;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #fff;
+    text-transform: uppercase;
+    border: 2px solid white;
+}
+
+td {
+    padding: 10px;
+    text-align: left;
+    vertical-align: middle;
+    font-weight: 300;
+    font-size: 1.5rem;
+    background: #29bde4;
+    color: #000;
+    border: 2px solid white;
+}
+
+input[type=text] {
+    /* min-width: 250px; */
+    margin: 8px 25px;
+    width: 80%;
+    padding: 10px 5px;
+    font-size: 1.5rem;
+    background: #29bde4;
+    color: #fff;
+    border-radius: 5px;
+    border: 1px solid #161361;
+    box-sizing: border-box;
+    transition: .3s;
+    outline: none;
+}
+
+::placeholder {
+    color: white;
+}
+
+input[type=text]:focus {
+    border-color: dodgerblue;
+}
+
+input[type=text]:hover {
+    border-color: dodgerblue;
+}
+
+
+/* Media Queries */
+
+@media (min-width: 600px) and (max-width: 880px) {
+    input[type=text] {
+        width: 60%;
+        margin: 8px 15px;
+    }
+}
+
+@media (min-width: 480px) and (max-width: 600px) {
+    input[type=text] {
+        width: 60%;
+        margin: 8px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    input[type=text] {
+        width: 95%;
+        margin: 8px 10px;
+        margin-bottom: 0;
+    }
+    form button {
+        display: block;
+        float: right;
+        margin: 0;
+    }
+    .cta {
+        /* margin-left: 20px; */
+        /* margin-right: 20px; */
+        font-size: 1.3rem;
+    }
+    .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttons .cta {
+        width: 50%;
+    }
+}
+
+@media (max-width: 365px) {
+    .buttons .cta {
+        width: 70%;
+    }
+}

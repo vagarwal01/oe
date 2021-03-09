@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="index.css"> -->
+    <title>OCera EdTech</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#includeHeader").load("/header.html");
+            $("#includeFooter").load("/footer.html");
+        });
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .message {
+            height: 100vh;
+            display: flex;
+            flex: 2;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            /* cursor: progress; */
+            text-align: center;
+        }
+        .demo-container {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            /* background-color: burlywood; */
+        }
+        .imagebox{
+            height: 50vh;
+            flex: 2.5;
+            width: max-content;
+            /* background-color: cadetblue; */
+            /* height: 30%; */
+        }
+        .imagebox img {
+            object-fit: contain;
+            /* height: 10%; */
+        }
+        @media (max-width: 650px) {
+            .demo-container {
+                flex-direction: column;
+                height: max-content;
+                margin-top: 15vh;
+            }
+            .message {
+                margin-top: 4%;
+                border-bottom: 1px solid black;
+                padding-bottom: 2%;
+                width: 90%;
+            }
+            .imagebox {
+                height: 40vh;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="includeHeader"></div>
+
+    <div class="demo-container">
+        <div class="imagebox">
+            <img src="/images/online_education.svg" alt="online education">
+        </div>
+        <div class="message">
+            <% if (msg == 'soon') { %>
+                <div class="successmsg">
+                    <h1><%=page%> page is currently under construction.</h1><br><br>
+                </div>
+                <div class="todo">
+                    <h2>Stay tuned !!</h2>
+                </div>
+                <% } else if (msg == 'success') { %>
+                    <div class="successmsg">
+                        <h1>Thank you for registering in OCera EdTech.</h1><br><br>
+                    </div>
+                    <div class="todo">
+                        <h2><a href="/login-signup">Login</a> and Get Started.</h2>
+                    </div>
+                    <% } else if (msg == 'noLogin') { %>
+                        <div class="successmsg">
+                            <h1>You are not logged in.</h1><br><br>
+                        </div>
+                        <div class="todo">
+                            <h2><a href="/login-signup">Login</a> and Get Started.</h2>
+                        </div>
+                        <% } else { %>
+                        <div class="successmsg">
+                            <h1><%=msg%></h1><br><br>
+                        </div>
+                        <div class="todo">
+                            <h2><a href="/login-signup">Register</a> yourself and Get Started.</h2>
+                        </div>
+                        <% } %>
+        </div>
+        </div>
+
+    <div id="includeFooter"></div>
+
+    <script type="text/javascript">
+        // setTimeout(() => {
+        //     location.href="/login-signup"
+        // }, 4000);
+    </script> 
+</body>
+
+</html>

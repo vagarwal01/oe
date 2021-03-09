@@ -1,0 +1,222 @@
+
+.rowipdata {
+    min-width: fit-content;
+    margin-right: 1%;
+}
+
+@media (max-width: 600px) {
+    .form__field {
+        width: 100%;
+    }
+}
+
+.course_detail {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.text_label {
+    color: #161361;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+textarea{
+    font-family: "Montserrat", sans-serif;
+}
+.course_detail_1 {
+    display: flex;
+    flex-direction: row;
+}
+
+.course_detail_2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.course_image {
+    width: 50%;
+}
+
+.data-stuff {
+    width: 50%;
+    margin: 5px 20px;
+    font-size: 1.5rem;
+}
+
+.cta {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px 15px;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+}
+
+.instructor {
+    margin-top: 60px;
+    padding: 10px 0px;
+    color: #161361;
+}
+
+.course_details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+}
+
+.instructor_info {
+    background: #29bde4;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+}
+
+.instructor_name {
+    font-weight: bold;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.image_file_label {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.ins-img {
+    object-fit: cover;
+}
+
+.ins-img:after {
+    content: '';
+    background-color: rgba(0, 0, 0, 0.75);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+@media (min-width: 600px) {
+    .course_detail_1 {
+        align-items: center;
+    }
+    .course_detail_2 {
+        align-items: center;
+    }
+}
+
+@media (max-width: 600px) {
+    input[type=text] {
+        width: 100%;
+    }
+    .course_detail_1 {
+        display: flex;
+        flex-direction: column;
+    }
+    .course_detail_2 {
+        display: flex;
+        flex-direction: column;
+    }
+    .course_image {
+        width: 100%;
+    }
+    .data-stuff {
+        width: 100%;
+        margin: 20px 0;
+        /* margin: 20px; */
+        font-size: 1.5rem;
+    }
+    textarea {
+        width: 100%;
+    }
+    .course_details {
+        padding: 0;
+    }
+    .instructor_name {
+        flex: 2;
+        font-weight: bold;
+        margin: 0;
+        padding: 0;
+        padding-left: 1%;
+    }
+    .ins_note {
+        line-height: 0;
+    }
+    .image_file_label {
+        min-width: 80px;
+        min-height: 80px;
+        border: 1px solid black;
+        margin: 0;
+    }
+    .ins-img {
+        object-fit: cover;
+    }
+}
+
+.basic_course {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+}
+
+.witnessdetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.witnessdetails .sigimg {
+    height: 100px;
+}
+
+.witnessdetails .sigimg img {
+    object-fit: contain;
+}
+
+
+  
+
+@media (max-width: 1000px) {
+    .basic_course {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .basic_course .rowipdata {
+        margin-top: 2%;
+    }
+    .witnessdetails {
+        margin-top: 2%;
+        border-bottom: 1px solid black;
+    }
+    .select {
+        width: 80%;
+        margin: 20px 0;
+        left: 0px;
+        top: 0px;
+    }
+}
+
+@media (max-width: 500px) {
+    .witnessdetails {
+        margin-top: 4%;
+    }
+}
+
+.file_upload {
+    /* margin-top: 2%; */
+    padding: 0;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+}
+

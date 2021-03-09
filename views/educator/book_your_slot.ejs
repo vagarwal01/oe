@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Slot</title>
+    <link rel="stylesheet" href="/book_your_slot.css">
+</head>
+
+<body>
+    <h2 class="top_heading">
+        Book Your <span class="data">Slot</span>
+    </h2>
+
+    <div class="container">
+
+        <div class="date_container">
+            <h3>Choose a Date</h3>
+            <div class="dates" id="date_con"></div>
+        </div>
+        <div class="time_container" id="time_con">
+            <h3>Choose Time</h3>
+            <span style="color: red;">* </span>Scroll to see more
+            <div class="time_slots" id="time_slots">
+                <p style="color: red;"><br>Please choose date first.</p>
+                <!-- <div class="time_box">4:00 - 4:15 pm</div>
+                <div class="time_box">4:15 - 4:30 pm</div>
+                <div class="time_box">4:30 - 4:45 pm</div>
+                <div class="time_box">4:45 - 5:00 pm</div>
+                <div class="time_box">5:00 - 5:15 pm</div>
+                <div class="time_box">5:15 - 5:30 pm</div>
+                <div class="time_box">5:30 - 5:45 pm</div>
+                <div class="time_box">5:45 - 6:00 pm</div>
+                <div class="time_box">6:00 - 6:15 pm</div>
+                <div class="time_box">6:15 - 6:30 pm</div>
+                <div class="time_box">6:30 - 6:45 pm</div>
+                <div class="time_box">6:45 - 7:00 pm</div> -->
+            </div>
+        </div>
+    </div>
+    <input type="text" style="display: none;" id="date_text">
+    <center>
+        <p style="color: red;" id="errormssg"></p>
+        <button class="cta" id="schedule_meeting">Schedule Meeting</button>
+        <i id="sm_error" style="display: none; padding-left: 2%; color: red;" class="fas fa-exclamation-circle"></i>
+    </center>
+    <p style="margin-top: 1%; text-align: center; color: red;" id="confirmMsg"></p>
+    <script>
+        const months = ["Jan", "Feb", "March", "April", "May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec"];
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+
+        function getDates(startDate, stopDate) {
+            var dateArray = new Array();
+            var currentDate = startDate;
+            while (currentDate <= stopDate) {
+                dateArray.push(new Date(currentDate));
+                currentDate = currentDate.addDays(1);
+            }
+            return dateArray;
+
+        }
+        var dateArray = getDates(new Date(), (new Date()).addDays(6));
+        for (i = 0; i < dateArray.length; i++) {
+            document.getElementById("date_con").innerHTML += '<div class="date_box" id="date_' + i + '">' + dateArray[i].getDate() + '-' + months[dateArray[i].getMonth()] + '-' + dateArray[i].getFullYear() + '</div>';
+        }
+
+        var chosenDate
+        var chosenTime
+        var timeSlots = ['4:00 - 4:15 pm', '4:15 - 4:30 pm', '4:30 - 4:45 pm', '4:45 - 5:00 pm', '5:00 - 5:15 pm', '5:15 - 5:30 pm', '5:30 - 5:45 pm', '5:45 - 6:00 pm', '6:00 - 6:15 pm', '6:15 - 6:30 pm', '6:30 - 6:45 pm', '6:45 - 7:00 pm']
+        $('#date_con .date_box').on('click', function() {
+            $('#date_con .date_box.current').removeClass('current');
+            $(this).addClass('current');
+            chosenDate = $(this).text()
+            if(new Date(chosenDate).toDateString() == new Date().toDateString()) {
+                if(new Date().getHours() >= 16) {
+                    var ind = -1
+                    for(var i=0;i<timeSlots.length;i++) {
+                        if(parseInt(timeSlots[i].charAt(0))+12 == new Date().getHours()) {
+                            var y = timeSlots[i].split(':')[1]
+                            if(parseInt(y.charAt(0)+y.charAt(1)) > new Date().getMinutes()) {
+                                var ind = i
+                                break
+                            }
+                        } else if (parseInt(timeSlots[i].charAt(0))+12 > new Date().getHours()) {
+                            var ind = i
+                            break
+                        }
+                    }
+                    document.getElementById('time_slots').innerHTML = ''
+                    for(var j = ind; j<timeSlots.length;j++) {
+                        document.getElementById('time_slots').innerHTML += '<div class="time_box" id="time_slot_'+j+'">'+timeSlots[j]+'</div>'
+                    }
+                    if(ind == -1) {
+                        document.getElementById('time_slots').innerHTML = '<p style="color: red;"><br>No available time slots for the chosen date.</p>'
+                    }
+                }
+                $('#time_slots .time_box').on('click', function() {
+                    $('#time_slots .time_box.current').removeClass('current');
+                    $(this).addClass('current');
+                    chosenTime = $(this).text()
+                });            
+            } else {
+                document.getElementById('time_slots').innerHTML = ''
+                for(var j = 0; j<timeSlots.length;j++) {
+                    document.getElementById('time_slots').innerHTML += '<div class="time_box" id="time_slot_'+j+'">'+timeSlots[j]+'</div>'
+                }
+                $('#time_slots .time_box').on('click', function() {
+                    $('#time_slots .time_box.current').removeClass('current');
+                    $(this).addClass('current');
+                    chosenTime = $(this).text()
+                });
+            }
+        });
+
+
+
+        $('#schedule_meeting').click(() => {
+            console.log(chosenTime)
+            console.log(chosenDate)
+            if (!chosenDate || chosenDate == '') {
+                document.getElementById('errormssg').innerText = 'Please choose date'
+                document.getElementById('sm_error').style.display = 'inline-block'
+            } else if (!chosenTime || chosenTime == '') {
+                document.getElementById('errormssg').innerText = 'Please choose time'
+                document.getElementById('sm_error').style.display = 'inline-block'
+            } else {
+                document.getElementById('errormssg').innerText = ''
+                document.getElementById('sm_error').style.display = 'none'
+                var eventTime = chosenTime.split(' - ')[0]
+                document.getElementById('schedule_meeting').style.display = 'none'
+                document.getElementById('confirmMsg').innerHTML = '<span style="color: black;">Confirm The Booking On ' + chosenDate + ' at ' + eventTime + ' pm ?<br><span onclick="confirm()" id="confirmyes" style="color: green; cursor: pointer">YES</span><span onclick="cancel()" style="padding-left: 5%; color: red; cursor: pointer">NO</span></span>'
+            }
+        })
+
+        function confirm() {
+            document.getElementById('gum-local').style.cursor = 'progress'
+            document.getElementById('confirmyes').style.cursor = 'progress'
+            $.ajax({
+                method: 'POST',
+                url: '/be-an-educator/sendEmail/confirmBooking',
+                data: {
+                    dt: chosenDate,
+                    tm: chosenTime
+                },
+                success: () => {
+                    document.getElementById('confirmMsg').innerHTML = '<span style="color: green;">You have successfully booked a slot.<br>Our team will contact you soon.</span>'
+                    setTimeout(function() {
+                        location.href = '/be-an-educator/dashboard/home'
+                    }, 3000);
+                },
+                error: (e) => {
+                    console.log(e)
+                    document.getElementById('confirmMsg').innerHTML = 'There occured some error while booking'
+                    setTimeout(function() {
+                        cancel()
+                    }, 2000);
+                }
+            })
+        }
+
+        function cancel() {
+            document.getElementById('confirmMsg').innerHTML = ''
+            document.getElementById('schedule_meeting').style.display = 'inline-block'
+            $('#time_con .time_box.current').removeClass('current');
+            $('#date_con .date_box.current').removeClass('current');
+            chosenTime = ''
+            chosenDate = ''
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,410 @@
+.test-feedback h1 {
+    padding-bottom: 20px;
+    color: #161361;
+}
+
+.test-feedback p {
+    color: black;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.data {
+    color: #29bde4;
+}
+
+.infographic {
+    /* border: 2px solid black; */
+    margin: 20px;
+    padding-top: 30px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.info {
+    margin: 0 20px;
+}
+
+.info-heading h1 {
+    padding: 20px;
+}
+
+.info-heading {
+    padding: 5px;
+    border-radius: 5px;
+    width: max-content;
+    background-color: rebeccapurple;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.info-body {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid rebeccapurple;
+    min-width: 100px;
+    display: inline-block;
+    width: max-content;
+    background-color: white;
+    color: #161361;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-top: -10px;
+}
+
+.info-footer {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    width: max-content;
+    background: rebeccapurple;
+    font-size: 1.2rem;
+    margin-top: -10px;
+}
+
+.info-heading1 {
+    padding: 5px;
+    border-radius: 5px;
+    width: max-content;
+    background-color: darkblue;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.info-body1 {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid darkblue;
+    min-width: 100px;
+    width: 250px;
+    display: inline-block;
+    background-color: white;
+    color: #161361;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-top: -10px;
+}
+
+.info-footer1 {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    width: max-content;
+    background: darkblue;
+    font-size: 1.2rem;
+    margin-top: -10px;
+}
+
+.info-heading1 h1 {
+    padding: 20px;
+}
+
+.info-heading2 {
+    padding: 5px;
+    border-radius: 5px;
+    width: max-content;
+    background-color: royalblue;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.info-body2 {
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid royalblue;
+    min-width: 100px;
+    width: 300px;
+    display: inline-block;
+    background-color: white;
+    color: #161361;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-left: 30px;
+    margin-top: -10px;
+}
+
+.info-footer2 {
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+    width: max-content;
+    background: royalblue;
+    font-size: 1.2rem;
+    margin-top: -10px;
+}
+
+.info-heading2 h1 {
+    padding: 20px;
+}
+
+.arrow {
+    width: 80px;
+    height: 50px;
+    background-color: rebeccapurple;
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+}
+
+.arrow1 {
+    width: 80px;
+    height: 50px;
+    background-color: royalblue;
+    clip-path: polygon(0% 20%, 60% 20%, 60% 0%, 100% 50%, 60% 100%, 60% 80%, 0% 80%);
+}
+
+.nextBtn {
+    padding: 1% 2%;
+    margin-right: 4%;
+    border-radius: 5px;
+    border: none;
+    display: block;
+    float: right;
+    outline: none;
+    color: #fff;
+    background: #161361;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-property: background-color, color;
+}
+
+.nextBtn:hover {
+    color: #fff;
+    font-weight: bold;
+    background-color: #29bde4;
+}
+
+@media (min-width: 1000px) and (max-width: 1350px) {
+    .infographic {
+        margin: 10px;
+    }
+    .info {
+        margin: 0 10px;
+    }
+    .info-heading {
+        font-size: 1.2rem;
+    }
+    .info-heading1 {
+        font-size: 1.2rem;
+    }
+    .info-heading2 {
+        font-size: 1.2rem;
+    }
+    .info-body {
+        font-size: 1rem;
+        width: fit-content;
+    }
+    .info-body1 {
+        font-size: 1rem;
+        width: fit-content;
+    }
+    .info-body2 {
+        font-size: 1rem;
+        width: fit-content;
+    }
+    .arrow {
+        width: 60px;
+        height: 40px;
+    }
+    .arrow1 {
+        width: 60px;
+        height: 40px;
+    }
+    .info-heading h1 {
+        padding: 10px;
+    }
+    .info-heading1 h1 {
+        padding: 10px;
+    }
+    .info-heading2 h1 {
+        padding: 10px;
+    }
+}
+
+@media (min-width: 850px) and (max-width: 1000px) {
+    .infographic {
+        margin: 10px;
+    }
+    .info {
+        margin: 0 10px;
+    }
+    .info-heading {
+        font-size: 1rem;
+    }
+    .info-heading1 {
+        font-size: 1rem;
+    }
+    .info-heading2 {
+        font-size: 1rem;
+    }
+    .info-body {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+    }
+    .info-body1 {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+    }
+    .info-body2 {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+    }
+    .arrow {
+        width: 40px;
+        height: 30px;
+    }
+    .arrow1 {
+        width: 40px;
+        height: 30px;
+    }
+    .info-heading h1 {
+        padding: 5px;
+    }
+    .info-heading1 h1 {
+        padding: 5px;
+    }
+    .info-heading2 h1 {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 850px) {
+    .nextBtn {
+        padding: 2% 4%;
+        margin-top: 3%;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 850px) {
+    .infographic {
+        margin: 5px;
+    }
+    .info {
+        margin: 0 5px;
+    }
+    .info-heading {
+        font-size: 0.8rem;
+    }
+    .info-heading1 {
+        font-size: 0.8rem;
+    }
+    .info-heading2 {
+        font-size: 0.8rem;
+    }
+    .info-body {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+        display: block;
+    }
+    .info-body1 {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+        display: block
+    }
+    .info-body2 {
+        font-size: 0.8rem;
+        width: fit-content;
+        margin-left: 10px;
+    }
+    .arrow {
+        width: 30px;
+        height: 20px;
+    }
+    .arrow1 {
+        width: 30px;
+        height: 20px;
+    }
+    .info-heading h1 {
+        padding: 5px;
+        font-size: 1.2rem;
+    }
+    .info-heading1 h1 {
+        padding: 5px;
+        font-size: 1.2rem;
+    }
+    .info-heading2 h1 {
+        padding: 5px;
+        font-size: 1.2rem;
+    }
+    .info-footer {
+        font-size: 1rem;
+    }
+    .info-footer1 {
+        font-size: 1rem;
+    }
+    .info-footer2 {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .infographic {
+        display: flex;
+        flex-direction: column;
+    }
+    .info {
+        margin: 0 20px;
+    }
+    .info-body {
+        font-size: 1rem;
+        width: fit-content;
+        margin-left: 10px;
+        display: block;
+    }
+    .info-body1 {
+        font-size: 1rem;
+        width: fit-content;
+        margin-left: 10px;
+        display: block;
+    }
+    .info-body2 {
+        font-size: 1rem;
+        width: fit-content;
+        margin-left: 10px;
+    }
+    .info-heading h1 {
+        padding: 5px;
+        font-size: 1.5rem;
+    }
+    .info-heading1 h1 {
+        padding: 5px;
+        font-size: 1.5rem;
+    }
+    .info-heading2 h1 {
+        padding: 5px;
+        font-size: 1.5rem;
+    }
+    .arrow {
+        margin: 20px 0px;
+        width: 60px;
+        height: 50px;
+        background-color: rebeccapurple;
+        clip-path: polygon(80% 0, 80% 60%, 100% 60%, 50% 100%, 0 60%, 20% 60%, 20% 0);
+        margin-left: 40px;
+    }
+    .arrow1 {
+        margin: 20px 0px;
+        width: 60px;
+        height: 50px;
+        background-color: royalblue;
+        clip-path: polygon(80% 0, 80% 60%, 100% 60%, 50% 100%, 0 60%, 20% 60%, 20% 0);
+        margin-left: 40px;
+    }
+}
+
+@media (max-width: 500px) {
+    .nextBtn {
+        padding: 3% 5%;
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing</title>
+    <link rel="stylesheet" href="/pricing.css">
+    <style>
+         :disabled {
+            cursor: not-allowed;
+        }
+        .select {
+            left: 0px;
+            margin: 3% 0;
+        }
+        @media (max-width: 700px) {
+            .select {
+                margin: 6% 0;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <h1 class="course_name">
+        <%=title%>
+    </h1>
+
+    <h2 class="top_heading">
+        Dear <span class="data">Educator,</span>
+    </h2>
+
+    <p class="data-pricing">
+        If you want your course to be published for free choose free, else choose the currency type and enter the amount you want to be paid.
+    </p>
+    <% if (type) { %>
+        <div class="form__group" style="margin-top: 2%;">
+            <input type="text" id="type" disabled value="<%=type%>" class="form__field"/>
+            <label for="type" class="form__label">Type</label>
+        </div>
+        <!-- <input type="text" name="" disabled value="<%=type%>" style="margin: 30px 0;"> -->
+        <% if (amount) { %>
+            <div class="form__group" style="margin-top: 2%;">
+                <input type="number" id="amount" value="<%=amount%>" disabled class="form__field"/>
+                <label for="amount" class="form__label">Amount</label>
+            </div>
+            <!-- <input type="number" value="<%=amount%>" disabled> -->
+            <% } %>
+                <br>
+                <div class="savebtn">
+                    <button type="button" disabled class="cta">SAVE</button>
+                    <i id="savedprice" style="color: green; font-size: 3rem;" class="fas fa-check-circle"></i>
+                </div>
+                <% if (!status) { %>
+                    <button type="button" id="submitforreview" class="cta">SUBMIT FOR REVIEW</button>
+                    <% } else if (status == 'Review') { %>
+                        <button type="button" disabled class="cta">Your Course is under Review</button>
+                        <% } else { %>
+                            <button type="button" disabled class="cta">Your Course is Live</button>
+                            <% } %>
+                                <% } else { %>
+                                    <div class="select">
+                                        <select id="typeselect" name="type">
+                                            <option value="Free">Free</option> 
+                                            <option value="USD">USD $</option>
+                                            <option value="INR" selected>INR ₹</option>
+                                        </select>
+                                    </div>
+                                    <!-- <input type="number" name="amount" id="amount" placeholder="Enter amount of your course"> -->
+                                    <div class="form__group" id="amountdiv">
+                                        <input type="number" onfocus="this.style.borderBottom = '2px solid #161361'" name="amount" id="amount" class="form__field" placeholder="Amount" required/>
+                                        <label for="amount" class="form__label">Amount</label>
+                                    </div>
+                                    <br>
+                                    <div class="savebtn">
+                                        <button type="button" id="savepricing" class="cta">SAVE</button>
+                                        <i id="savedprice" style="color: green; display: none; font-size: 3rem;" class="fas fa-check-circle"></i>
+                                    </div>
+                                    <button type="button" style="display: none;" id="submitforreview" class="cta">SUBMIT FOR REVIEW</button>
+                                    <% } %>
+                                        <p id="errormssg2" style="margin-top: 2%; color: red;"></p>
+
+
+
+                                        <script>
+                                            $('#typeselect').change(() => {
+                                                var selected = document.querySelector('#typeselect').value
+                                                console.log(selected)
+                                                if (selected == 'Free') {
+                                                    document.getElementById('amount').disabled = true
+                                                    document.getElementById('amount').value = ''
+                                                    document.getElementById('amount').style.cursor = 'not-allowed'
+                                                } else {
+                                                    document.getElementById('amount').disabled = false
+                                                    document.getElementById('amount').style.cursor = 'auto'
+                                                }
+                                            })
+                                            $('#savepricing').click(() => {
+                                                if (document.querySelector('#typeselect').value != 'Free' && document.getElementById('amount').value == '') {
+                                                    document.getElementById('amount').style.borderBottom = '2px solid red'
+                                                } else {
+                                                    $.ajax({
+                                                        type: "POST",
+                                                        url: "/be-an-educator/save/pricing",
+                                                        data: {
+                                                            type: document.querySelector('#typeselect').value,
+                                                            amount: document.getElementById('amount').value
+                                                        },
+                                                        success: (data) => {
+                                                            if (data == 'success') {
+                                                                document.getElementById('typeselect').disabled = true
+                                                                document.getElementById('amount').disabled = true
+                                                                document.getElementById('submitforreview').style.display = 'block'
+                                                                document.getElementById('savedprice').style.display = 'block'
+                                                                document.getElementById('savepricing').disabled = true
+                                                                document.getElementById('savepricing').style.cursor = 'not-allowed'
+                                                            } else {
+                                                                console.log(data)
+                                                                document.getElementById('errormssg2').innerText = 'Something went wrong. Please try again later.'
+                                                            }
+                                                        },
+                                                        error: (e) => {
+                                                            console.log(e)
+                                                            document.getElementById('errormssg2').innerText = 'Something went wrong. Please try again later.'
+                                                        }
+                                                    });
+                                                }
+                                            })
+                                            $('#submitforreview').click(() => {
+                                                document.getElementById('gum-local').style.cursor = 'progress'
+                                                document.getElementById('submitforreview').style.cursor = 'progress'
+                                                $.ajax({
+                                                    type: "GET",
+                                                    url: "/be-an-educator/submitforreview",
+                                                    success: (data) => {
+                                                        if (data == 'success') {
+                                                            document.getElementById('errormssg2').innerHTML = '<span style="color: green;">Your course is now under Review. You will be informed when approved.</span>'
+                                                            setTimeout(function() {
+                                                                location.href = '/be-an-educator/dashboard/myCourses';
+                                                            }, 4000);
+                                                        } else {
+                                                            console.log(data)
+                                                            document.getElementById('gum-local').style.cursor = 'auto'
+                                                            document.getElementById('submitforreview').style.cursor = 'auto'
+                                                            document.getElementById('errormssg2').innerText = data
+                                                            document.getElementById('submitforreview').style.display = 'block'
+                                                        }
+                                                    },
+                                                    error: (e) => {
+                                                        console.log(e)
+                                                        document.getElementById('gum-local').style.cursor = 'auto'
+                                                        document.getElementById('submitforreview').style.cursor = 'auto'
+                                                        document.getElementById('errormssg2').innerText = 'Something went wrong. Please try again later.'
+                                                    }
+                                                });
+                                            })
+                                        </script>
+</body>
+
+</html>
+
+</html>

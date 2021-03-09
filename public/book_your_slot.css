@@ -1,0 +1,143 @@
+h3 {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    /* margin-top: 20px; */
+    align-items: center;
+}
+
+.date_container {
+    width: 50%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.dates {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.date_box {
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    padding: 20px;
+    font-size: 1.5rem;
+    background: #e9f8fc;
+    box-shadow: inset 3px 3px 3px #2097b6, inset -3px -3px 3px #2097b6;
+    color: #161361;
+    text-align: center;
+    cursor: pointer;
+}
+
+.date_box:hover {
+    background: #f7f7f7;
+    box-shadow: inset 3px 3px 3px #161361, inset -3px -3px 3px #161361;
+}
+
+.date_box.current {
+    color: white;
+    background: #161361;
+    box-shadow: none;
+}
+
+.time_container {
+    width: 50%;
+    height: 400px;
+    border-left: 2px solid black;
+    overflow-y: scroll;
+    display: block;
+    text-align: center;
+}
+
+.time_slots {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.time_box {
+    width: 200px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.5rem;
+    background: #e9f8fc;
+    box-shadow: inset 3px 3px 3px red, inset -3px -3px 3px red;
+    color: #161361;
+    cursor: pointer;
+}
+
+.time_box:hover {
+    background: #e9f8fc;
+    box-shadow: inset 3px 3px 3px #161361, inset -3px -3px 3px #161361;
+}
+
+.time_box.current {
+    color: white;
+    background: #161361;
+    box-shadow: none;
+}
+
+.cta {
+    display: inline-block;
+    padding: 10px 15px;
+    color: white;
+    background-color: #161361;
+    border: 2px solid #161361;
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 1%;
+    transition: .3s ease;
+    outline: none;
+    transition-property: background-color, color;
+}
+
+.cta:hover {
+    color: white;
+    background-color: #29bde4;
+    border: 2px solid #29bde4;
+}
+
+@media (max-width: 860px) {
+    .date_container {
+        height: 530px;
+    }
+    .time_container {
+        height: 530px;
+    }
+    .cta {
+        margin-top: 30px;
+    }
+}
+
+@media (max-width: 650px) {
+    .container {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+    }
+    .date_container {
+        width: 100%;
+        height: fit-content;
+        padding-bottom: 2%;
+        border-bottom: 2px solid black;
+    }
+    .time_container {
+        width: 100%;
+        margin-top: 2%;
+        border-left: 0;
+        height: 400px;
+    }
+}

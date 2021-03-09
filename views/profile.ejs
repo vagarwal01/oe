@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator Profile</title>
+    <link rel="stylesheet" href="/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#includeHeader").load("/header.html");
+            $("#includeFooter").load("/footer.html");
+        });
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="includeHeader"></div>
+
+    <div class="ls-banner"></div>
+
+    <section id="profile">
+        <div class="section-title">Complete Yo<span>ur Profile</span>
+        </div>
+
+        <center>
+            <div class="profile-container">
+                <div class="profile-basic">
+                    <form id="saveProfileDP" method="POST" enctype="multipart/form-data">
+                        <div class="pro-image">
+                            <p class="profile_text">Click on the camera icon to change picture <br> You can upload/change your picture anytime.</p>
+                            <img id="profile_photo_image" src="/be-an-educator/profiledp.jpg">
+                            <div class="pro-image-edit">
+                                <i id="profile_photo_start_icon" style="cursor: pointer;" class="fas fa-camera"></i>
+                            </div>
+                            <input type="file" accept=".jpg, .png, .jpeg" id="profile_photo_start" hidden name="profile_photo">
+                        </div>
+                    </form>
+                    <div class="user-name data-name">
+                        <%=data.name%>
+                    </div>
+                    <div class="user-email data-name">
+                        <%=data.email%>
+                    </div>
+                </div>
+                <div class="additional-info">
+                    <div class="additional-info-container" id="addinfocont">
+                        <form id="form1">
+                            <div class="form-que">Provide us your basic educational details.</div>
+                            <div class="user-edu">
+                                <input required type="text" id="eduOrg" placeholder="Organisation" />
+                                <input required type="text" id="eduQual" placeholder="Qualification" />
+                            </div>
+                            <div class="form-btn-container">
+                                <button class="form-btn" type="button" id="next1">Next</button>
+                            </div>
+                        </form>
+                        <form id="form2">
+                            <div class="form-que">How much teaching experience do you have ?</div>
+                            <div class="form-que-options" id="fqo-te">
+                                <label for="te-rd1" class="btn-radio">
+                                <input type="radio" value="Fresher" id="te-rd1" name="te">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Fresher</span>
+                              </label>
+                                <label for="te-rd2" class="btn-radio">
+                                <input type="radio" value="Taught Professionally" id="te-rd2" name="te">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Taught Professionally</span>
+                              </label>
+                                <label for="te-rd3" class="btn-radio">
+                                <input type="radio" value="Taught Online" id="te-rd3" name="te">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Taught Online</span>
+                              </label>
+                                <label for="te-rd4" class="btn-radio">
+                                <input type="radio" value="Taught Personally" id="te-rd4" name="te">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Taught Personally</span>
+                              </label>
+                            </div>
+                            <div class="form-btn-container">
+                                <button class="form-btn btn-margin" type="button" id="back1">Back</button>
+                                <button class="form-btn" type="button" id="next2">Next</button>
+                            </div>
+                        </form>
+                        <form id="form3">
+                            <div class="form-que">Have you created any online course before ?</div>
+                            <div class="form-que-options" id="fqo-oc">
+                                <label for="oc-rd1" class="btn-radio">
+                                <input type="radio" value="Yes" id="oc-rd1" name="oc">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Yes</span>
+                              </label>
+                                <label for="oc-rd2" class="btn-radio">
+                                <input type="radio" value="No" id="oc-rd2" name="oc">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>No</span>
+                              </label>
+                            </div>
+                            <div class="form-btn-container">
+                                <button class="form-btn btn-margin" type="button" id="back2">Back</button>
+                                <button class="form-btn" type="button" id="next3">Next</button>
+                            </div>
+                        </form>
+                        <form id="form4">
+                            <div class="form-que">How much time can you spend in making the course per day ?</div>
+                            <div class="form-que-options" id="fqo-time">
+                                <label for="time-rd1" class="btn-radio">
+                                <input type="radio" value="0 - 2 Hours" id="time-rd1" name="time">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>0 - 2 Hours</span>
+                              </label>
+                                <label for="time-rd2" class="btn-radio">
+                                <input type="radio" value="2 - 4 Hours" id="time-rd2" name="time">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>2 - 4 Hours</span>
+                              </label>
+                                <label for="time-rd3" class="btn-radio">
+                                <input type="radio" value="4 - 6 Hours" id="time-rd3" name="time">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>4 - 6 Hours</span>
+                              </label>
+                                <label for="time-rd4" class="btn-radio">
+                                <input type="radio" value="As much as I can per day" id="time-rd4" name="time">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>As much as I can per day</span>
+                              </label>
+                            </div>
+                            <div class="form-btn-container">
+                                <button class="form-btn btn-margin" type="button" id="back3">Back</button>
+                                <button class="form-btn" type="button" id="next4">Next</button>
+                            </div>
+                        </form>
+                        <form id="form5">
+                            <div class="form-que">How much camera pro you are ?</div>
+                            <div class="form-que-options" id="fqo-camera">
+                                <label for="camera-rd1" class="btn-radio">
+                                <input type="radio" value="Facing camera first time" id="camera-rd1" name="camera">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Facing camera first time</span>
+                              </label>
+                                <label for="camera-rd2" class="btn-radio">
+                                <input type="radio" value="In habit of facing the camera" id="camera-rd2" name="camera">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>In habit of facing the camera</span>
+                              </label>
+                                <label for="camera-rd3" class="btn-radio">
+                                <input type="radio" value="Will adjust with it soon, once I will start" id="camera-rd3" name="camera">
+                                <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                  <circle cx="10" cy="10" r="9"></circle>
+                                  <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                  <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                </svg>
+                                <span>Will adjust soon, once I will start</span>
+                              </label>
+                            </div>
+                            <div class="form-btn-container">
+                                <button class="form-btn btn-margin" type="button" id="back4">Back</button>
+                                <button class="form-btn" type="button" id="profile-submit">submit</button>
+                            </div>
+                        </form>
+                        <div class="step-row">
+                            <div id="progress"></div>
+                            <div class="step-col"><small>Step 1</small></div>
+                            <div class="step-col"><small>Step 2</small></div>
+                            <div class="step-col"><small>Step 3</small></div>
+                            <div class="step-col"><small>Step 4</small></div>
+                            <div class="step-col"><small>Step 5</small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
+
+    </section>
+    <div id="includeFooter"></div>
+
+    <script>
+        $("#profile_photo_start_icon").click(function(e) {
+            $("#profile_photo_start").click();
+        });
+
+        function fasterPreview(uploader) {
+            if (uploader.files && uploader.files[0]) {
+                $('#profile_photo_image').attr('src',
+                    window.URL.createObjectURL(uploader.files[0]));
+            }
+        }
+
+        $("#profile_photo_start").change(function() {
+            fasterPreview(this);
+        });
+
+        var form1 = document.getElementById('form1')
+        var form2 = document.getElementById('form2')
+        var form3 = document.getElementById('form3')
+        var form4 = document.getElementById('form4')
+        var form5 = document.getElementById('form5')
+
+        var next1 = document.getElementById('next1')
+        var next2 = document.getElementById('next2')
+        var next3 = document.getElementById('next3')
+        var next4 = document.getElementById('next4')
+
+        var back1 = document.getElementById('back1')
+        var back2 = document.getElementById('back2')
+        var back3 = document.getElementById('back3')
+        var back4 = document.getElementById('back4')
+
+        var submit = document.getElementById('profile-submit')
+
+        var progress = document.getElementById('progress')
+
+        var eduData = {}
+
+        next1.onclick = function() {
+            if ($("#eduOrg").val() == '') {
+                document.getElementById('eduOrg').style.border = "2px solid red";
+            } else {
+                document.getElementById('eduOrg').style.border = "none";
+            }
+            if ($("#eduQual").val() == '') {
+                document.getElementById('eduQual').style.border = "2px solid red";
+            } else {
+                document.getElementById('eduQual').style.border = "none";
+            }
+            if ($("#eduOrg").val() != '' && $("#eduQual").val() != '') {
+                eduData['organisation'] = $("#eduOrg").val()
+                eduData['qualification'] = $("#eduQual").val()
+                form1.style.left = "-500px"
+                form2.style.left = "0px"
+                console.log(document.getElementById('addinfocont').style.width)
+                if (window.innerWidth <= 400) {
+                    progress.style.width = "100px"
+                } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                    progress.style.width = "150px"
+                } else {
+                    progress.style.width = "200px"
+                }
+            }
+        }
+        back1.onclick = function() {
+            form1.style.left = "0px"
+            form2.style.left = "500px"
+            if (window.innerWidth <= 400) {
+                progress.style.width = "40px"
+            } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                progress.style.width = "70px"
+            } else {
+                progress.style.width = "100px"
+            }
+        }
+
+        next2.onclick = function() {
+            var selectedTE = document.querySelector('input[type=radio][name=te]:checked');
+            if (selectedTE == null) {
+                document.getElementById('fqo-te').style.border = "2px solid red"
+            } else {
+                document.getElementById('fqo-te').style.border = "none"
+                eduData['experience'] = selectedTE.value
+                form2.style.left = "-500px"
+                form3.style.left = "0px"
+                if (window.innerWidth <= 400) {
+                    progress.style.width = "160px"
+                } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                    progress.style.width = "230px"
+                } else {
+                    progress.style.width = "300px"
+                }
+            }
+        }
+        back2.onclick = function() {
+            form2.style.left = "0px"
+            form3.style.left = "500px"
+            if (window.innerWidth <= 400) {
+                progress.style.width = "100px"
+            } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                progress.style.width = "150px"
+            } else {
+                progress.style.width = "200px"
+            }
+        }
+
+        next3.onclick = function() {
+            var selectedOC = document.querySelector('input[type=radio][name=oc]:checked');
+            if (selectedOC == null) {
+                document.getElementById('fqo-oc').style.border = "2px solid red"
+            } else {
+                document.getElementById('fqo-oc').style.border = "none"
+                eduData['online'] = selectedOC.value
+                form3.style.left = "-500px"
+                form4.style.left = "0px"
+                if (window.innerWidth <= 400) {
+                    progress.style.width = "220px"
+                } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                    progress.style.width = "310px"
+                } else {
+                    progress.style.width = "400px"
+                }
+            }
+        }
+        back3.onclick = function() {
+            form3.style.left = "0px"
+            form4.style.left = "500px"
+            if (window.innerWidth <= 400) {
+                progress.style.width = "160px"
+            } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                progress.style.width = "230px"
+            } else {
+                progress.style.width = "300px"
+            }
+        }
+
+        next4.onclick = function() {
+            var selectedTM = document.querySelector('input[type=radio][name=time]:checked');
+            if (selectedTM == null) {
+                document.getElementById('fqo-time').style.border = "2px solid red"
+            } else {
+                document.getElementById('fqo-time').style.border = "none"
+                eduData['time'] = selectedTM.value
+                form4.style.left = "-500px"
+                form5.style.left = "0px"
+                if (window.innerWidth <= 400) {
+                    progress.style.width = "300px"
+                } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                    progress.style.width = "400px"
+                } else {
+                    progress.style.width = "500px"
+                }
+            }
+        }
+        back4.onclick = function() {
+            form4.style.left = "0px"
+            form5.style.left = "500px"
+            if (window.innerWidth <= 400) {
+                progress.style.width = "220px"
+            } else if (window.innerWidth > 400 && window.innerWidth <= 480) {
+                progress.style.width = "310px"
+            } else {
+                progress.style.width = "400px"
+            }
+        }
+
+        submit.onclick = function() {
+            var selectedCAM = document.querySelector('input[type=radio][name=camera]:checked');
+            if (selectedCAM == null) {
+                document.getElementById('fqo-camera').style.border = "2px solid red"
+            } else {
+                document.getElementById('fqo-camera').style.border = "none"
+                eduData['camera'] = selectedCAM.value
+
+                var input1 = document.getElementById("profile_photo_start");
+                var file1 = input1.files[0];
+                var limit1 = 2097152;
+
+
+                if (file1) {
+                    var idxDot1 = file1.name.lastIndexOf(".") + 1;
+                    var extFile1 = file1.name.substr(idxDot1, file1.name.length).toLowerCase();
+                    if ((file1.size <= limit1) && (extFile1 == "png" || extFile1 == "jpg" || extFile1 == "jpeg")) {
+                        var form = $('#saveProfileDP')[0];
+                        var data = new FormData(form);
+                        $.each(eduData, (key, val) => {
+                            data.append(key, val)
+                        })
+                        $.ajax({
+                            url: '/be-an-educator/setting-up-profile',
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            data: data,
+                            success: (data) => {
+                                if(data == 'success') {
+                                    setTimeout(function() {
+                                        alert('Successfully created your account')
+                                        location.href = '/be-an-educator/dashboard/home';
+                                        // location.reload();
+                                    }, 500);
+                                } else {
+                                    alert('Something went wrong. Please try again later.')
+                                }
+                            },
+                            error: (e) => {
+                                alert(e.value);
+                            }
+                        })
+                    } else if(file1.size > limit1) {
+                        alert('Allowed image file size: 2MB')
+                    } else if (extFile1 != "png" && extFile1 != "jpg" && extFile1 != "jpeg") {
+                        alert('Allowed image file formats: .png, .jpg or .jpeg')
+                    }
+                } else {
+                    $.ajax({
+                        url: '/be-an-educator/setting-up-profile',
+                        type: "POST",
+                        enctype: false,
+                        data: eduData,
+                        success: (data) => {
+                            setTimeout(function() {
+                                alert('Successfully created your account')
+                                location.href = '/be-an-educator/dashboard/home';
+                                // location.reload();
+                            }, 500);
+                        },
+                        error: (e) => {
+                            alert(e.value);
+                        }
+                    })
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

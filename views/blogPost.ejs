@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/blogs.css">
+    <title>Blogs</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#includeHeader").load("/header.html");
+            $("#includeFooter").load("/footer.html");
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="includeHeader"></div>
+
+
+    <!-- Hero Section  -->
+    <section id="hero" style="z-index: 2;"></section>
+    <!-- End Hero Section  -->
+
+    <div class="blog_container">
+        <% if (pagetype == 'create') { %>
+            <div class="blog_subcontainer">
+                <form method="POST" id="blogPostForm" enctype="multipart/form-data" class="blog_section">
+                    <center>
+                        <h1>Create your own blog</h1>
+                        <p>( Logged in as <%=email%> )</p>
+                    </center>
+                    <div class="form__group">
+                        <input type="text" class="form__field" placeholder="Blog Title" onfocus="this.style.borderBottom = '2px solid #161361'" name="title" id='btitle' required/>
+                        <label for="btitle" class="form__label">Blog Title</label>
+                    </div> 
+                    <div class="form__group">
+                        <input type="text" id="bauthoremail" name="authorEmail" value="<%=email%>" hidden>
+                        <input type="text" class="form__field" placeholder="Author" onfocus="this.style.borderBottom = '2px solid #161361'" value="<%=name%>" name="authorName" id='bauthor' required/>
+                        <label for="bauthor" class="form__label">Author</label>
+                    </div> 
+                    <div class="form__group">
+                        <input type="text" class="form__field" disabled style="cursor: not-allowed;" placeholder="Dated" id='bdated' required/>
+                        <label for="bdated" class="form__label">Dated</label>
+                    </div> 
+                    <p style="color: #007bff; font-weight: normal; margin-top: 3%;">Blog Thumbnail</p>
+                    <div class="drop-zone">
+                        <span class="drop-zone__prompt"><i class="fas fa-cloud-upload-alt"></i><br>Drop file here or click to upload<br><h5>Max file size: 2MB<br>File type: .jpg or .png<br>Dimensions: 750x421 pixels</h5></span>
+                        <input type="file" accept=".jpg, .png" id="blogimage" name="blogimage" class="drop-zone__input">
+                    </div>
+                    <div class="form__group">
+                        <p style="color: #007bff; font-weight: normal;">Blog Content</p>
+                        <textarea id="blogcontent"></textarea>
+                    </div> 
+                    <center><p id="berror" style="color: red; font-weight: 700;"></p></center>
+                    <button type="button" class="qcta" onclick="blogSubmit()">Submit for Review</button>
+                </form>
+            </div>
+                <% } else { %>
+                <div class="blog_subcontainer">
+                    <div class="blog_section">
+                        <h1 class="blog_title"><%=blog['btitle']%></h1>
+                        <div class="blog_details">
+                            <h3>Dated : <%=blog['bdate'].toLocaleDateString("en-US", {day: "numeric", month: "short", year: "numeric"})%></h3>
+                            <h3>Author : <%=blog['authorName']%></h3>
+                            <!-- <h3>Catogory : India</h3> -->
+                            <div class="share_icons" style="z-index: 1;">
+                                <a href="http://www.facebook.com/sharer.php?u=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #3b5998; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-facebook-f"></i>
+                                </div></a>
+                                <a href="http://www.facebook.com/sharer.php?u=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #4FCE5D; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-whatsapp"></i>
+                                </div></a>
+                                <a href="http://pinterest.com/pin/create/button/?url=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #F0002A; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-pinterest-p"></i>
+                                </div></a>
+                                <a href="http://twitter.com/share?text=<%=blog['btitle']%>&url=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #55ACEE; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-twitter"></i>
+                                </div></a>
+                                <a href="https://plus.google.com/share?url=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #DD4B39; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-google-plus-g"></i>
+                                </div></a>
+                                <!-- <a href="http://www.facebook.com/sharer.php?u=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #f09433; 
+                                background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+                                background: -webkit-linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+                                background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+                                filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 ); padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-instagram"></i>
+                                </div></a> -->
+                                <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://localhost:5000/blogs/<%=blog['_id']%>" target="_blank" style="text-decoration: none; color: white;"><div class="icon_color" style="background: #006192; padding: 5px; height: 35px; width: 30px;" >
+                                    <i class="fab fa-linkedin-in"></i>
+                                </div></a>
+                            </div>
+                        </div>
+                        
+                        <div class="circle">
+                            <img src="/blogs/<%=blog['bimage']%>" onerror="this.src='/be-an-educator/upload-test-video.svg'; this.style.background='#cccccc'">
+                        </div>
+                        <textarea id="blogcontentta" hidden value="YourEditor"></textarea> 
+                        <div id="blogcont"></div>
+                    </div>
+                    <div class="comments">
+                        <h1 class="comment_title">Leave a Comment</h1>
+                        <div class="comment_details">
+                            <div class="form__group">
+                                <input type="text" class="form__field" onfocus="this.style.borderBottom = '2px solid #161361'" placeholder="Name" name="name" id='name' required/>
+                                <label for="name" class="form__label">Name</label>
+                            </div> 
+                            <div class="form__group">
+                                <input type="email" class="form__field" onfocus="this.style.borderBottom = '2px solid #161361'" placeholder="Email" name="email" id='email' required/>
+                                <label for="email" class="form__label">Email</label>
+                            </div> 
+                            <div class="form__group">
+                                <input type="text" class="form__field" onfocus="this.style.borderBottom = '2px solid #161361'" placeholder="Comment" name="comment" id='comment' required/>
+                                <label for="comment" class="form__label">Comment</label>
+                            </div> 
+                            <center><p style="color: red; font-weight: 700;" id="cmntError"></p></center>
+                            <button class="qcta" onclick="submitcomment()">Submit Comment</button>                    
+                            
+                        </div>
+                    </div>
+        
+                    <p class="comment_button1" onclick="showComments()"><i class="far fa-comments"></i> Click to view comments</p>
+        
+                    <div class="public_comments"></div> 
+                </div>
+                        <% } %>
+
+
+        <div class="trend_section">
+            <div class="publishbtn">
+                <button class="qcta" onclick="showSocialBtns()">Publish your own blog</button>
+                <div class="socialbuttons">
+                    <a href="/sociologin/google/blog"><button class="qcta" style="border-color: transparent; background-color: #DD4B39;">Login with <i class="fab fa-google-plus-g"></i></button></a>
+                    <h2 style="margin-top: 20px;">OR</h2>
+                    <a href="/sociologin/facebook/blog"><button class="qcta" style="border-color: transparent; background-color: #3b5998;">Login with <i class="fab fa-facebook-f"></i></button></a>
+                </div>
+            </div>
+            <h3>Recent Post</h3>
+            <div class="all_post">
+                <% for (var i=0; i< rblogs.length; i++) { %>
+                    <div class="post_card">
+                        <div class="post_image">
+                            <img src="/blogs/<%=rblogs[i]['bimage']%>" onerror="this.src='/be-an-educator/upload-test-video.svg'; this.style.background='#cccccc'">
+                        </div>
+                        <div class="post_data">
+                            <p class="post_category"><%=rblogs[i]['authorName']%></p>
+                            <a href="/blogs/<%=rblogs[i]['_id']%>"><p class="post_title"><%=rblogs[i]['btitle']%></p></a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+   
+    
+
+    <div id="includeFooter"></div>
+    <script src="/ckeditor3/ckeditor.js"></script>
+    <script src="/ckeditor3/adapters/jquery.js"></script>
+    <script>
+        var ptype = '<%=pagetype%>'
+        if(ptype == 'create') {
+            $( 'textarea#blogcontent' ).ckeditor({
+            removePlugins: 'print,save,exportpdf,newpage,templates,undo,find,selectall,scayt,forms,removeformat,copyformatting,blockquote,div,bidi,flash,pagebreak,showblocks',
+                height: 500,
+                width: '100%',
+                editorplaceholder: 'Type the content here'
+            });
+            var dt = new Date()
+            dt = dt.toLocaleDateString("en-US", {day: "numeric", month: "short", year: "numeric"})
+            $('#bdated').val(dt)
+        } else {
+            var txt = document.createElement("textarea")
+            txt.innerHTML = `<%=blog['bcontent']%>`
+            document.getElementById('blogcont').innerHTML = txt.value
+        }
+        function showSocialBtns() {
+            document.querySelector(".socialbuttons").style.display = "flex";
+        }
+        function showComments() {
+            $.ajax({
+                method: 'GET',
+                url: '/getComments/<%=blog["_id"]%>',
+                success: (data) => {
+                    document.querySelector(".comment_button1").style.display = "none"
+                    console.log(data)
+                    document.querySelector(".public_comments").style.display = 'block'
+                    document.querySelector(".public_comments").innerHTML = `<h1 class="public_comments_h1">Comments</h1>`
+                    var count = 0
+                    for (comm in data['comments']) {
+                        if(comm != '_id') {
+                            document.querySelector(".public_comments").innerHTML += `
+                                <div class="comment_card">
+                                    <div class="card_profile">
+                                        <h1>${data['comments'][comm]['name']}</h1>
+                                        <h3>${data['comments'][comm]['date'].toLocaleString().split('T')[0]}</h3>
+                                    </div>
+                                    <p class="card_comments">${data['comments'][comm]['comment']}</p>
+                                </div>`  
+                            count++      
+                        }
+                    }
+                    if(count == 0) {
+                        document.querySelector(".public_comments").innerHTML += `<h2 class="public_comments_h1">No comments yet</h2>`
+                    }
+                    document.querySelector(".public_comments").innerHTML += `<p class="comment_button2" onclick="hideComments()"><i class="fas fa-times"></i> Hide Comments</p>`
+                },
+                error: (err) => {
+                    console.log(err.responseText)
+                    alert('error')
+                }
+            })
+        }
+        function hideComments() {
+            document.querySelector(".public_comments").style.display = "none";
+            document.querySelector(".comment_button1").style.display = "block";
+        }
+        function submitcomment() {
+            if($('#name').val() == '') {
+                document.getElementById('cmntError').innerText = 'Please enter name'
+                document.getElementById('name').style.borderBottom = '2px solid red'
+                return
+            }
+            if($('#email').val() == '') {
+                document.getElementById('cmntError').innerText = 'Please enter email'
+                document.getElementById('email').style.borderBottom = '2px solid red'
+                return
+            }
+            if($('#comment').val() == '') {
+                document.getElementById('cmntError').innerText = 'Please enter comment'
+                document.getElementById('comment').style.borderBottom = '2px solid red'
+                return
+            }
+            document.getElementById('cmntError').innerText = ''
+            $.ajax({
+                method: 'POST',
+                url: '/postComment/<%=blog["_id"]%>',
+                data: {
+                    'name': $('#name').val(),
+                    'email': $('#email').val(),
+                    'comment': $('#comment').val()
+                },
+                success: (data) => {
+                    if(data == 'success') {
+                        $('#name').val('')
+                        $('#email').val('')
+                        $('#comment').val('')
+                        document.getElementById('cmntError').innerHTML = '<span style="color: green;">Thank you for commenting !</span>'
+                    } else {
+                        console.log(data)
+                        document.getElementById('cmntError').innerText = 'Something went wrong. Please try again later.'    
+                    }
+                },
+                error: (err) => {
+                    console.log(err.responseText)
+                    document.getElementById('cmntError').innerText = 'Something went wrong. Please try again later.'
+                }
+            })
+        }
+        function blogSubmit() {
+            if($('#btitle').val() == '') {
+                document.getElementById('btitle').style.borderBottom = '2px solid red'
+                document.getElementById('berror').innerText = 'Please enter blog title'
+                return
+            }
+            if($('#bauthor').val() == '') {
+                document.getElementById('bauthor').style.borderBottom = '2px solid red'
+                document.getElementById('berror').innerText = 'Please enter author name'
+                return
+            }
+            if($( 'textarea#blogcontent' ).val() == '') {
+                document.getElementById('berror').innerText = 'Please enter blog content'
+                return
+            }
+            var input1 = document.getElementById("blogimage");
+            var file1 = input1.files[0];
+            var limit1 = 2000000;
+            if (!file1) {
+                document.getElementById('berror').innerText = 'Please upload the Blog Thumbnail'
+                return
+            } else {
+                var idxDot1 = file1.name.lastIndexOf(".") + 1;
+                var extFile1 = file1.name.substr(idxDot1, file1.name.length).toLowerCase();
+                if ((file1.size <= limit1) && (extFile1 == "png" || extFile1 == "jpg")) {
+                    img = new Image();
+                    img.src = window.URL.createObjectURL(file1)
+                    img.onload = function() {
+                        if (this.width == 750 && this.height == 421) {
+                            document.getElementById('berror').innerText = ''
+                            var form = $('#blogPostForm')[0];
+                            var data = new FormData(form);
+                            data.append('blogPost', $( 'textarea#blogcontent' ).val())
+                            $.ajax({
+                                method: 'POST',
+                                url: '/save/blogPost',
+                                enctype: "multipart/form-data",
+                                data: data,
+                                processData: false,
+                                contentType: false,
+                                cache: false,
+                                success: (data) => {
+                                    if(data == 'success') 
+                                        document.getElementById('berror').innerHTML = '<span style="color: green;">Thank You for submitting your blog !<br>Your blog will be published after the team review. We will contact you for changes, if any.<br>Till then, you may <a href="/blogs" style="color: blue; text-decoration: underline;">view</a> our other posts.</span>'
+                                    else
+                                        document.getElementById('berror').innerText = 'Something went wrong. Please try again later'
+                                },
+                                error: (err) => {
+                                    console.log(err.responseText)
+                                    document.getElementById('berror').innerText = 'Something went wrong. Please try again later'
+                                }
+                            })
+                        } else {
+                            document.getElementById('berror').innerText = 'Blog Thumbnail dimensions should be 750x421 pixels'
+                            return
+                        }
+                    };
+                } else if (file1.size > limit1) {
+                    document.getElementById('berror').innerText = 'Allowed Blog Thumbnail file size: less than 2MB'
+                    return
+                } else if (extFile1 != "png" && extFile1 != "jpg") {
+                    document.getElementById('berror').innerText = 'Allowed Blog Thumbnail file format: .png or .jpg'
+                    return
+                }
+            }
+        }
+
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                }
+            });
+
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                }
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        function updateThumbnail(dropZoneElement, file) {
+            console.log(file)
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+            // First time - there is no thumbnail element, so lets create it
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+            thumbnailElement.dataset.label = file.name;
+        }
+        
+    </script>
+</body>
+
+</html>

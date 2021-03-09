@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/extra_info.css">
+    <title>Setup for Video Editing</title>
+    <style>
+        .setup-list-item i {
+            padding-right: 7%;
+            padding-left: 0;
+        }
+        
+        @media only screen and (min-width: 768px) {
+            .setup-list-item i {
+                padding-right: 4%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="scrollTop" id="backBtn"><i class="fas fa-chevron-circle-left"></i> Back</button>
+    <div class="top-navs">
+        <!-- <div class="backbtndiv">
+            <button class="backBtn">Back</button>
+        </div> -->
+        <div class="setupsdiv">
+            <button id="videoRecNavBtn" class="backBtn">Video Recording</button>
+            <button id="AVNavBtn" class="backBtn">Audio Visual Recording</button>
+            <button id="videoEdNavBtn" class="backBtn">Video Editing</button>
+        </div>
+    </div>
+    <div class="setup-container">
+        <div class="setup-title">Setup For <span>Video Editing</span></div>
+        <div class="setup-info">
+            <p>Once you are done with the recordings, it is crucial to integrate them to get the final video. This step is called Video editing and can easily be done using software available in the market. Many of them are freely available.
+                <br> Some of the suggestions for editing the videos are given for the reference.
+            </p>
+        </div>
+    </div>
+
+    <section id="vision" style="margin-top: 2%;">
+        <div class="projects">
+            <div class="all-projects">
+                <div class="project-item">
+                    <div class="project-img">
+                        <img src="/be-an-educator/imovie.jpg" alt="img">
+                        <h1>using iMovie Software</h1>
+                    </div>
+                    <div class="project-info">
+                        <div class="setup-list-main">
+                            <div class="setup-list-item">
+                                <i class="fas fa-dot-circle"></i>
+                                <p>Shoot your Video with your iPhone and transport the video to your Macbook from iphone (optional).</p>
+                            </div>
+                            <div class="setup-list-item">
+                                <i class="fas fa-dot-circle"></i>
+                                <p>Shoot your Video with your iPhone and transport the video to your Macbook from iphone (optional).</p>
+                            </div>
+                            <div class="setup-list-item">
+                                <i class="fas fa-dot-circle"></i>
+                                <p>Shoot your Video with your iPhone and transport the video to your Macbook from iphone (optional).</p>
+                            </div>
+                            <div class="setup-list-item">
+                                <i class="fas fa-dot-circle"></i>
+                                <p>Shoot your Video with your iPhone and transport the video to your Macbook from iphone (optional).</p>
+                            </div>
+                        </div>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>* &nbsp;&nbsp;&nbsp;</b>
+                            <a href="https://www.youtube.com/watch?v=g54smplLli4" target="_blank" style="color: white;font-weight: bold; cursor: pointer;">Hindi Version</a>
+                        </p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>* &nbsp;&nbsp;&nbsp;</b>
+                            <a href="https://www.youtube.com/watch?v=aRLT9L_L1Pw" target="_blank" style="color: white;font-weight: bold; cursor: pointer;">English Version</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="project-item">
+                    <div class="project-img">
+                        <img src="/be-an-educator/oneshot.png" alt="img">
+                        <h1>using other Softwares</h1>
+                    </div>
+                    <div class="project-info">
+                        <p>Video editing is an important part of video lectures. It makes your lecture smooth and impressive.</p>
+                        <p>Many professional free (for basic editing) and paid options are available. A few of them are mentioned below:</p>
+                        <p><b>a. &nbsp;&nbsp;&nbsp;</b>OneShot</p>
+                        <p><b>b. &nbsp;&nbsp;&nbsp;</b>shotcut</p>
+                        <p><b>c. &nbsp;&nbsp;&nbsp;</b>Filmora9</p>
+                        <p><b>d. &nbsp;&nbsp;&nbsp;</b>DaVinci Resolve 16</p>
+                        <p><b>e. &nbsp;&nbsp;&nbsp;</b>hitfilm Express</p>
+                        <p><b>f. &nbsp;&nbsp;&nbsp;</b>Adode Premiere</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        var type = '<%=type%>'
+        $('#backBtn').click(() => {
+            if (type == 'CU')
+                $("#gum-local").load("/be-an-educator/record_editing");
+            else if (type == 'TV')
+                $("#gum-local").load("/be-an-educator/testVideoAndFeedback");
+            else
+                location.href = '/be-an-educator/dashboard/signMou-' + type;
+        })
+        $('#videoRecNavBtn').click(() => {
+            $("#gum-local").load("/be-an-educator/setupForVideoRecording/" + type);
+        })
+        $('#AVNavBtn').click(() => {
+            $("#gum-local").load("/be-an-educator/setupForAudioVisualRecording/" + type);
+        })
+        $('#videoEdNavBtn').click(() => {
+            $("#gum-local").load("/be-an-educator/setupForVideoEditing/" + type);
+        })
+    </script>
+
+</body>
+
+</html>

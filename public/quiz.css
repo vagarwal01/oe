@@ -1,0 +1,296 @@
+.info_box {
+    margin: 10px;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 540px;
+    border-radius: 5px;
+    transform: translate(0%, 0%) scale(0.9);
+    transition: all 0.3s ease;
+    display: block;
+}
+
+.info_box .info-title {
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.info_box .info-list {
+    padding: 15px 30px;
+}
+
+.info_box .info-list .info {
+    margin: 5px 0;
+    font-size: 17px;
+    text-align: left;
+}
+
+.info_box .info-list .info span {
+    font-weight: 600;
+    color: #007bff;
+}
+
+.info_box .buttons {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 30px;
+    border-top: 1px solid lightgrey;
+}
+
+.quiz_box {
+    margin: 10px;
+    width: 750px;
+    border: 2px solid #007bff;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transform: translate(0%, 0%) scale(0.9);
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.quiz_box header {
+    position: relative;
+    z-index: 2;
+    height: 70px;
+    padding: 0 30px;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0px 3px 5px 1px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.header_div {
+    width: 100%;
+}
+
+section {
+    padding: 25px 30px 20px 30px;
+    background: #fff;
+}
+
+.footer {
+    height: 60px;
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top: 1px solid lightgrey;
+    
+}
+
+.qcta {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #161361;
+    border: 2px solid #161361;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    outline: none;
+    cursor: pointer;
+    transition: .3s ease;
+    transition-property: background-color, color;
+}
+
+.qcta:hover {
+    color: white;
+    font-weight: bold;
+    background-color: #29bde4;
+    border: 2px solid #29bde4;
+}
+
+
+.form__group {
+    position: relative;
+    padding: 15px 0 0;
+    width: 100%;
+}
+.que_div {
+    display: flex;
+    justify-content: space-between;
+}
+.mainOptionDiv {
+    margin: 1% 0;
+}
+.textoptiondiv {
+    display: flex;
+    justify-content: space-between;
+}
+.input_que {
+    width: 90%;
+    display: flex;
+}
+.input_que input {
+    width: 90%;
+}
+.icon_que {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon_que i {
+    font-size: 2rem;
+    color: #007bff;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.icon_que i:hover {
+    font-size: 2.2rem;
+}
+.image_box {
+    margin-top: 2%;
+    height: 100px;
+}
+.image_box img {
+    object-fit: contain;
+}
+.answerTypeRadios {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.btn-radio {
+    width: max-content;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 10px 0;
+    text-align: left;
+}
+@media screen and (max-width: 480px) {
+    .btn-radio {
+        display: block;
+        float: none;
+    }
+    .btn-radio:not(:first-child) {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}
+
+.btn-radio svg {
+    fill: none;
+    vertical-align: middle;
+}
+
+.btn-radio svg circle {
+    stroke-width: 2;
+    stroke: #C8CCD4;
+}
+
+.btn-radio svg path {
+    stroke: #007bff;
+}
+
+.btn-radio svg path.inner {
+    stroke-width: 6;
+    stroke-dasharray: 19;
+    stroke-dashoffset: 19;
+}
+
+.btn-radio svg path.outer {
+    stroke-width: 2;
+    stroke-dasharray: 57;
+    stroke-dashoffset: 57;
+}
+
+.btn-radio input {
+    display: none;
+}
+
+.btn-radio input:checked+svg path {
+    transition: all 0.4s ease;
+}
+
+.btn-radio input:checked+svg path.inner {
+    stroke-dashoffset: 38;
+    transition-delay: 0.3s;
+}
+
+.btn-radio input:checked+svg path.outer {
+    stroke-dashoffset: 0;
+}
+
+.btn-radio span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.quiz_box .form__field {
+    width: 100%;
+}
+.form__field_option {
+    margin-bottom: 5px;
+}
+
+
+.icon_que i.checkcircle {
+    color: grey;
+    cursor: pointer;
+}
+
+.icon_que i.checkcircle:hover {
+    color: green;
+}
+i.fa-times:hover {
+    color: red;
+}
+.input_que p {
+    text-align: left;
+    cursor: text;
+}
+
+
+
+@media (max-width: 470px) {
+    .quiz_box {
+        border: 2px solid #000;
+        width: 800px;
+        margin: 0;
+    }
+    .quiz_box header {
+        padding: 0 15px;
+    }
+    section {
+        padding: 25px 15px 20px 15px;
+    } 
+    .footer {
+        padding: 0 15px;
+    }
+    .input_que input {
+        width: 80%;
+    }
+    .input_que .icon_que {
+        width: 15%;
+    }
+    
+    
+}
+@media (max-width: 650px) {
+    .footer {
+        height: max-content;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+        margin-bottom: 5%;
+        padding-top: 5%;
+    }
+    .footer button {
+        margin: 1% 0;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Feedback</title>
+    <link rel="stylesheet" href="/getFeedback.css">
+</head>
+
+<body>
+    <h2 class="top_heading">
+        Dear<span class="data"> Educator,</span>
+    </h2>
+    <h4>You would receive Feedback of your test video here. Generally it takes 3 working days, after you upload the test video. You will be informed through mail also regarding the readiness of feedback of your video.</h4>
+    <div class="feedback_container">
+        <div class="feedback_status">
+            <div class="feedback_banner">
+                <img src="/be-an-educator/feedback_banner.svg" class="feedback_img" alt="">
+            </div>
+            <div class="check_feedback">
+                <div class="feedback_text">
+                    <% if(fb == 'N') { %>
+                        <i class="fas fa-search"></i>
+                        <div class="text">Your video is under review.</div>
+                        <% } else { %>
+                            <i class="fas fa-clipboard-check fa-2x"></i>
+                            <div class="text">Feedback for your video is ready.</div>
+                            <% } %>
+                </div>
+                <!-- <button class="cta" id="getFeedbackScoreCard">Check Now</button> -->
+                <% if(fb == 'Y') { %>
+                    <button class="cta cnow" id="getFeedbackScoreCard">Check Now</button>
+                    <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var fb = '<%=fb%>'
+        if(fb == 'Y')
+            document.getElementById('getFeedbackScoreCard').onclick = function() {
+                $("#gum-local").load("/be-an-educator/feedbackScoreCard");
+            }
+    </script>
+</body>
+
+</html>
+
+</html>

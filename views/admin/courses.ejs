@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploaded Courses</title>
+    <link rel="stylesheet" href="/courses.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+
+<body>
+    <div class="header">UPLOADED COURSES</div>
+    <% if (edu != 'null') { %>
+        <h3 style="text-align: center;  margin: 3%;">Viewing Courses of
+            <%=edu%><br> [Click
+                <a href="/admin/releaseEduIdforCourse">here</a> to view all courses]
+        </h3>
+        <% } %>
+
+
+            <% if (courses.length == 0){ %>
+                <h3 style="text-align: center;  margin: 5%; color: red;">
+                    There are no courses !</h3>
+                <% } else { %>
+                    <% for (var i=0;i< courses.length; i++) { %>
+                        <% var cid = courses[i]['_id'] %>
+                            <% var catfolder = courses[i]['courseCategory'].replace(/ /g, "_") %>
+                            <div class="courses_div">
+                                <div class="contents" onclick="opencourse('<%=cid%>')">
+                                    <div class="course_basic">
+                                        <div class="img_div">
+                                                <img class="img" src="/courseVideos/<%=catfolder%>/<%=courses[i]['_id']%>/courses[i]['thumbnail']" alt="No Course Image yet !">
+                                        </div>
+                                        <div class="course_title">
+                                            <div class="ctitle">
+                                                <%=courses[i]['courseCategory']%><br><hr style="margin: 2% 0;"><%=courses[i]['courseTitle']%> 
+                                            </div>
+                                            <div class="course_status">
+                                                <div class="live">
+                                                    <% if(!courses[i]['courseStatus']) { %>
+                                                        <p>Draft</p>
+                                                        <% } else { %>
+                                                            <p>
+                                                                <%=courses[i]['courseStatus']%>
+                                                            </p>
+                                                            <% } %>
+                                                </div>
+                                                <% if (courses[i]['pricing']) { %>
+                                                    <p>
+                                                        <%=courses[i]['pricing'] %>
+                                                    </p>
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course_info">
+                                        <div class="course_info_item">
+                                            <h2>$0.00</h2>
+                                            <p>Earned this month</p>
+                                        </div>
+                                        <div class="course_info_item">
+                                            <h2>0</h2>
+                                            <p>Enrolled this month</p>
+                                        </div>
+                                        <div class="course_info_item2">
+                                            <h2><i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i></h2>
+                                            <p>Course Rating</p>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="coursebuttons">
+                                    <button class="cta" style="background-color: white; color: #000;">Created on <%=courses[i]['courseUploadDate'].toLocaleDateString("en-US", {day: "numeric", month: "short", year: "numeric"})%> by <%=courses[i]['educator']['name']%></button>
+                                    <button onclick="downloadCA('<%=catfolder%>', '<%=cid%>')" class="cta">Download Course Annexure-1</button>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% } %>
+
+
+                                    <script>
+                                        function opencourse(cid) {
+                                            console.log(cid)
+                                            location.href = '/admin/setCourseId/' + cid;
+                                        }
+                                        function downloadCA(category, cid) {
+                                            location.href = '/be-an-educator/download/course-annexure-1/'+category + '/' + cid
+                                        }
+                                    </script>
+</body>
+
+</html>

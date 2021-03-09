@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign MoU</title>
+    <style>
+        .home-styling h1 {
+            padding-bottom: 20px;
+            color: #161361;
+            text-align: center;
+        }
+        
+        .data {
+            color: #29bde4;
+        }
+        
+        .test_video_success_upload {
+            display: none;
+            font-size: 1.8rem;
+            margin-top: 3%;
+            text-align: center;
+        }
+        
+        .test_video_success_upload i {
+            font-size: 2.5rem;
+            padding-right: 3%;
+        }
+        
+        @media only screen and (max-width: 500px) {
+            .test_video_success_upload {
+                margin-top: 5%;
+                font-size: 1.5rem;
+            }
+            .test_video_success_upload i {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="home-styling">
+        <h2 class="top_heading" style="font-weight: 900; text-align: center;">
+            COURSE-PROVIDER & <span class="data">EDUCATOR AGREEMENT</span>
+            <a href="/be-an-educator/download/mou"><button style="float: right; text-transform: none;" class="cta">DOWNLOAD MoU</button></a>
+        </h2>
+
+        <div class="mou" id="loadmou"></div>
+        <% if(type != 'readonly') { %>
+            <div class="test_video_success_upload" style="display: none;" id="annexure_upload_success">
+                <hr style="margin-bottom: 2%;">
+                <br><br> You are now ready to upload the course videos.
+                <br><br>Go To <a href="/be-an-educator/dashboard/courseCreation" style="color: blue; text-decoration: underline;">Courses</a> Panel.
+            </div>
+            <% } %>
+    </div>
+    </div>
+    <script>
+        $(document).ready(() => {
+            $('#loadmou').load('/be-an-educator/mou/<%=type%>')
+        })
+    </script>
+</body>
+
+</html>
+
+</html>

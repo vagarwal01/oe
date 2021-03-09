@@ -1,0 +1,839 @@
+.plus {
+    width: max-content;
+    /* display: none; */
+    cursor: pointer;
+    text-align: center;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ecf0f3;
+    border: 1px solid black;
+    padding: 10px 25px;
+    margin-right: 3%;
+    border-radius: 2px;
+    transition: 0.5s;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.plus:hover {
+    box-shadow: 0 0 0 #fff;
+    /* border: 1px solid grey; */
+    border: 2px solid black;
+}
+
+
+input[type=file] {
+    max-width: fit-content;
+    padding: 6px 0;
+    padding-left: 5px;
+    font-size: 1.5rem;
+    background: #29bde4;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+ ::placeholder {
+    color: #000;
+    font-size: 1.5rem;
+}
+
+label {
+    font-weight: bold;
+    padding-right: 1%;
+}
+
+
+.weekActive {
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: #000;
+    width: 100%;
+    margin-bottom: 2%;
+    display: flex;
+}
+
+
+.cta {
+    padding: 10px 20px;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+}
+
+.loading_circle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 1%;
+    overflow-x: hidden;
+}
+
+.loading_circle img {
+    width: 50px;
+}
+
+.videoTable {
+    margin: 2% 0;
+    width: 95%;
+}
+
+.videoTable .lecture_item {
+    padding: 2%;
+    margin-bottom: 2%;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #ecf0f3;
+}
+
+.videoTable .lecture_item .lecture {
+    display: flex;
+    align-items: center;
+}
+
+.videoTable .lecture_item .lecture .lecture_details {
+    flex: 1;
+}
+
+.videoTable .lecture_item .lecture .videofilepluserror {
+    flex: 2;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.file_upload_success {
+    width: 100%;
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 10%;
+}
+
+.type {
+    padding: 12% 3%;
+    text-align: center;
+    box-shadow: inset 4px 4px 4px #cbced1, inset -4px -4px 4px #cbced1;
+    cursor: pointer;
+    border-right: 2px solid #161361;
+}
+
+.type:hover {
+    background-color: #161361;
+    box-shadow: 0 0 0 #fff;
+    color: #fff;
+}
+
+.typeactive {
+    background-color: #161361;
+    box-shadow: 0 0 0 #fff;
+    color: #fff;
+}
+
+.COdetails {
+    background-color: white;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 95%;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.typeofCO {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.COdata {
+    flex: 5;
+    height: 100%;
+    /* border: 2px solid black; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    padding: 0 2%;
+}
+
+.COBasicDetails {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2%;
+    /* background-color: burlywood; */
+}
+
+.COBasicDetails input {
+    margin-right: 2%;
+}
+
+.COBasicDetails input[type=number] {
+    min-width: 50px;
+    margin-right: 0;
+}
+
+.COdata form {
+    width: 100%;
+}
+
+.resource {
+    display: none;
+    align-items: center;
+}
+
+.resourcefile {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.fileinfo {
+    width: 100%;
+    display: none;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.quizDetails {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.assnDetails {
+    /* display: block; */
+    width: 95%;
+    padding: 1%;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    background-color: white;
+    border: 2px solid #007bff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.assnDetails form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.titlediv {
+    width: 50%;
+}
+.titlediv .form__group:nth-child(2) {
+    margin-top: 2%;
+}
+.titlediv .form__group .form__field {
+    width: 100%;
+}
+
+input[type='text']:disabled {
+    cursor: not-allowed;
+}
+
+.module_main {
+    margin: 2% 0;
+    margin-left: 3%;
+    margin-bottom: 4%;
+    border-bottom: 2px solid black;
+}
+
+.newmodule {
+    padding-top: 2%;
+    padding-bottom: 0;
+}
+
+.module_leftmargin {
+    margin-left: 4%;
+}
+
+.moddetails {
+    display: none;
+    margin-bottom: 2%;
+}
+.moddetails .form__group {
+    margin-top: 2%;
+}
+
+.moddetails .plus {
+    margin-top: 2%;
+}
+
+.mod_text {
+    margin-bottom: 1%;
+    display: flex;
+    align-items: center;
+}
+
+.mod_text h3 {
+    background-color: #161361;
+    color: white;
+    padding: 1%;
+}
+
+.mod_text i {
+    padding-left: 2%;
+    font-size: 26px;
+}
+
+.mod_title {
+    text-transform: capitalize;
+}
+
+.additions {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.additions .plus {
+    margin: 0;
+}
+
+.viewLec {
+    margin: 2% 0;
+}
+
+.weekmaindiv {
+    border-left: 2px solid black;
+}
+
+.weekBtn {
+    margin: 2% 0;
+    margin-left: 3%;
+    background-color: rgb(200, 0, 0);
+    box-shadow: inset 0 0 0 #33999e, inset -0 -0 0px #33999e;
+    font-weight: 900;
+    font-size: larger;
+    position: relative;
+    color: #fff;
+    z-index: 5;
+    transform: scale(1);
+}
+
+.weekBtn:hover {
+    transform: scale(1.1);
+    border: 1px solid #000;
+}
+
+.weekActive {
+    margin: 0;
+    padding-left: 3%;
+}
+
+.weekActive h3 {
+    text-transform: capitalize;
+}
+
+.week {
+    margin-bottom: 2%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.week:after {
+    content: '';
+    width: 3%;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.week i {
+    font-size: 30px;
+    margin-left: 2%;
+}
+
+.weekDetails {
+    display: flex;
+    align-items: center;
+    padding-left: 3%;
+}
+
+.weekdetailsinputs {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.collapseWeek {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 2% 0;
+}
+
+.collapseWeek:after {
+    content: '';
+    width: 100%;
+    height: 2px;
+    background-color: black;
+    position: absolute;
+    left: 0;
+    top: 50%;
+}
+
+.collapseWeek .plus {
+    z-index: 5;
+    margin: 0;
+}
+
+.viewallassn {
+    display: none;
+    width: 95%;
+    margin-bottom: 5%;
+}
+
+.viewallassnitem {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 1%;
+    background-color: #ecf0f3;
+    border: 2px solid #161361;
+}
+
+.viewassndel {
+    padding: 0 1%;
+}
+
+.viewassndel i {
+    font-size: 25px;
+    cursor: pointer;
+    color: rgb(200, 0, 0);
+}
+
+.viewassntype {
+    background-color: #29bde4;
+    flex: 2;
+    padding: 3% 0;
+}
+
+.viewassndetails {
+    flex: 3;
+    padding: 1%;
+    border-right: 2px solid #161361;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.viewassntitle {
+    padding-bottom: 1%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.viewassnfilename {
+    background: #33999e;
+    color: white;
+    width: max-content;
+    border-radius: 10px;
+    padding: 2% 3%;
+}
+
+
+.prevweekmssg {
+    margin-top: 5%;
+}
+.progressdivaddn {
+    width: 25%;
+}
+
+
+
+
+
+
+
+
+
+@media (max-width: 1160px) {
+    .assnDetails form .filediv {
+        flex: 2;
+    }
+}
+
+@media (max-width: 1100px) {
+    .videoTable .lecture_item .lecture .lecture_details {
+        flex: 2;
+    }
+    .videoTable .lecture_item .lecture .videofilepluserror {
+        flex-direction: column;
+    }
+    .progressdiv {
+        margin: 4% 0;
+        width: 90%;
+    }
+    .progressdivaddn {
+        width: 35%;
+    }
+    .weekDetails {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .weekdetailsinputs {
+        width: 100%;
+    }
+    .addModbtn {
+        margin-top: 2%;
+    }
+}
+
+@media (max-width: 1060px) {
+    .assnDetails form {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .assnDetails form .titlediv {
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+    .titlediv .form__group:nth-child(2) {
+        margin-top: 0;
+    }
+    .assnDetails form .filediv {
+        display: flex;
+        justify-content: left;
+        margin-top: 5%;
+        align-items: center;
+    }
+    .assnDetails form .filediv .filedivtext {
+        flex: 1;
+        text-align: left;
+    }
+    .assnDetails form .filediv .filedivfile {
+        flex: 1;
+    }
+    .assnDetails form .filediv .filedivfile input[type='file'] {
+        width: 210px;
+    }
+    .titlediv input[type=number] {
+        margin-top: 0;
+    }
+}
+
+@media (min-width: 1000px) and (max-width: 1070px) {
+    .videofilepluserror .lecture_video_file form input[type=file] {
+        width: 200px;
+    }
+}
+@media (max-width: 1000px) {
+    .videoTable .lecture_item .lecture {
+        flex-direction: column;
+    }
+    .videoTable .lecture_item .lecture .lecture_details {
+        width: 100%;
+        justify-content: center;
+    }
+    .videoTable .lecture_item .lecture .videofilepluserror {
+        width: 100%;
+        margin-top: 2%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .videofilepluserror .file_upload_success {
+        justify-content: center;
+        color: rgb(149, 223, 236);
+    }
+    .progressdiv {
+        margin: 0;
+        width: 35%;
+    }
+    .type {
+        padding: 12% 3%;
+    }
+
+}
+
+@media (max-width: 970px) {
+    .weekdetailsinputs {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 950px) {
+    .COBasicDetails {
+        margin-bottom: 6%;
+    }
+}
+
+@media (max-width: 900px) {
+    .assnDetails form .titlediv {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .titlediv input[type=text] {
+        min-width: 97%;
+        width: 97%;
+        max-width: 97%;
+    }
+    .titlediv .form__group:nth-child(2) {
+        margin-top: 2%;
+    }
+}
+
+@media (max-width:890px) {
+    .titlediv input[type=number] {
+        min-width: 50px;
+    }
+    .titlediv input {
+        margin-right: 2%;
+    }
+}
+
+@media (max-width: 855px) {
+    .COdata {
+        padding: 0 1%;
+    }
+}
+
+@media (max-width:850px) {
+    .viewallassn {
+        margin-top: 4%;
+        margin-bottom: 7%;
+    }
+    .viewallassnitem {
+        flex-direction: column;
+        margin-bottom: 3%;
+    }
+    .viewassntype, .viewassndetails {
+        width: 100%;
+    }
+    .viewassndetails {
+        border-right: 0;
+        border-bottom: 2px solid #161361;
+    }
+    .viewassndel {
+        padding: 2% 1%;
+    }    
+
+}
+
+@media (max-width: 800px) {
+    .COdetails {
+        flex-direction: column;
+        margin: 6% 0;
+    }
+    .typeofCO {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+    }
+    .type {
+        padding: 2% 0;
+        flex: 1;
+        border-right: 0px solid #161361;
+        border-bottom: 2px solid #161361;
+    }
+    .COdata {
+        margin: 2% 0;
+        padding: 0;
+        width: 100%;
+        padding: 0 1%;
+    }
+    .COdata form .resource {
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+    .assnDetails form .filediv {
+        flex-direction: column;
+    }
+    .assnDetails form .filediv .filedivtext {
+        text-align: center;
+    }
+    .viewLec {
+        margin-bottom: 4%;
+    }
+}
+
+@media (max-width: 750px) {
+    .videoTable .lecture_item {
+        margin-bottom: 5%;
+    }
+    .videoTable .lecture_item .lecture .videofilepluserror {
+        width: 100%;
+        margin-top: 2%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .progressdiv {
+        margin: 4% 0;
+        width: 90%;
+    }
+    .progressdivaddn {
+        width: 50%;
+    }
+}
+
+@media (max-width: 700px) {
+    .COdata form input[type='file'] {
+        width: 200px;
+    }
+    .wacta {
+        margin: 5% 0;
+    }
+    .weekadditionals {
+        margin-bottom: 5%;
+    }
+    .prevweekmssg {
+        margin-top: 7%;
+    }
+}
+
+@media (max-width: 650px) {
+    .COBasicDetails {
+        flex-direction: column;
+        justify-content: start;
+        align-items: flex-start;
+        padding: 0 3%;
+    }
+    .COBasicDetails input[type=number] {
+        margin-top: 2%;
+    }
+    .COBasicDetails input[type=text], .COBasicDetails input[type=number] {
+        min-width: 95%;
+    }
+    .resource {
+        padding: 0 3%;
+    }
+    .additions {
+        margin-top: 5%;
+    }
+}
+
+@media (max-width: 618px) {
+    .resource {
+        flex-direction: column;
+    }
+    .rurl .form__group .form__field {
+        width: 96%;
+        margin-top: -4%;
+        margin-bottom: 2%;
+    }
+}
+
+@media (max-width: 600px) {
+    .videoTable {
+        margin-top: 4%;
+    }
+    .videofilepluserror .lecture_video_file form {
+        flex-direction: column;
+    }
+    .videofilepluserror .lecture_video_file form input[type='file'] {
+        margin: 5% 0;
+    }
+}
+
+@media(max-width: 550px) {
+    .module_main {
+        margin-top: 4%;
+    }
+    .newmodule {
+        flex-direction: column;
+        align-items: center;
+    }
+    input[type=text] {
+        margin: 0;
+    }
+    .newmodule .cta {
+        width: max-content;
+        margin-top: 1%;
+    }
+}
+
+@media (max-width: 500px) {
+    .videofilepluserror .lecture_video_file form .plus {
+        margin-top: 7%;
+    }
+    .videoTable .lecture_item {
+        margin-bottom: 9%;
+    }
+    .wacta {
+        margin: 7% 0;
+    }
+    .weekadditionals {
+        margin-bottom: 7%;
+    }
+    .prevweekmssg {
+        margin-top: 9%;
+    }
+}
+
+@media (max-width: 450px) {
+    .module_main {
+        margin-top: 6%;
+    }
+    .additions {
+        margin-top: 9%;
+    }
+
+}
+
+@media (max-width: 430px) {
+    .assnDetails form .filediv .filedivfile button {
+        margin-top: 3%;
+    }
+}
+
+@media (max-width: 425px) {
+    .type {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 410px) {
+    .videofilepluserror .lecture_video_file form input[type='file'] {
+        width: 200px;
+    }
+    .videoTable .lecture_item {
+        margin-bottom: 12%;
+    }
+    .resource button {
+        margin-top: 3%;
+    }
+}
+
+@media (max-width:400px) {
+    .viewallassn {
+        margin-top: 6%;
+        margin-bottom: 9%;
+    }
+    .viewallassnitem {
+        margin-bottom: 5%;
+    }
+    .prevweekmssg {
+        margin-top: 11%;
+    }
+    .progressdivaddn {
+        width: 65%;
+    }
+}
+
+@media (max-width: 380px) {
+    .weekdetailsinputs input[type='text'] {
+        min-width: 100%;
+    }
+    .module_main {
+        margin-top: 10%;
+    }
+}
+
+@media (max-width: 330px) {
+    .moddetails .plus {
+        margin-top: 4%;
+    }
+}

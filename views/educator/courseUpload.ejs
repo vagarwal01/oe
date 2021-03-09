@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/courseUpload.css">
+    <!-- <link rel="stylesheet" href="/courseUpload2.css"> -->
+    <link rel="stylesheet" href="/quiz.css">
+    <title>Course Upload</title>
+    <style>
+        @media (max-width: 970px) {
+            .wtime {
+                margin: 3% 0;
+            }            
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="course_name">
+        <%=coursetitle%>
+    </h1>
+
+    <h2 class="top_heading">
+        Dear <span class="data">Educator,</span>
+    </h2>
+
+    <p>It’s great up to now. Hope you have created the course structure of your course and recorded the videos. Now you are about to increase your outreach.<br>Just upload the course, follow subsequent steps and launch your course.</p>
+    <br>
+    <p style="color: red;">Note: Some fields are auto filled as per the Annexure-1 provided by you.</p><br>
+    <p>1. Number of Weeks and Modules are as per the Annexure-1.</p>
+    <p>2. Video Uploading process will go week by week</p><br>
+    <p style="color: red;">Note: You need to complete atleast 1/3rd of your total modules i.e.
+        <%=limit%> Modules by
+            <%=lastdate%>.
+    </p>
+    <br>
+    <p>3. Click on the <i>Week n</i> to start that week and similarly on <i>Module n</i> to start that module.</p>
+    <p>4. You can add <i>Course Offerings</i> (Downloadable Files, URLs, Source Codes) for each module.</p>
+    <p>5. You can add <i>Assignments</i> for each module or week as per your choice.</p>
+    <p>5. You can add <i>Quizzes</i> at the end of each week.</p><br>
+    <p style="color: red;">Note: Remember to provide atleast 1.5 hours of Course Offerings and atleast 20 min of Assignment for each week.
+    </p><br>
+    <div>
+        <a href="/be-an-educator/download/course-annexure-1/ses/ses"><button style="float: right; text-transform: none;" class="cta">Download Annexure-1</button></a>
+    </div>
+    <hr style="margin: 2% 0;">
+
+
+    <div class="weekmaindiv" id="weekmaindiv">
+        <% for(var i = 0; i < syll.length; i++) { %>
+            <% var wk = syll[i].split("::")[0] %>
+                <div class="weekitem">
+                    <!-- week -->
+                    <% if (i!=0 && syll[i-1].split("::")[1] == 'No') { %>
+                        <p class="prevweekmssg" style="padding-left: 3%;" id="weekmsg_<%=wk%>">
+                            <span style="color: red;">*</span> Complete previous week first.
+                            <br>( This includes uploading all Lecture Videos, minimum 1.5 hours of Course Offerings and minimum 20 min of Assignments )
+                        </p>
+                        <% } %>
+                            <div class="week">
+                                <% if (i==0) { %>
+                                    <% if(syll[i].split("::")[1] == 'No' || syll[i].split("::")[1] == 'Inc') { %>
+                                        <div class="plus weekBtn" style="background-color: rgb(200,0,0);" onclick="buttonWeek('<%=wk%>')" id="Wbtn_<%=wk%>" style="display: block;">
+                                            <%=wk%>
+                                        </div>
+                                        <i id="Wcheck_<%=wk%>" style="color: green; display:none;" class="fas fa-check-circle"></i>
+                                        <% } else { %>
+                                            <div class="plus weekBtn" style="background-color: rgb(0,100,0);" id="Wbtn_<%=wk%>" onclick="buttonWeek('<%=wk%>')" style="display: block;">
+                                                <%=wk%>
+                                            </div>
+                                            <i id="Wcheck_<%=wk%>" style="color: green; display: block;" class="fas fa-check-circle"></i>
+                                            <% } %>
+                                                <% } else { %>
+                                                    <% if (syll[i-1].split("::")[1] == 'No'  || syll[i].split("::")[1] == 'Inc') { %>
+                                                        <div class="plus weekBtn" style="background-color: rgb(200,0,0); display: block; cursor: not-allowed;" id="Wbtnnonactive_<%=wk%>">
+                                                            <%=wk%>
+                                                        </div>
+                                                        <% } else if(syll[i].split("::")[1] == 'No') { %>
+                                                            <div class="plus weekBtn" style="background-color: rgb(200,0,0);" onclick="buttonWeek('<%=wk%>')" id="Wbtn_<%=wk%>" style="display: block;">
+                                                                <%=wk%>
+                                                            </div>
+                                                            <i id="Wcheck_<%=wk%>" style="color: green; display:none;" class="fas fa-check-circle"></i>
+                                                            <% } else { %>
+                                                                <div class="plus weekBtn" style="background-color: rgb(0,100,0);" id="Wbtn_<%=wk%>" onclick="buttonWeek('<%=wk%>')" style="display: block;">
+                                                                    <%=wk%>
+                                                                </div>
+                                                                <i id="Wcheck_<%=wk%>" style="color: green; display: block;" class="fas fa-check-circle"></i>
+                                                                <% } %>
+                                                                    <% } %>
+                            </div>
+
+                            <div id="allinoneweekdiv_<%=wk%>" style="display: none">
+                                <!-- week details -->
+                                <div class="weekDetails" id="weekDetails_<%=wk%>" style="display: none;">
+                                    <div class="weekdetailsinputs">
+                                        <div class="form__group">
+                                            <input type="text" name="weekTitle" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" id="weekTitle_<%=wk%>" placeholder="Week Title"/>
+                                            <label for="weekTitle_<%=wk%>" class="form__label">Week Title</label>
+                                        </div>
+                                        <div class="form__group wtime">
+                                            <input type="text" name="weekTime" disabled class="form__field" id="weekTime_<%=wk%>" placeholder="Total Time Of Efforts"/>
+                                            <label for="weekTime_<%=wk%>" class="form__label">Total Time Of Efforts</label>
+                                        </div>                                        
+                                    </div>
+                                    <div class="plus addModbtn" id="addModules_<%=wk%>" onclick="addModules('<%=wk%>')">NEXT</div>
+                                </div>
+                                <div class="weekActive" style="padding-top: 0; margin-top: 0; padding-bottom: 20px;">
+                                    <p id="remaining_<%=wk%>" style="color: red"></p>
+                                </div>
+                                <div class="weekActive">
+                                    <h3 id="weekActiveInfo_<%=wk%>"></h3>
+                                </div>
+                                <!-- all module -->
+                                <div id="moduleTable_<%=wk%>"></div>
+
+                                <!-- week additionals -->
+                                <div class="weekadditionals" style="display: none; margin-left: 3%;" id="weekadditionals_<%=wk%>">
+                                    <button class="cta wacta" onclick="newAssn('<%=wk%>')" style="margin-bottom: 2%; margin-right: 2%;">+ <%=wk%> Assignment</button>
+                                    <button class="cta wacta" onclick="newQuiz('<%=wk%>')" style="margin-bottom: 2%; margin-right: 2%;">+ <%=wk%> Quiz</button>
+                                    <button class="cta wacta" onclick="cancelWA('<%=wk%>')" id="cancelWA_<%=wk%>" style="display: none; margin-bottom: 2%;">CANCEL</button>
+                                </div>
+
+                                <!-- Assignment -->
+                                <p id="assnSuc_<%=wk%>" style="text-align: center; color: red;"></p>
+                                <center><div class="progressdiv progressdivaddn" id="progressdiv_<%=wk%>" style="flex: 1; display: none; margin-left: 1%">
+                                    <div class="progress">
+                                        <div class="progress-bar" id="progressbar_<%=wk%>"></div>
+                                    </div>
+                                    <p id="uploadStatus_<%=wk%>" style="color: green; padding-top: 2%; padding-bottom: 4%; width: fit-content;">Uploading your file</p>
+                                </div></center>
+                                <center>
+                                    <div class="assnDetails" id="assnUpload_<%=wk%>" style="display: none; margin-bottom: 2%;">
+                                        <form method="POST" id="upload_assignment_<%=wk%>" role="form" enctype="multipart/form-data">
+                                            <div class="titlediv">
+                                                <div class="form__group">
+                                                    <input type="text" name="aboutWAssn" id="aboutAssn_<%=wk%>" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Brief Title of Assignment"/>
+                                                    <label for="aboutAssn_<%=wk%>" class="form__label">Brief Title of Assignment</label>
+                                                </div>
+                                                <div class="form__group">
+                                                    <input type="number" name="timeWAssn" id="timeAssn_<%=wk%>" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Time Effort (in Min)"/>
+                                                    <label for="timeAssn_<%=wk%>" class="form__label">Time Effort (in Min)</label>
+                                                </div>
+                                            </div>
+                                            <div class="filediv">
+                                                <div class="filedivtext">
+                                                    <p>Max File Size: 1GB</p>
+                                                    <p>Accepted Files: image files / documents (text, docs, ppt, excel)</p>
+                                                </div>
+                                                <div class="filedivfile">
+                                                    <input type="file" accept=".png, .jpg, .jpeg, .docx, .doc, .xlsx, .cvv, .pdf, .txt, .ppt" id="assignment_file_<%=wk%>" name="assignment_file_<%=wk%>">
+                                                    <button type="button" class="cta" onclick="upload_Wassignment_func('<%=wk%>')" id="assignment_btn_<%=wk%>">Upload</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </center>
+
+                                <!-- Quiz -->
+                                <center>
+                                    <div class="quizDetails" id="quizUpload_<%=wk%>" style="display: none; margin-bottom: 2%;">
+                                        <div class="info_box" id="infoBox_<%=wk%>">
+                                            <div class="info-title"><span class="span_title">Dear Educator, how to upload questions</span></div>
+                                            <div class="info-list">
+                                                <div class="info">1. You can give the <b>title</b> to the quiz, if required.</div>
+                                                <div class="info">2. Question type can be either <b>MCQ</b> (multiple choice question) or <b>Checkbox</b> (more than one correct option) or <b>Short Answer</b>.</div>
+                                                <div class="info">3. For every question and/or options, you can either provide <b>text</b> or <b>image</b> or <b>both</b>.</div>
+                                                <div class="info">4. For MCQ and Checkbox type questions, you need to select the <b>correct option/s</b>.</div>
+                                                <div class="info">5. For Short Answer type question, you need to provide the <b>correct answer</b>.</div>
+                                                <div class="info">6. You can also give the <b>explanation</b> for your students.</div>
+                                                <div class="info">7. Click on <b>'Save and Next'</b> to put next questions.</div>
+                                                <div class="info">8. Click on <b>'View Questions'</b> to view your posted questions.</div>
+                                                <div class="info">9. Click on <b>'Exit'</b> to close the quiz box.</div>
+                                                <div class="info">10. You can <b>add more questions</b> after closing the quiz box as well.</div>
+                                            </div>
+                                            <div class="footer">
+                                                <button class="qcta" onclick="closeQuiz('<%=wk%>')">Close</button>
+                                                <button class="qcta" onclick="startQuiz('<%=wk%>')">Add/View Questions</button>
+                                            </div>
+                                        </div>
+
+                                        <form method="POST" class="quiz_box" id="quizquestionform_<%=wk%>" enctype="multipart/form-data">
+                                            <header>
+                                                <div class="form__group field header_div">
+                                                    <input class="form__field que_text" placeholder="Quiz Title" id='Qtitle_<%=wk%>' required/>
+                                                    <label for="Qtitle_<%=wk%>" class="form__label">Quiz Title</label>
+                                                </div>
+                                            </header>
+                                            <section>
+                                                <div class="form__group field">
+                                                    <p style="color: #007bff; text-align: left;" id="questiontitle_<%=wk%>">Question 1</p>
+                                                    <div class="que_div" id="textual_que-div_<%=wk%>">
+                                                        <div class="input_que" style="width: 100%;">
+                                                            <textarea name="" style="display: block;" id="question_<%=wk%>"></textarea>
+                                                        </div>
+                                                        <div class="icon_que">
+                                                            <i class="fas fa-image" onclick="displayImgDiv('<%=wk%>')"></i>
+                                                            <input type="file" accept="image/*" onchange="fasterPreview(this, '<%=wk%>')" hidden id="question_image_file_<%=wk%>" name="quizFiles_<%=wk%>">
+                                                        </div>    
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="que_div" id="image_que-div_<%=wk%>" style="display: none;">
+                                                    <div class="input_que image_box">
+                                                        <img src="" id="question_image_<%=wk%>" onclick="displayImgDiv('<%=wk%>')">
+                                                    </div>
+                                                    <div class="icon_que">
+                                                        <i class="fas fa-times" onclick="deleteQueImage('<%=wk%>')"></i>
+                                                    </div>        
+                                                </div>
+                                                <div class="form__group" style="margin-top: 2%;">
+                                                    <p style="color: #007bff;">Choose the answer type</p>
+                                                    <div class="answerTypeRadios" id="answerType_<%=wk%>">
+                                                        <label for="at-rd1_<%=wk%>" class="btn-radio">
+                                                        <input type="radio" value="multipleChoice" onclick="answerType('multipleChoice' ,'<%=wk%>', 1)" id="at-rd1_<%=wk%>" name="at">
+                                                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                            <circle cx="10" cy="10" r="9"></circle>
+                                                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                                        </svg>
+                                                        <span>Multiple Choice</span>
+                                                        </label>
+                                                        <label for="at-rd2_<%=wk%>" class="btn-radio">
+                                                        <input type="radio" value="checkbox" onclick="answerType('checkbox' ,'<%=wk%>', 1)" id="at-rd2_<%=wk%>" name="at">
+                                                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                            <circle cx="10" cy="10" r="9"></circle>
+                                                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                                        </svg>
+                                                        <span>Checkboxes</span>
+                                                        </label>
+                                                        <label for="at-rd3_<%=wk%>" class="btn-radio">
+                                                        <input type="radio" value="shortAnswer" onclick="answerType('shortAnswer' ,'<%=wk%>', 1)" id="at-rd3_<%=wk%>" name="at">
+                                                        <svg width="20px" height="20px" viewBox="0 0 20 20">
+                                                            <circle cx="10" cy="10" r="9"></circle>
+                                                            <path d="M10,7 C8.34314575,7 7,8.34314575 7,10 C7,11.6568542 8.34314575,13 10,13 C11.6568542,13 13,11.6568542 13,10 C13,8.34314575 11.6568542,7 10,7 Z" class="inner"></path>
+                                                            <path d="M10,1 L10,1 L10,1 C14.9705627,1 19,5.02943725 19,10 L19,10 L19,10 C19,14.9705627 14.9705627,19 10,19 L10,19 L10,19 C5.02943725,19 1,14.9705627 1,10 L1,10 L1,10 C1,5.02943725 5.02943725,1 10,1 L10,1 Z" class="outer"></path>
+                                                        </svg>
+                                                        <span>Short Answer</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <input type="text" hidden value="" id="selectedOptionMC_<%=wk%>">
+                                                <input type="text" hidden value="" id="selectedOptionCB_<%=wk%>">
+                                                <input type="number" hidden value="" id="queno_<%=wk%>">
+                                                <div class="options" id="option_list_<%=wk%>">
+                                                    <!-- <div class="option_list"></div> -->
+                                                </div>
+                                                <div class="form__group field" style="margin-top: 3%; margin-bottom: 40px;">
+                                                    <input class="form__field que_text" placeholder="Explanation" id='explanation_<%=wk%>' required/>
+                                                    <label for="explanation_<%=wk%>" class="form__label">Explanation</label>
+                                                </div>
+                                                <p id="quizerror_<%=wk%>" style="color: red;"></p>
+                                            </section>
+                                            <div class="footer" id="footerquiz_<%=wk%>">
+                                                <button type="button" class="qcta" onclick="closeQuiz('<%=wk%>')">Exit</button>
+                                                <button type="button" class="qcta submit_btn" onclick="quizDetails('<%=wk%>')">View Questions</button>
+                                                <button type="button" class="qcta next_btn" onclick="nextQue('<%=wk%>', 'save')">Save and Next</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </center>
+                                <div class="collapseWeek" id="viewAdditionsbtn_<%=wk%>" style="display: none; margin-bottom: 6%;">
+                                    <button class="plus CWbtn" onclick="viewAdditions('<%=wk%>')">View all <%=wk%> Additionals</button>
+                                </div>
+
+                                <center>
+                                    <div id="viewallassn_<%=wk%>" class="viewallassn"></div>
+                                </center>
+                                <div class="collapseWeek">
+                                    <button class="plus CWbtn" onclick="collapseWeek('<%=wk%>')">COLLAPSE <%=wk%></button>
+                                </div>
+                            </div>
+                </div>
+                <% } %>
+    </div>
+
+    <script src="/ckeditor3/ckeditor.js"></script>
+    <script src="/ckeditor3/adapters/jquery.js"></script>
+    <script>
+        function answerType(type, week, num) {
+            if(type != 'shortAnswer') {
+                document.getElementById('at-rd3_'+week).disabled = false
+                if(type == 'multipleChoice') {
+                    $('#selectedOptionCB_'+week).val('')
+                    document.getElementById('at-rd1_'+week).disabled = true
+                    document.getElementById('at-rd2_'+week).disabled = false
+                    var icon = 'circle'
+                } else {
+                    $('#selectedOptionMC_'+week).val('')
+                    document.getElementById('at-rd2_'+week).disabled = true
+                    document.getElementById('at-rd1_'+week).disabled = false
+                    var icon = 'square'
+                }
+                if(num == 1)
+                    document.getElementById('option_list_'+week).innerHTML = ''
+                $('#option_list_'+week).append(`
+                <div class="mainOptionDiv" style="margin: 5% 0" id="mainOptionDiv_${week}_${type}::${num}">
+                    <div class="textoptiondiv">
+                        <div class="icon_que">
+                            <i class="fas fa-check-${icon} checkcircle" onclick="selectOption('${week}', '${type}', '${num}')" id="ans_icon_${type}_${num}_${week}"></i>
+                        </div>
+                        <div class="input_que option_div" id="textual_opt-div_${type}_${num}_${week}">
+                            <textarea name="" style="display: block;" id="option_${type}_${num}_${week}"></textarea>
+                            <div class="icon_que">
+                                <i class="fas fa-image" onclick="displayOptImgDiv('${week}', '${type}', '${num}')"></i>
+                                <input type="file" hidden accept="image/*" onchange="fasterOptPreview(this, '${week}', '${type}', '${num}')" id="optionImageFile_${type}_${num}_${week}" name="quizFiles_${week}">
+                            </div>
+                        </div>
+                        <div class="icon_que">
+                            <i class="fas fa-times" onclick="removeOption('${week}', '${type}', '${num}')"></i>
+                        </div>
+                    </div>
+                    <div class="image_box" id="image_opt-div_${type}_${num}_${week}" style="display: none;">
+                        <img src="" id="opt_image_${type}_${num}_${week}" onclick="displayOptImgDiv('${week}', '${type}', '${num}')">
+                        <div class="icon_que">
+                            <i class="fas fa-times" onclick="deleteOptImage('${week}', '${type}', '${num}')"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_div form__group" id="addoption_${type}_${num}_${week}">
+                    <div class="icon_que">
+                        <i class="far fa-check-${icon}" style="cursor: auto"></i>
+                    </div>        
+                    <div class="input_que">
+                        <p onclick="addAnotherOption('${week}', '${type}', '${num}')">Add Options</p>
+                    </div>
+                    <div class="icon_que"></div>    
+                </div>
+                `)
+                // option_${type}_${num}_${week}
+                $( 'textarea#option_'+type+'_'+num+'_'+week ).ckeditor({
+                    removePlugins: 'print,save,exportpdf,newpage,templates,undo,find,selectall,scayt,forms,removeformat,copyformatting,blockquote,div,bidi,link,image,flash,table,horizontalrule,smiley,pagebreak,iframe,colordialog,colorbutton,tabletools,showblocks,showborders,tableselection',
+                    height: 100,
+                    width: '100%',
+                    editorplaceholder: 'Type the option here'
+                });
+
+            } else {
+                document.getElementById('at-rd3_'+week).disabled = true
+                document.getElementById('at-rd2_'+week).disabled = false
+                document.getElementById('at-rd1_'+week).disabled = false
+                document.getElementById('option_list_'+week).innerHTML = `
+                <div class="mainOptionDiv">
+                    <div class="form__group field" style="margin-top: 1%; width: 90%">
+                        <input class="form__field que_text" placeholder="Short Answer Text" id='shortanswer_${week}' required/>
+                        <label for="shortanswer_${week}" class="form__label">Short Answer Text</label>
+                    </div>
+                </div>`
+            }
+        }
+        function selectOption(week, type, num) {
+            if (type == 'multipleChoice') {
+                document.getElementById("ans_icon_"+type+"_"+num+"_"+week).style.color = 'green'
+                $('#selectedOptionMC_'+week).val('opt'+num)
+                var n = $(".mainOptionDiv:not([style*='display: none'])").length
+                for(var i=0;i<n;i++) {
+                    var did = document.getElementsByClassName('mainOptionDiv')[i].id
+                    var x = did.split('::')[1]
+                    if(x != num)
+                        document.getElementById("ans_icon_"+type+"_"+x+"_"+week).style.color = 'grey'
+                }
+            } else {
+                var cbicon = document.getElementById("ans_icon_"+type+"_"+num+"_"+week)
+                if (cbicon.style.color != 'green') {
+                    cbicon.style.color = 'green'
+                    var dt = $('#selectedOptionCB_'+week).val()
+                    dt = dt + '&opt' + num
+                    $('#selectedOptionCB_'+week).val(dt)
+                } else {
+                    cbicon.style.color = 'grey'
+                    var dt = $('#selectedOptionCB_'+week).val()
+                    dt = dt.replace('&opt'+num, '')
+                    $('#selectedOptionCB_'+week).val(dt)
+                }
+            }
+        }
+        function addAnotherOption(week, type, num) {
+            document.getElementById("addoption_"+type+"_"+num+"_"+week).style.display = 'none'; 
+            var n = $(".mainOptionDiv:not([style*='display: none'])").length
+            for(var i=0;i<n;i++) {
+                var did = document.getElementsByClassName('mainOptionDiv')[i].id
+                var x = did.split('::')[1]
+            }
+            answerType(type, week, parseInt(num)+1)
+        }
+        function removeOption(week, type, num) {
+            document.getElementById("mainOptionDiv_"+week+"_"+type+"::"+num).remove()
+            if(type == 'multipleChoice') {
+                if($('#selectedOptionMC_'+week).val() == 'opt'+num)
+                    $('#selectedOptionMC_'+week).val('')
+            } else {
+                console.log('ans type cb')
+                var corroptlist = $('#selectedOptionCB_'+week).val().split('&')
+                console.log(corroptlist)
+                if(corroptlist.includes('opt'+num))
+                var corr = $('#selectedOptionCB_'+week).val().replace('&opt'+num, '')
+                $('#selectedOptionCB_'+week).val(corr)
+            }
+        }
+        function displayOptImgDiv(week, type, num) {
+            $("#optionImageFile_"+type+"_"+num+"_"+week).click()
+        }
+        function deleteOptImage(week, type, num) {
+            $("#optionImageFile_"+type+"_"+num+"_"+week).val('')
+            $("#opt_image_"+type+"_"+num+"_"+week).attr('src', '')
+            document.getElementById("image_opt-div_"+type+"_"+num+"_"+week).style.display = 'none'
+        }
+        function fasterOptPreview(uploader, week, type, num) {
+            if (uploader.files && uploader.files[0]) {
+                var file = uploader.files[0]
+                var idxDot = file.name.lastIndexOf(".") + 1;
+                var extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+                console.log(extFile)
+                if(extFile == 'jpg' || extFile == 'png' || extFile == 'jpeg') {
+                    document.getElementById("image_opt-div_"+type+"_"+num+"_"+week).style.display = 'flex'
+                    $("#opt_image_"+type+"_"+num+"_"+week).attr('src',
+                        window.URL.createObjectURL(uploader.files[0]));
+                }
+            }
+        }
+        function displayImgDiv(week) {
+            $("#question_image_file_"+week).click();
+        }
+        function deleteQueImage(week) {
+            $("#question_image_file_"+week).val('')
+            $('#question_image_'+week).attr('src', '')
+            document.getElementById('image_que-div_'+week).style.display = 'none'
+        }
+        function fasterPreview(uploader, week) {
+            if (uploader.files && uploader.files[0]) {
+                var file = uploader.files[0]
+                var idxDot = file.name.lastIndexOf(".") + 1;
+                var extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+                console.log(extFile)
+                if(extFile == 'jpg' || extFile == 'png' || extFile == 'jpeg') {
+                    document.getElementById('image_que-div_'+week).style.display = 'flex'
+                    $('#question_image_'+week).attr('src',
+                        window.URL.createObjectURL(uploader.files[0]));
+                }
+            }
+        }
+
+        function closeQuiz(week) {
+            document.getElementById('quizUpload_' + week).style.display = 'none'
+        }
+        function newQuiz(week) {
+            document.getElementById('quizUpload_' + week).style.display = 'flex'
+            document.getElementById('quizquestionform_'+week).style.display = 'none'
+            document.getElementById('infoBox_'+week).style.display = 'block'            
+            document.getElementById('assnUpload_' + week).style.display = 'none'
+            document.getElementById('assnSuc_' + week).innerText = ''
+            document.getElementById('cancelWA_' + week).style.display = 'inline-block'
+        }
+        var quizdet
+        function quizDetails(week) {
+            $.ajax({
+                type: 'GET',
+                url: '/be-an-educator/get/quizDetails/'+week,
+                success: (data) => {
+                    if(data['resp'] == 'suc') {
+                        document.getElementById('quizquestionform_'+week).style.display = 'block'
+                        document.getElementById('infoBox_'+week).style.display = 'none'
+                        
+                        if(data['quiz']) {
+                            quizdet = data['quiz']
+                            displayQue(week, 1)                            
+                        } else {
+                            $('#queno_'+week).val(1)
+                            $( 'textarea#question_'+week ).ckeditor({
+                                removePlugins: 'print,save,exportpdf,newpage,templates,undo,find,selectall,scayt,forms,removeformat,copyformatting,blockquote,div,bidi,link,image,flash,table,horizontalrule,smiley,pagebreak,iframe,colordialog,colorbutton,tabletools,showblocks,showborders,tableselection',
+                                height: 100,
+                                width: '100%',
+                                editorplaceholder: 'Type the question here'
+                            });
+                        }
+                    } else {
+                        alert('something went wrong')
+                    }
+                },
+                error: (err) => {
+                    alert('something went wrong')
+                }
+            })
+        }
+        function displayQue(week, qno) {
+            console.log(quizdet)
+            console.log(quizdet['title'])
+            console.log(week)
+            console.log(typeof week)
+            console.log(qno)
+            console.log('fiinsh')
+            var quizD = quizdet['Question-'+qno]
+            $('#queno_'+week).val(qno)
+            $('#Qtitle_'+week).val(quizdet['title'])
+            document.getElementById('questiontitle_'+week).innerText = 'Question '+qno
+            $( 'textarea#question_'+week ).ckeditor({
+                removePlugins: 'print,save,exportpdf,newpage,templates,undo,find,selectall,scayt,forms,removeformat,copyformatting,blockquote,div,bidi,link,image,flash,table,horizontalrule,smiley,pagebreak,iframe,colordialog,colorbutton,tabletools,showblocks,showborders,tableselection',
+                height: 100,
+                width: '100%',
+                editorplaceholder: 'Type the question here'
+            });
+            $( 'textarea#question_' + week ).val(quizD['question']['text'])
+            if(quizD['question']['image']) {
+                document.getElementById('image_que-div_'+week).style.display = 'flex'
+                $('#question_image_'+week).attr('src','/courseVideos/<%=cat%>/<%=id%>/'+week+'/quiz/que'+ qno + '/' + quizD['question']['image']);
+            } else {
+                $("#question_image_file_"+week).val('')
+                $('#question_image_'+week).attr('src', '')
+                document.getElementById('image_que-div_'+week).style.display = 'none'
+            }
+            if(quizD['answerType'] == 'multipleChoice') {
+                document.getElementById('at-rd1_'+week).checked = true
+                document.getElementById('at-rd1_'+week).disabled = true
+                document.getElementById('at-rd2_'+week).disabled = false
+                document.getElementById('at-rd3_'+week).disabled = false
+                $('#selectedOptionMC_'+week).val(quizD['correct'])
+                $('#selectedOptionCB_'+week).val('')
+                var icon = 'circle' 
+            }
+            else if(quizD['answerType'] == 'checkbox') {
+                document.getElementById('at-rd2_'+week).checked = true
+                document.getElementById('at-rd2_'+week).disabled = true
+                document.getElementById('at-rd1_'+week).disabled = false
+                document.getElementById('at-rd3_'+week).disabled = false
+                $('#selectedOptionCB_'+week).val(quizD['correct'])
+                $('#selectedOptionMC_'+week).val('')
+                var icon = 'square' 
+                var optlist = quizD['correct'].split('&')
+            }
+            // $('#queno_'+week).val(qdata['queno'])
+            else {
+                $('#selectedOptionCB_'+week).val('')
+                $('#selectedOptionMC_'+week).val('')
+                document.getElementById('at-rd3_'+week).checked = true
+                document.getElementById('at-rd3_'+week).disabled = true
+                document.getElementById('at-rd1_'+week).disabled = false
+                document.getElementById('at-rd2_'+week).disabled = false
+                document.getElementById('option_list_'+week).innerHTML = `
+                    <div class="mainOptionDiv">
+                        <div class="form__group field" style="margin-top: 1%; width: 90%">
+                            <input class="form__field que_text" value="${quizD['correct']}" placeholder="Short Answer Text" id='shortanswer_${week}' required/>
+                            <label for="shortanswer_${week}" class="form__label">Short Answer Text</label>
+                        </div>
+                    </div>`
+            } 
+            if(quizD['answerType'] != 'shortAnswer') {
+                var type = quizD['answerType']
+                document.getElementById('option_list_'+week).innerHTML = ''
+                for(var i = 1; i <= quizD['totalOptions']; i++) {
+                    var opt = 'opt'+i
+                    console.log('num = ' + i)
+                    if(quizD['answerType'] == 'checkbox') {
+                        if(optlist.includes(opt))
+                            var color = 'green'
+                        else
+                            var color = 'grey'
+                    } else {
+                        if(opt == quizD['correct'])
+                            var color = 'green'
+                        else
+                            var color = 'grey'
+                    }
+                    if(quizD['opt'+i]['image'])
+                        $('#option_list_'+week).append(`
+                            <div class="mainOptionDiv" style="margin: 5% 0" id="mainOptionDiv_${week}_${type}::${i}">
+                                <div class="textoptiondiv">
+                                    <div class="icon_que">
+                                        <i class="fas fa-check-${icon} checkcircle" style="color: ${color}" onclick="selectOption('${week}', '${type}', '${i}')" id="ans_icon_${type}_${i}_${week}"></i>
+                                    </div>
+                                    <div class="input_que option_div" id="textual_opt-div_${type}_${i}_${week}">
+                                        ${quizD['opt'+i]['text']}
+                                        <textarea name="" hidden id='option_${type}_${i}_${week}'>${quizD['opt'+i]['text']}</textarea>
+<!--                                    
+                                        <textarea name="" style="display: block;" id='option_${type}_${i}_${week}'></textarea>
+-->
+                                        <div class="icon_que">
+                                            <i class="fas fa-image" onclick="displayOptImgDiv('${week}', '${type}', '${i}')"></i>
+                                            <input type="file" accept="image/*" onchange="fasterOptPreview(this, '${week}', '${type}', '${i}')" hidden id="optionImageFile_${type}_${i}_${week}" name="quizFiles_${week}">
+                                        </div>
+                                    </div>
+                                    <div class="icon_que">
+                                        <i class="fas fa-times" onclick="removeOption('${week}', '${type}', '${i}')"></i>
+                                    </div>
+                                </div>
+
+                                <div class="image_box" id="image_opt-div_${type}_${i}_${week}" style="display: flex;">
+                                    <img src="/courseVideos/<%=cat%>/<%=id%>/${week}/quiz/que${qno}/${quizD['opt'+i]['image']}" id="opt_image_${type}_${i}_${week}" onclick="displayOptImgDiv('${week}', '${type}', '${i}')">
+                                    <div class="icon_que">
+                                        <i class="fas fa-times" onclick="deleteOptImage('${week}', '${type}', '${i}')"></i>
+                                    </div>
+                                </div>
+                            </div>`)
+                        else
+                            $('#option_list_'+week).append(`
+                            <div class="mainOptionDiv" style="margin: 5% 0" id="mainOptionDiv_${week}_${type}::${i}">
+                                <div class="textoptiondiv">
+                                    <div class="icon_que">
+                                        <i class="fas fa-check-${icon} checkcircle" style="color: ${color}" onclick="selectOption('${week}', '${type}', '${i}')" id="ans_icon_${type}_${i}_${week}"></i>
+                                    </div>
+                                    <div class="input_que option_div" id="textual_opt-div_${type}_${i}_${week}">
+                                        ${quizD['opt'+i]['text']}
+                                        <textarea name="" hidden id='option_${type}_${i}_${week}'>${quizD['opt'+i]['text']}</textarea>
+<!--                                    
+                                        <textarea name="" style="display: block;" id='option_${type}_${i}_${week}'></textarea>
+-->
+                                        <div class="icon_que">
+                                            <i class="fas fa-image" onclick="displayOptImgDiv('${week}', '${type}', '${i}')"></i>
+                                            <input type="file" accept="image/*" onchange="fasterOptPreview(this, '${week}', '${type}', '${i}')" hidden id="optionImageFile_${type}_${i}_${week}" name="quizFiles_${week}">
+                                        </div>
+                                    </div>
+                                    <div class="icon_que">
+                                        <i class="fas fa-times" onclick="removeOption('${week}', '${type}', '${i}')"></i>
+                                    </div>
+                                </div>
+                                <div class="image_box" id="image_opt-div_${type}_${i}_${week}" style="display: none;">
+                                    <img src="" id="opt_image_${type}_${i}_${week}" onclick="displayOptImgDiv('${week}', '${type}', '${i}')">
+                                    <div class="icon_que">
+                                        <i class="fas fa-times" onclick="deleteOptImage('${week}', '${type}', '${i}')"></i>
+                                    </div>
+                                </div>
+                            </div>`)
+                        // document.getElementById('option_list_'+week).innerHTML += ``
+                    // $('textarea#option_'+type+'_'+i+'_'+week).ckeditor({
+                    //     removePlugins: 'print,save,exportpdf,newpage,templates,undo,find,selectall,scayt,forms,removeformat,copyformatting,blockquote,div,bidi,link,image,flash,table,horizontalrule,smiley,pagebreak,iframe,colordialog,colorbutton,tabletools,showblocks,showborders,tableselection',
+                    //     height: 100,
+                    //     width: '100%',
+                    //     editorplaceholder: 'Type the option here'
+                    // });
+                    // $( 'textarea#option_'+type+'_'+i+'_'+week ).val(quizD['opt'+i]['text'])
+                }
+                document.getElementById('option_list_'+week).innerHTML += `
+                    <div class="que_div form__group" id="addoption_${type}_${i}_${week}">
+                        <div class="icon_que">
+                            <i class="far fa-check-${icon}" style="cursor: auto"></i>
+                        </div>        
+                        <div class="input_que">
+                            <p onclick="addAnotherOption('${week}', '${type}', '${i}')">Add Options</p>
+                        </div>
+                        <div class="icon_que"></div>    
+                    </div>`
+            }
+            $('#explanation_'+week).val(quizD['explanation'])
+            // document.getElementById('quelecture_'+week).value = quizD['lecture']
+            if(qno == quizdet['total']) {
+                // $('#queno_'+week).val(1)
+                document.getElementById('footerquiz_'+week).innerHTML = `
+                <!--
+                <button type="button" class="qcta submit_btn" onclick="displayQue('${week}', ${qno-1})">Prev Que</button>
+                -->
+                <button type="button" class="qcta submit_btn" onclick="nextQue('${week}', 'update')">Save Changes</button>
+                <button type="button" class="qcta next_btn" onclick="resetform('${week}', '${quizdet['title']}', ${qno+1})">Add New Que</button>`
+            } 
+            // else if(qno == 1) {
+            //     document.getElementById('footerquiz_'+week).innerHTML = `
+            //     <button type="button" class="qcta submit_btn" onclick="nextQue('${week}', 'update')">Save Changes</button>
+            //     <button type="button" class="qcta next_btn" onclick="displayQue('${week}', ${qno+1})">Next Que</button>`
+            // } 
+            else {
+                document.getElementById('footerquiz_'+week).innerHTML = `
+                <button type="button" class="qcta submit_btn" onclick="nextQue('${week}', 'update')">Save Changes</button>
+                <button type="button" class="qcta next_btn" onclick="displayQue('${week}', ${qno+1})">Que ${qno+1} of ${quizdet['total']}</button>`
+            }
+        }
+        function startQuiz(week) {
+            quizDetails(week)
+            // document.getElementById('quizquestionform_'+week).style.display = 'block'
+            // document.getElementById('infoBox_'+week).style.display = 'none'
+            // $('#queno_'+week).val(1)
+        }
+
+        function nextQue(week, actype) {
+            console.log('hi rechaed nedxt wi')
+            var qdata = {}
+            qdata['files'] = 0
+            if($("#Qtitle_" + week).val() != '')
+                qdata['title'] = $("#Qtitle_" + week).val()
+            
+            var form = $('#quizquestionform_' + week)[0];
+            var data = new FormData(form);
+            var inputQ = document.getElementById("question_image_file_" + week);
+            var fileQ = inputQ.files[0];
+            console.log('text === ' + $( 'textarea#question_' + week ).val() + ' ok')
+            if($( 'textarea#question_' + week ).val() == '' && !fileQ) {
+                document.getElementById('quizerror_'+week).innerText = 'Please enter/upload the question.'
+                return
+            }
+            else {
+                qdata['queno'] = $('#queno_'+week).val()
+                if(actype == 'save')
+                    qdata['totalq'] = $('#queno_'+week).val()
+                var que = {}
+                if($( 'textarea#question_' + week ).val() != '')
+                    // que['text'] = $("#question_" + week).val()
+                que['text'] = $( 'textarea#question_' + week ).val()
+                if(fileQ || $('#question_image_'+week).attr('src') != '') {
+                    qdata['files'] += 1
+                    que['image'] = fileQ ? fileQ.name : $('#question_image_'+week).attr('src').replace(/^.*[\\\/]/, '')
+                }
+                console.log(qdata)
+                data.append('que', JSON.stringify(que))
+                console.log(que)
+                console.log('finish')
+            }
+            if(document.querySelector('input[type=radio][name=at]:checked') == null) {
+                document.getElementById('quizerror_'+week).innerText = 'Please choose the answer type.'
+                return
+            } else
+                qdata['answerType'] = document.querySelector('input[type=radio][name=at]:checked').value
+            if(document.querySelector('input[type=radio][name=at]:checked').value != 'shortAnswer') {
+                var ansType = document.querySelector('input[type=radio][name=at]:checked').value
+                var n = $(".mainOptionDiv:not([style*='display: none'])").length
+                if(n < 2) {
+                    document.getElementById('quizerror_'+week).innerText = 'Atlease two options must be provided.'
+                    return
+                } else if($('#selectedOptionMC_'+week).val() == '' && $('#selectedOptionCB_'+week).val() == '') {
+                    document.getElementById('quizerror_'+week).innerText = 'Please provide the correct answer.'
+                    return
+                } else {
+                    qdata['options'] = n
+                    qdata['correct'] = ''
+                    var opt = {}
+                    for(var i=0;i<n;i++) {
+                        var did = document.getElementsByClassName('mainOptionDiv')[i].id
+                        if(did.includes(week)) {
+                            console.log(did)
+                            var x = did.split('::')[1]
+                            console.log('x=' + x)
+                            var optnum = i+1
+                            console.log('hi')
+                            var inputO = document.getElementById("optionImageFile_"+ansType+"_"+x+"_"+week);
+                            var fileO = inputO.files[0];
+                            // if($("#option_"+ansType+"_"+x+"_"+week).val() == '' && document.getElementById("optionText_"+ansType+"_"+x+"_"+week).innerText == '' && !fileO) {
+                            if($("#option_"+ansType+"_"+x+"_"+week).val() == '' && !fileO) {
+                                document.getElementById('quizerror_'+week).innerText = 'Please enter/upload all the options.'
+                                return
+                            } else {
+                                opt['opt'+optnum] = {}
+                                // if($("#option_"+ansType+"_"+x+"_"+week).val() != '' || document.getElementById("optionText_"+ansType+"_"+x+"_"+week).innerText != '')
+                                if($("#option_"+ansType+"_"+x+"_"+week).val() != '')
+                                    opt['opt'+optnum]['text'] = $("#option_"+ansType+"_"+x+"_"+week).val()
+                                    // opt['opt'+optnum]['text'] = $("#option_"+ansType+"_"+x+"_"+week).val() == '' ? document.getElementById("optionText_"+ansType+"_"+x+"_"+week).innerText : $("#option_"+ansType+"_"+x+"_"+week).val()
+                                if(fileO || $('#opt_image_'+ansType + '_' + x + '_' + week).attr('src') != '') {
+                                    qdata['files'] += 1
+                                    if(fileO) {
+                                        console.log(fileO.name)
+                                    }
+                                    if ($('#opt_image_'+ansType + '_' + x + '_' + week).attr('src') != '') {
+                                        console.log($('#opt_image_'+ansType + '_' + x + '_' + week).attr('src'))
+                                    }
+                                    opt['opt'+optnum]['image'] = fileO ? fileO.name : $('#opt_image_'+ansType + '_' + x + '_' + week).attr('src').replace(/^.*[\\\/]/, '')
+                                }
+                                data.append('opt'+optnum, JSON.stringify(opt['opt'+optnum]))
+                                if(ansType == 'multipleChoice') {
+                                    if($('#selectedOptionMC_'+week).val() == x || $('#selectedOptionMC_'+week).val() == 'opt'+x)
+                                        qdata['correct'] = 'opt'+optnum
+                                } else {
+                                    console.log('ans type cb')
+                                    var corroptlist = $('#selectedOptionCB_'+week).val().split('&')
+                                    console.log(corroptlist)
+                                    if(corroptlist.includes('opt'+x))
+                                        qdata['correct'] += '&opt'+optnum
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                console.log('r')
+                console.log($('#shortanswer_'+week).val())
+                if($('#shortanswer_'+week).val() == '') {
+                    document.getElementById('quizerror_'+week).innerText = 'Please write the correct answer.'
+                    return
+                } else {
+                    qdata['correct'] = $('#shortanswer_'+week).val()
+                }
+            }
+            if($("#explanation_" + week).val() != '')
+                qdata['explanation'] = $("#explanation_" + week).val()
+            else
+                qdata['explanation'] = ''
+            // if(document.getElementById('quelecture_'+week).value != 'none')
+            //     qdata['lecture'] = document.getElementById('quelecture_'+week).value
+            // else
+            //     qdata['lecture'] = ''
+            document.getElementById('quizerror_'+week).innerText = ''
+            console.log(qdata)
+            $.each(qdata, (key, val) => {
+                data.append(key, val)
+            })
+            console.log(qdata['files'])
+            console.log('/be-an-educator/save/quizformQue/'+week+'/'+ qdata['queno'] + '/' +qdata['files'])
+            $.ajax({
+                type: 'POST',
+                enctype: 'multipart/form-data',
+                url: '/be-an-educator/save/quizformQue/'+week+'/'+ qdata['queno'] + '/' +qdata['files'],
+                data: data,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: (data) => {
+                    if(data == 'success') {
+                        document.getElementById('quizerror_'+week).innerHTML = '<span style="color: green;">Saved Successfully</span>'
+                        setTimeout(() => {
+                            document.getElementById('quizerror_'+week).innerHTML = ''
+                        }, 2000);
+                        if(actype == 'save') {
+                            qdata['queno']++
+                            resetform(week, qdata['title'], qdata['queno'])
+                        }
+                    } else {
+                        console.log(data)
+                        document.getElementById('quizerror_'+week).innerText = 'Something went wrong.'
+                    }
+                },
+                error: (err) => {
+                    console.log(err.responseText)
+                    document.getElementById('quizerror_'+week).innerText = 'Something went wrong.'
+                }
+            })
+        }
+        function resetform(week, title, qnum) {
+            document.getElementById('quizquestionform_' + week).reset()
+            $('#queno_'+week).val(qnum)
+            $( 'textarea#question_' + week ).val('')
+            document.getElementById('at-rd1_'+week).disabled = false
+            document.getElementById('at-rd2_'+week).disabled = false
+            document.getElementById('at-rd3_'+week).disabled = false
+            document.getElementById('option_list_'+week).innerHTML = ''
+            $("#Qtitle_" + week).val(title)
+            $("#question_image_file_"+week).val('')
+            $('#question_image_'+week).attr('src', '')
+            console.log('mext que ' + qnum)
+            // document.querySelector('label[for="question_'+week+'"]').textContent = 'Question '+qnum
+            document.getElementById('questiontitle_'+week).innerText = 'Question '+qnum
+            // $('#questiontitle_'+week).attr('placeholder', 'Question '+qnum)
+            document.getElementById('image_que-div_'+week).style.display = 'none'
+            document.getElementById('footerquiz_'+week).innerHTML = `
+                <button type="button" class="qcta submit_btn" onclick="quizDetails('${week}')">View Questions</button>
+                <button type="button" class="qcta next_btn" onclick="nextQue('${week}', 'save')">Save and Next</button>`
+        }
+        $(document).ready(function() {
+            setTimeout(function() {
+                alert('You need to complete atleast 1/3rd of your total modules i.e. <%=limit%> Modules by <%=lastdate%>.')
+            }, 5000);
+        });
+
+        function newAssn(week) {
+            document.getElementById('assnUpload_' + week).style.display = 'block'
+            document.getElementById('quizUpload_' + week).style.display = 'none'
+            document.getElementById('assnSuc_' + week).innerText = ''
+            document.getElementById('cancelWA_' + week).style.display = 'inline-block'
+        }
+
+
+        function cancelWA(week) {
+            document.getElementById('quizUpload_' + week).style.display = 'none'
+            document.getElementById('assnUpload_' + week).style.display = 'none'
+            document.getElementById('assnSuc_' + week).innerText = ''
+        }
+
+        function viewAdditions(week) {
+            if (document.getElementById('viewallassn_' + week).style.display == 'none') {
+                document.getElementById('viewallassn_' + week).style.display = 'block'
+                getallAdditions(week)
+            } else {
+                document.getElementById('viewAdditionsbtn_' + week).style.marginBottom = '6%'
+                document.getElementById('viewallassn_' + week).style.display = 'none'
+            }
+        }
+
+        function viewmoddetails(week, mod_num) {
+            document.getElementById('newmodule_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById(week + '_' + mod_num + '_text').style.display = 'block'
+            document.getElementById(week + '_' + mod_num + '_details').style.display = 'block'
+            document.getElementById('modmain_' + week + '_' + mod_num).style.background = '#e9f8fc'
+            document.getElementById('modmain_' + week + '_' + mod_num).style.boxShadow = 'inset 15px 15px 15px #2097b6, inset -15px -15px 15px #2097b6'
+        }
+
+        function viewlecturetable(week, mod_num) {
+            document.getElementById(week + '_' + mod_num + '_title').style.display = 'block'
+            document.getElementById(week + '_' + mod_num + '_details').style.display = 'none'
+            document.getElementById('viewLec_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('vidTable_' + week + '_' + mod_num).style.display = 'block'
+            getLectureDetails(week, mod_num)
+        }
+
+        function verifyVideos(week, mod_num) {
+            var ele = document.getElementsByClassName('fileSuc_' + week + '_' + mod_num)
+            var flag = 0
+            for (var i = 0; i < ele.length; i++) {
+                console.log(i)
+                if (ele[i].style.display == 'none') {
+                    console.log('hi')
+                    j = i + 1
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + j).style.display = 'block'
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + j).innerHTML = 'Please upload the video for this lecture.'
+                    flag = 1
+                }
+            }
+            if (flag == 0) {
+                saveModuleStatus(week, mod_num)
+            }
+        }
+
+        function collapseVidTable(week, mod_num) {
+            document.getElementById('vidTable_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('viewLec_' + week + '_' + mod_num).style.display = 'block'
+        }
+
+        function addCO(week, mod_num) {
+            document.getElementById('cancelbtn_' + week + '_' + mod_num).style.display = 'block'
+            document.getElementById('CODetails_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('assnUpload_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = ''
+        }
+        function addAssn(week, mod_num) {
+            document.getElementById('cancelbtn_' + week + '_' + mod_num).style.display = 'block'
+            document.getElementById('assnUpload_' + week + '_' + mod_num).style.display = 'block'
+            document.getElementById('CODetails_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+        }
+        function cancel(week, mod_num) {
+            document.getElementById('assnUpload_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('CODetails_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = ''
+            document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+        }
+
+        function buttonWeek(week) {
+            if (document.getElementById('allinoneweekdiv_' + week).style.display == 'none') {
+                document.getElementById('allinoneweekdiv_' + week).style.display = 'block'
+                if (document.getElementById('weekActiveInfo_' + week).innerText.length == 0) {
+                    getWeekDetails(week)
+                    document.getElementById('addModules_' + week).style.display = 'block'
+                    document.getElementById('weekDetails_' + week).style.display = 'flex'
+                }
+            } else {
+                document.getElementById('allinoneweekdiv_' + week).style.display = 'none'
+            }
+        }
+
+        function collapseWeek(week) {
+            document.getElementById('allinoneweekdiv_' + week).style.display = 'none'
+        }
+
+        function addModules(week) {
+            if (!document.getElementById('weekTitle_' + week).disabled)
+                if ($('#weekTitle_' + week).val() == '') {
+                    document.getElementById('weekTitle_'+week).style.borderBottom = '2px solid red'
+                } else {
+                    saveWeekTitle(week)
+                }
+            else {
+                $.ajax({
+                    method: 'GET',
+                    url: '/be-an-educator/totaladdns/' + week,
+                    success: (data) => {
+                        console.log(data)
+                        if(data['status'] == 'success') {
+                            document.getElementById('remaining_' + week).innerHTML = ''
+                            if(data['co'] < 90) {
+                                var leftCO = 90 - data['co']
+                                document.getElementById('remaining_' + week).innerHTML += '<br> ' + leftCO + ' out of 90 minutes left for course offerings of ' + week
+                            }
+                            if(data['assn'] < 20) {
+                                var leftAssn = 20 - data['assn']
+                                document.getElementById('remaining_' + week).innerHTML += '<br> ' + leftAssn + ' out of 20 minutes left for assignments of ' + week
+                            }
+                        } else {
+                            console.log(data['status'])
+                        }
+                    },
+                    error: (err) => {
+                        console.log(err.responseText)
+                    }
+                })
+                document.getElementById('weekadditionals_' + week).style.display = 'block'
+                document.getElementById('weekActiveInfo_' + week).innerText = $("#weekTitle_" + week).val() + ' | ' + $("#weekTime_" + week).val()
+                document.getElementById('addModules_' + week).style.display = 'none'
+                document.getElementById('weekDetails_' + week).style.display = 'none'
+                document.getElementById('viewAdditionsbtn_' + week).style.display = 'flex'
+                getNumOfModules(week)
+            }
+        }
+
+
+        function COfile(week, mod_num) {
+            $('#COfile_' + week + '_' + mod_num).addClass('typeactive')
+            $('#COurl_' + week + '_' + mod_num).removeClass('typeactive')
+            $('#COsc_' + week + '_' + mod_num).removeClass('typeactive')
+            document.getElementById('reourceFile_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('fileinfoFile_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('reourceURL_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('reourceSC_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('fileinfoSC_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+        }
+
+        function COurl(week, mod_num) {
+            $('#COurl_' + week + '_' + mod_num).addClass('typeactive')
+            $('#COfile_' + week + '_' + mod_num).removeClass('typeactive')
+            $('#COsc_' + week + '_' + mod_num).removeClass('typeactive')
+            document.getElementById('reourceFile_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('fileinfoFile_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('reourceURL_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('reourceSC_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('fileinfoSC_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+        }
+
+        function COsc(week, mod_num) {
+            $('#COsc_' + week + '_' + mod_num).addClass('typeactive')
+            $('#COfile_' + week + '_' + mod_num).removeClass('typeactive')
+            $('#COurl_' + week + '_' + mod_num).removeClass('typeactive')
+            document.getElementById('reourceFile_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('fileinfoFile_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('reourceURL_' + week + '_' + mod_num).style.display = 'none'
+            document.getElementById('reourceSC_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('fileinfoSC_' + week + '_' + mod_num).style.display = 'flex'
+            document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+        }
+
+        function saveCODetailsURL(week, mod_num) {
+            var flag = 0
+            if ($('#COtitle_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtitle_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } 
+            if ($('#COtime_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtime_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            }
+            if ($('#COurltext_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('COurltext_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else {
+                if (/^(http|https|ftp):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/i.test($('#COurltext_' + week + '_' + mod_num).val())) {
+                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = ''
+                    flag = 1
+                } else {
+                    document.getElementById('COurltext_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Please enter valid URL. Eg: https://www.yoursite.com'
+                    flag = 0
+                }
+            }
+            if ($('#COtitle_' + week + '_' + mod_num).val() != '' && $('#COtime_' + week + '_' + mod_num).val() != '' && $('#COurltext_' + week + '_' + mod_num).val() != '' && flag == 1) {
+                saveCOurl(week, mod_num)
+            }
+        }
+
+
+
+
+
+        $('#weekTitle').keyup(function() {
+            $(this).attr('size', $(this).val().length)
+        })
+        $('#moduleTitle').keyup(function() {
+            $(this).attr('size', $(this).val().length)
+        })
+
+        function getWeekDetails(week) {
+            $.ajax({
+                type: "GET",
+                url: "/be-an-educator/get/weekDetails/" + week,
+                success: (data) => {
+                    console.log(data)
+                    document.getElementById('weekTime_' + week).value = data['time']
+                    document.getElementById('weekTitle_' + week).value = data['title']
+                    if (data['title'].length > 0)
+                        document.getElementById('weekTitle_' + week).disabled = true
+                },
+                error: (err) => {
+                    alert('Something went wrong. Please try again later.')
+                }
+            });
+        }
+
+        function saveWeekTitle(week) {
+            var weekTitle = $("#weekTitle_" + week).val();
+            $.ajax({
+                type: "POST",
+                url: "/be-an-educator/save/weekTitle/" + week,
+                data: {
+                    weekTitle: weekTitle
+                },
+                success: (data) => {
+                    if (data['status'] == 'success') {
+                        document.getElementById('remaining_' + week).innerHTML = ''
+                        if(data['co'] < 90) {
+                            var leftCO = 90 - data['co']
+                            document.getElementById('remaining_' + week).innerHTML += '<br> ' + leftCO + ' out of 90 minutes left for course offerings of ' + week
+                        }
+                        if(data['assn'] < 20) {
+                            var leftAssn = 20 - data['assn']
+                            document.getElementById('remaining_' + week).innerHTML += '<br> ' + leftAssn + ' out of 20 minutes left for assignments of ' + week
+                        }
+                        document.getElementById('weekadditionals_' + week).style.display = 'block'
+                        document.getElementById('weekActiveInfo_' + week).innerText = weekTitle + ' | ' + $("#weekTime_" + week).val()
+                        document.getElementById('addModules_' + week).style.display = 'none'
+                        document.getElementById('weekDetails_' + week).style.display = 'none'
+                        document.getElementById('viewAdditionsbtn_' + week).style.display = 'flex'
+                        getNumOfModules(week)
+                    } else {
+                        alert('Something went wrong. Please try again later.');
+                    }
+                },
+                error: (e) => {
+                    alert('Something went wrong. Please try again later.');
+                }
+            });
+        }
+
+        function getLectureDetails(week, mod_num) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/be-an-educator/get/lectureDetails/" + week + "/" + mod_num,
+                success: (data) => {
+                    var numoflec = 0
+                    document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML = ''
+                    for (lecture in data) {
+                        if (lecture.includes('lec')) {
+                            numoflec++
+                            var i = data[lecture]['sno'].toString().split(".")[1]
+                            if (!data[lecture]['videoFile']) {
+                                document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `
+                                <div class="lecture_item">
+                                    <div class="lecture">
+                                        <div class="lecture_details" style="display: flex;">
+                                            <h4 style=" flex: 1;">${data[lecture]['sno']}</h4>
+                                            <h4 style="flex: 8;">${data[lecture]['title']}</h4> 
+                                        </div>
+                                        <div class="videofilepluserror" style="display: flex;">
+                                            <div style="flex: 1" class="lecture_video_file" id="upload_course_video_div_${week}_${mod_num}_${i}">
+                                                <form method="POST" style="display: flex; align-items: center; justify-content: center;" id="upload_course_video_${week}_${mod_num}_${i}" role="form" enctype="multipart/form-data">
+                                                    <input type="file" accept="video/*" id="course_video_${week}_${mod_num}_${i}" name="course_video_${week}_${mod_num}_${i}">
+                                                    <button type="button" class="cta" onclick="videoFileUpload('${week}', ${i}, '${mod_num}')" id="course_video_btn_${week}_${mod_num}_${i}">Upload</button>
+                                                    <button type="button" style="display: none;" class="cta" id="abortUpload_${week}_${mod_num}_${i}">Abort</button>
+                                                </form>
+                                                <div class="lecture_error" style="font-weight: 700;">Max File Size: 2GB, File Type: .mp4/.mov</div>
+                                            </div>
+                                            <div class="progressdiv" id="progressdiv_${week}_${mod_num}_${i}" style="flex: 1; display: none; margin-left: 1%">
+                                                <div class="progress">
+                                                    <div class="progress-bar" id="progressbar_${week}_${mod_num}_${i}"></div>
+                                                </div>
+                                                <p id="uploadStatus_${week}_${mod_num}_${i}" style="color: green; padding-top: 2%; width: fit-content;">Uploading your video</p>
+                                            </div>
+                                            <div class="lecture_error" style="color: red; font-weight: 700; flex: 0.5;" id="${week}_${mod_num}_errormessage_${i}"></div>
+                                            <div class="file_upload_success fileSuc_${week}_${mod_num}" style="display: none;" id="file_upload_success_${week}_${mod_num}_${i}">
+                                                <p class="filename" style="background: #33999e; color: white; border-radius: 10px; padding: 2% 5%; margin-right: 10%; margin-bottom: 0;" id="filename_${week}_${mod_num}_${i}"></p>
+                                                <h1><i style="color: green;" class="fas fa-check-circle"></i></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                            } else {
+                                document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `
+                                <div class="lecture_item">
+                                    <div class="lecture">
+                                        <div class="lecture_details" style="display: flex;">
+                                            <h4 style=" flex: 1;">${data[lecture]['sno']}</h4>
+                                            <h4 style="flex: 8;">${data[lecture]['title']}</h4> 
+                                        </div>
+                                        <div class="videofilepluserror" style="display: flex;">
+                                            <div class="lecture_video_file"></div>
+                                            <div class="lecture_error"></div>
+                                            <div class="file_upload_success fileSuc_${week}_${mod_num}" style="display: flex;">
+                                                <p class="filename" style="background: #33999e; color: white; border-radius: 10px; padding: 2% 5%; margin-right: 10%; margin-bottom: 0;">${data[lecture]['videoFile']['original']}</p>
+                                                <h1><i style="color: green;" class="fas fa-check-circle"></i></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>`
+                            }
+                        }
+                    }
+                    if (data['status'])
+                        document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `<button class="plus" onclick="collapseVidTable('${week}', '${mod_num}')" >COLLAPSE</button>`
+                    else
+                        document.getElementById('vidTable_' + week + '_' + mod_num).innerHTML += `
+                        <p style="text-align: left; color: red" id="moderror_${week}_${mod_num}"></p>
+                        <div style="display: flex; flex-wrap: wrap">
+                            <button class="plus" onclick="collapseVidTable('${week}', '${mod_num}')" >CANCEL</button>
+                            <button class="plus" onclick="verifyVideos('${week}', '${mod_num}')" >NEXT</button>
+                        </div>
+                        `
+                },
+                error: (err) => {
+                    alert('Something went wrong. Please try again later.')
+                }
+            });
+
+        }
+
+        function videoFileUpload(week, lecnum, mod_num) {
+            console.log(week, lecnum, mod_num)
+            var input = document.getElementById("course_video_" + week + '_' + mod_num + '_' + lecnum);
+            var file = input.files[0];
+            var limit = 2147483648;
+            document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).style.display = 'block'
+            if (!file) {
+                document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Please choose a file.'
+            } else {
+                var idxDot = file.name.lastIndexOf(".") + 1;
+                var extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+                if ((extFile == "mp4" || extFile == "mov") && file.size <= limit) {
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = ''
+                    document.getElementById('course_video_btn_' + week + '_' + mod_num + '_' + lecnum).style.display = 'none';
+                    var form = $('#upload_course_video_' + week + '_' + mod_num + '_' + lecnum)[0];
+                    var data = new FormData(form);
+                    var module = mod_num
+
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).style.flex = '0'
+                    document.getElementById('progressdiv_' + week + '_' + mod_num + '_' + lecnum).style.display = 'block'
+                    document.getElementById("abortUpload_"+ week + "_" + mod_num + "_" + lecnum).style.display = 'block'
+                    $.ajax({
+                        xhr: function() {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                $("#abortUpload_"+ week + "_" + mod_num + "_" + lecnum).click(() => {
+                                    console.log('clicked')
+                                    xhr.abort()
+                                    document.getElementById('course_video_btn_' + week + '_' + mod_num + '_' + lecnum).style.display = 'block';
+                                    document.getElementById("abortUpload_"+ week + "_" + mod_num + "_" + lecnum).style.display = 'none'
+                                    document.getElementById('progressdiv_' + week + '_' + mod_num + '_' + lecnum).style.display = 'none'
+                                    document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Upload cancelled.'
+                                })
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $("#progressbar_"+ week + "_" + mod_num + "_" + lecnum).width(percentComplete + '%');
+                                    $("#progressbar_"+ week + "_" + mod_num + "_" + lecnum).html(Math.round(percentComplete)+'%');
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        type: "POST",
+                        enctype: "multipart/form-data",
+                        url: "/be-an-educator/upload/courseVideo/" + week + "/" + module + "/" + lecnum,
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function(){
+                            $("#progressbar_"+ week + "_" + mod_num + "_" + lecnum).width('0%');
+                        },
+                        success: (data) => {
+                            if (data.includes('success')) {
+                                document.getElementById('upload_course_video_div_' + week + '_' + mod_num + '_' + lecnum).style.display = 'none'
+                                document.getElementById('file_upload_success_' + week + '_' + mod_num + '_' + lecnum).style.display = 'flex'
+                                document.getElementById('filename_' + week + '_' + mod_num + '_' + lecnum).innerHTML = data.split("==")[1]
+                                document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = ''
+                                document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).style.display = 'none'
+                            } else {
+                                console.log(data)
+                                document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).style.flex = '0.5'
+                                document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Error while uploading the video.'
+                            }
+                            document.getElementById('progressdiv_' + week + '_' + mod_num + '_' + lecnum).style.display = 'none'
+                            document.getElementById('course_video_btn_' + week + '_' + mod_num + '_' + lecnum).style.display = 'block';
+                            document.getElementById("abortUpload_"+ week + "_" + mod_num + "_" + lecnum).style.display = 'none'
+                        },
+                        error: (e) => {
+                            console.log(e)
+                            console.log('hi')
+                            document.getElementById('progressdiv_' + week + '_' + mod_num + '_' + lecnum).style.display = 'none'
+                            document.getElementById('course_video_btn_' + week + '_' + mod_num + '_' + lecnum).style.display = 'block';
+                            document.getElementById("abortUpload_"+ week + "_" + mod_num + "_" + lecnum).style.display = 'none'
+                            document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).style.flex = '0.5'
+                            document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Something went wrong. Please try again later.'
+                        }
+                    });
+                } else if (file.size > limit) {
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Max file size allowed is 2GB.'
+                } else if (extFile != "mp4" || extFile != "mov") {
+                    document.getElementById(week + '_' + mod_num + '_errormessage_' + lecnum).innerHTML = 'Only .mp4 / .mov file is allowed.'
+                }
+            }
+        }
+
+        function getNumOfModules(week) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/be-an-educator/get/modules/" + week,
+                success: (data) => {
+                    console.log(data)
+                    for (module in data) {
+                        if (module.includes('module')) {
+                            console.log(module)
+                            var unId = week + "_" + module
+                            if (data[module]['status']) {
+                                var newModDisplay = 'none'
+                                var modDisplay = 'block'
+                                var vidButton = 'View Lectures'
+                                var addDisplay = 'flex'
+                            } else {
+                                var newModDisplay = 'flex'
+                                var modDisplay = 'none'
+                                var vidButton = '+ Canned Videos'
+                                var addDisplay = 'none'
+                            }
+                            var time = 0
+                            for (lec in data[module]) {
+                                if (lec.includes('lec')) {
+                                    time += data[module][lec]['time']
+                                }
+                            }
+                            var hours = Math.floor(time / 60);
+                            var min = time - (hours * 60)
+                            var moduleTime = ''
+                            if (hours == 1) {
+                                moduleTime += '1 Hour '
+                            } else if (hours > 1) {
+                                moduleTime += hours + ' Hours '
+                            }
+                            if (min == 1) {
+                                moduleTime += min + ' Minute'
+                            } else if (min > 1) {
+                                moduleTime += min + ' Minutes'
+                            }
+                            document.getElementById('moduleTable_' + week).innerHTML += `
+                            <div class="module_main" id="modmain_${week}_${module}">
+                                <div class="newmodule" style="display: ${newModDisplay};" id="newmodule_${week}_${module}">
+                                    <input type="text" disabled style="font-weight: bold;" value="${module}" name="inputtextmodule" id="${week}_${module}">
+                                    <button class="cta" onclick="viewmoddetails('${week}', '${module}')">Next</button>
+                                </div>
+                                <div class="mod_text">
+                                    <h3 id="${week}_${module}_text" style="display: ${modDisplay};">${module.toUpperCase()}</h3>
+                                    <i id="${week}_${module}_check" style="display: ${modDisplay}; color: #143d3f;" class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="module_leftmargin">
+                                    <h4 id="${week}_${module}_title" style="display: ${modDisplay};" class="mod_title">${data[module]['title']} | ${moduleTime}</h4>
+                                    <div class="moddetails" id="${week}_${module}_details">
+                                        <div class="form__group">
+                                            <input type="text" name="moduleTitle" disabled value="${data[module]['title']}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" id="moduleTitle_${module}" placeholder="Module Title"/>
+                                            <label for="moduleTitle_${module}" class="form__label">Module Title</label>
+                                        </div>
+                                        <div class="form__group">
+                                            <input type="text" name="moduleEfforts" disabled value="${moduleTime}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" id="moduleEfforts_${module}" placeholder="Total Efforts of Time"/>
+                                            <label for="moduleEfforts_${module}" class="form__label">Total Efforts of Time</label>
+                                        </div>
+                                        <div class="form__group">
+                                            <input type="text" name="moduleLO" disabled value="${data['learningoutcome']}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" id="moduleLO_${module}" placeholder="Learning Outcome"/>
+                                            <label for="moduleLO_${module}" class="form__label">Learning Outcome</label>
+                                        </div>
+                                        <button class="plus" onclick="viewlecturetable('${week}', '${module}')" >${vidButton}</button>                                    
+                                        </div>
+                                    <center>
+                                        <div class="videoTable" id="vidTable_${week}_${module}" style="display: none;"></div>
+                                    </center>
+                                    <button class="plus viewLec" style="display: ${modDisplay};" onclick="viewlecturetable('${week}', '${module}')" id="viewLec_${week}_${module}">${vidButton}</button>
+                                    <div class="additions" style="display: ${addDisplay}" id="${week}_${module}_additions">
+                                        <button class="plus" onclick="addCO('${week}', '${module}')" >+ Course Offering</button>
+                                        <button class="plus" onclick="addAssn('${week}', '${module}')" >+ Assignment</button>
+                                        <button class="plus" style="display: none;" id="cancelbtn_${week}_${module}" onclick="cancel('${week}', '${module}')" >Cancel</button>
+                                    </div>
+                                    <!-- Course Offering -->
+                                    <p id="COsuc_${week}_${module}" style="color: red; text-align: center; margin: 1% 0;"></p>
+                                    <center><div class="progressdiv progressdivaddn" id="progressdiv_${week}_${module}" style="flex: 1; display: none; margin-left: 1%">
+                                        <div class="progress">
+                                            <div class="progress-bar" id="progressbar_${week}_${module}"></div>
+                                        </div>
+                                        <p id="uploadStatus_${week}_${module}" style="color: green; padding-top: 2%; padding-bottom: 4%; width: fit-content;">Uploading your file</p>
+                                    </div></center>
+                                    <div class="COdetails" id="CODetails_${week}_${module}" style="display: none;">
+                                        <div class="typeofCO">
+                                            <div class="type typeactive" id="COfile_${week}_${module}" onclick="COfile('${week}', '${module}')">
+                                                <h3>File</h3>
+                                            </div>
+                                            <div class="type" id="COurl_${week}_${module}" onclick="COurl('${week}', '${module}')">
+                                                <h3>URL</h3>
+                                            </div>
+                                            <div class="type" id="COsc_${week}_${module}" onclick="COsc('${week}', '${module}')">
+                                                <h3>Source Code</h3>
+                                            </div>
+                                        </div>
+                                        <div class="COdata">
+                                            <form method="POST" id="upload_CO_file_${week}_${module}" role="form" enctype="multipart/form-data">
+                                                <div class="COBasicDetails">
+                                                    <div class="form__group">
+                                                        <input type="text" name="COtitle" id="COtitle_${week}_${module}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Brief Title of Resource"/>
+                                                        <label for="COtitle_${week}_${module}" class="form__label">Brief Title of Resource</label>
+                                                    </div>
+                                                    <div class="form__group">
+                                                        <input type="number" name="COtime" id="COtime_${week}_${module}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Effort Time In Minutes"/>
+                                                        <label for="COtime_${week}_${module}" class="form__label">Effort Time In Minutes</label>
+                                                    </div>
+                                                </div>
+                                                <!-- URL -->
+                                                <div class="resource rurl" id="reourceURL_${week}_${module}">
+                                                    <div class="form__group">
+                                                        <input type="text" name="COurltext" id="COurltext_${week}_${module}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="External URL"/>
+                                                        <label for="COurltext_${week}_${module}" class="form__label">External URL</label>
+                                                    </div>
+                                                    <button type="button" onclick="saveCODetailsURL('${week}', '${module}')" class="cta">Save</button>
+                                                </div>
+                                                <!-- downloadable file -->
+                                                <div class="resource" id="reourceFile_${week}_${module}" style="display: flex;">
+                                                    <!-- <p style="text-align: center;">Make sure file names are not the same.</p> -->
+                                                    <label style="min-width: max-content;">Offline File</label>
+                                                    <div class="resourcefile">
+                                                        <input type="file" name="COdlfile_${week}_${module}" accept=".png, .jpg, .jpeg, .docx, .doc, .xlsx, .cvv, .pdf, .txt, .ppt" id="COdlfile_${week}_${module}">
+                                                        <button type="button" id="saveCODetailsFile_${week}_${module}" onclick="upload_dlfile('${week}', '${module}')" class="cta">Save</button>
+                                                    </div>
+                                                </div>
+                                                <div class="fileinfo" id="fileinfoFile_${week}_${module}" style="display: flex;">
+                                                    <p>Max File Size: 1 GB</p>
+                                                    <p>Accepted Files: image files / documents (text, docs, ppt, excel)</p>
+                                                </div>
+                                                <!-- Source code -->
+                                                <div class="resource" id="reourceSC_${week}_${module}">
+                                                    <label style="min-width: max-content;">Source Code</label>
+                                                    <div class="resourcefile">
+                                                        <input type="file" name="COscfile_${week}_${module}" accept=".c, .cpp, .py, .java, .php, .js, .html, .css, .txt" id="COscfile_${week}_${module}">
+                                                        <button type="button" id="saveCODetailsSC_${week}_${module}" onclick="upload_scfile('${week}', '${module}')" class="cta">Save</button>
+                                                    </div>
+                                                </div>
+                                                <div class="fileinfo" id="fileinfoSC_${week}_${module}">
+                                                    <p>Max File Size: 1 GB</p>
+                                                    <p>Accepted files: .c / .cpp / .js / .html / .css / .py / .java/ .php/ .txt</p>
+                                                </div>
+                                                <!-- End -->
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- Assignment -->
+                                    <p id="assnSuc_${week}_${module}" style="text-align: center; color: red;"></p>
+                                    <center>
+                                        <div class="assnDetails" id="assnUpload_${week}_${module}" style="display: none;">
+                                            <form method="POST" id="upload_assignment_${week}_${module}" role="form" enctype="multipart/form-data">
+                                                <div class="titlediv">
+                                                    <div class="form__group">
+                                                        <input type="text" name="aboutAssn" id="aboutAssn_${week}_${module}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Brief Title of Assignment"/>
+                                                        <label for="aboutAssn_${week}_${module}" class="form__label">Brief Title of Assignment</label>
+                                                    </div>
+                                                    <div class="form__group">
+                                                        <input type="number" name="timeAssn" id="timeAssn_${week}_${module}" onfocus="this.style.borderBottom = '2px solid #161361'" class="form__field" placeholder="Time Effort (in Min)"/>
+                                                        <label for="timeAssn_${week}_${module}" class="form__label">Time Effort (in Min)</label>
+                                                    </div>
+                                                </div>
+                                                <div class="filediv">
+                                                    <div class="filedivtext">
+                                                        <p>Max File Size: 1GB</p>
+                                                        <p>Accepted Files: image files / documents (text, docs, ppt, excel)</p>
+                                                    </div>
+                                                    <div class="filedivfile">
+                                                        <input type="file" accept=".png, .jpg, .jpeg, .docx, .doc, .xlsx, .cvv, .pdf, .txt, .ppt" id="assignment_file_${week}_${module}" name="assignment_file_${week}_${module}">
+                                                        <button type="button" class="cta" onclick="upload_assignment_func('${week}', '${module}')" id="assignment_btn_${week}_${module}">Upload</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </center>
+                                </div>
+                            </div>
+                            `
+                            if (data[module]['status']) {
+                                document.getElementById('modmain_' + week + '_' + module).style.background = '#e9f8fc'
+                                document.getElementById('modmain_' + week + '_' + module).style.boxShadow = 'inset 15px 15px 15px #2097b6, inset -15px -15px 15px #2097b6'
+                            }
+                        }
+                    }
+                },
+                error: (err) => {
+                    alert('Something went wrong. Please try again later.')
+                }
+            });
+
+        }
+
+        function saveModuleStatus(week, mod_num) {
+            $.ajax({
+                type: "GET",
+                url: "/be-an-educator/save/moduleStatus/" + week + "/" + mod_num,
+                success: (data) => {
+                    console.log(data);
+                    console.log(data['week']);
+                    if(data['status'] == 'success') {
+                        document.getElementById('vidTable_' + week + '_' + mod_num).style.display = 'none'
+                        document.getElementById('viewLec_' + week + '_' + mod_num).style.display = 'block'
+                        document.getElementById('viewLec_' + week + '_' + mod_num).innerText = 'View Lectures'
+                        document.getElementById(week + '_' + mod_num + '_additions').style.display = 'flex'
+                        document.getElementById(week + '_' + mod_num + '_check').style.display = 'block'
+                        if(data['modules'] == 'y') {
+                            if (data['week'] == 'success') {
+                                var prew = parseInt(week.match(/\d+/))
+                                var newW = prew + 1
+                                var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                setTimeout(() => {
+                                    alert(newWid + ' Unlocked')
+                                    $("#gum-local").load("/be-an-educator/courseUpload");
+                                }, 1000);
+                            } else if (data['week'] == 'complete') {
+                                setTimeout(() => {
+                                    alert(week + ' Completed')
+                                    $("#gum-local").load("/be-an-educator/courseUpload");
+                                }, 1000);
+                            } 
+                        } 
+                    } else {
+                        console.log(data['error'])
+                        document.getElementById('moderror_'+ week + '_' + mod_num).innerText = 'Something went wrong. Please try again later.'
+                    }
+                },
+                error: (e) => {
+                    console.log(e)
+                    document.getElementById('moderror_'+ week + '_' + mod_num).innerText = 'Something went wrong. Please try again later.'
+                }
+            })
+        }
+
+        function saveCOurl(week, mod_num) {
+            $.ajax({
+                type: "POST",
+                url: "/be-an-educator/save/COurl/" + week + "/" + mod_num,
+                data: {
+                    COtitle: $("#COtitle_" + week + '_' + mod_num).val(),
+                    COtime: $("#COtime_" + week + '_' + mod_num).val(),
+                    COurl: $("#COurltext_" + week + '_' + mod_num).val()
+                },
+                success: (data) => {
+                    if (data['status'] == 'success') {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = '<span style="color: green;">Saved Successfully</span>'
+                        document.getElementById('upload_CO_file_' + week + '_' + mod_num).reset()
+                        if (data['week']) {
+                            if (data['week'] == 'success') {                                        
+                                var prew = parseInt(week.match(/\d+/))
+                                var newW = prew + 1
+                                var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                setTimeout(() => {
+                                    alert(newWid + ' Unlocked')
+                                    $("#gum-local").load("/be-an-educator/courseUpload");
+                                }, 1000);
+                            } else if (data['week'] == 'complete') {
+                                setTimeout(() => {
+                                    alert(week + ' Completed')
+                                    $("#gum-local").load("/be-an-educator/courseUpload");
+                                }, 1000);
+                            } else {
+                                document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br><span style="color: green;">Minimum requirement of ' + week + ' for course offerings is completed.</span>'
+                            }
+                        } else {
+                            document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br>' + data['time'] + ' out of 90 minutes left for course offerings of ' + week + '.'
+                        }
+                    } else {
+                        console.log(data['error'])
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while saving !'
+                    }
+                },
+                error: (e) => {
+                    console.log(e)
+                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while saving !'
+                }
+            });
+        }
+
+        function upload_dlfile(week, mod_num) {
+            if ($('#COtitle_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtitle_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else if ($("#COtime_" + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtime_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else {
+                var input = document.getElementById("COdlfile_" + week + '_' + mod_num);
+                var file = input.files[0];
+                var limit = 1073741824;
+                var allowedExt = ['.png', '.jpg', '.jpeg', '.docx', '.doc', '.xlsx', '.cvv', '.pdf', '.txt', '.ppt ']
+
+                if (!file) {
+                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Please upload a file.'
+                } else {
+                    var idxDot = file.name.lastIndexOf(".") + 1;
+                    var extFile = "." + file.name.substr(idxDot, file.name.length).toLowerCase();
+                    if ((allowedExt.indexOf(extFile) != -1) && file.size <= limit) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = ''
+                        document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'block';
+                        document.getElementById('saveCODetailsFile_' + week + '_' + mod_num).style.display = 'none';
+                        var form = $('#upload_CO_file_' + week + '_' + mod_num)[0];
+                        var data = new FormData(form);
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/be-an-educator/upload/COdlfile/" + week + "/" + mod_num,
+                            data: data,
+                            xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function(evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $("#progressbar_"+ week + "_" + mod_num).width(percentComplete + '%');
+                                        $("#progressbar_"+ week + "_" + mod_num).html(Math.round(percentComplete)+'%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            beforeSend: function(){
+                                $("#progressbar_"+ week + "_" + mod_num).width('0%');
+                            },
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: (data) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('saveCODetailsFile_' + week + '_' + mod_num).style.display = 'inline-block';
+                                if (data['status'] == 'success') {
+                                    document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = '<span style="color: green;">Uploaded Successfully</span>'
+                                    document.getElementById('upload_CO_file_' + week + '_' + mod_num).reset()
+                                    if (data['week']) {
+                                        if (data['week'] == 'success') {                                        
+                                            var prew = parseInt(week.match(/\d+/))
+                                            var newW = prew + 1
+                                            var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                            setTimeout(() => {
+                                                alert(newWid + ' Unlocked')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else if (data['week'] == 'complete') {
+                                            setTimeout(() => {
+                                                alert(week + ' Completed')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else {
+                                            document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br><span style="color: green;">Minimum requirement of ' + week + ' for course offerings is completed.</span>'
+                                        }
+                                    } else {
+                                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br>' + data['time'] + ' out of 90 minutes left for course offerings of ' + week + '.'    
+                                    }
+                                } else {
+                                    document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                    document.getElementById('saveCODetailsFile_' + week + '_' + mod_num).style.display = 'inline-block';
+                                    console.log(data['error'])
+                                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                                }
+                            },
+                            error: (e) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('saveCODetailsFile_' + week + '_' + mod_num).style.display = 'inline-block';
+                                console.log(e)
+                                document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                            }
+                        });
+                    } else if (file.size > limit) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = 'Max file size allowed is 1GB.'
+                    } else if (allowedExt.indexOf(extFile) == -1) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = 'File type should be any one of these: .png / .jpg / .jpeg / .txt / .docx / .doc / .pdf / .ppt / .xlsx / .cvv'
+                    }
+                }
+            }
+        }
+
+        function upload_scfile(week, mod_num) {
+            if ($('#COtitle_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtitle_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else if ($("#COtime_" + week + '_' + mod_num).val() == '') {
+                document.getElementById('COtime_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else {
+                var input = document.getElementById("COscfile_" + week + '_' + mod_num);
+                var file = input.files[0];
+                var limit = 1073741824;
+                var allowedExt = ['.c', '.cpp', '.py', '.java', '.php', '.js', '.html', '.css', '.txt']
+
+                if (!file) {
+                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Please upload a file.'
+                } else {
+                    var idxDot = file.name.lastIndexOf(".") + 1;
+                    var extFile = "." + file.name.substr(idxDot, file.name.length).toLowerCase();
+                    if ((allowedExt.indexOf(extFile) != -1) && file.size <= limit) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = ''
+                        document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'block';
+                        document.getElementById('saveCODetailsSC_' + week + '_' + mod_num).style.display = 'none';
+                        var form = $('#upload_CO_file_' + week + '_' + mod_num)[0];
+                        var data = new FormData(form);
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/be-an-educator/upload/COscfile/" + week + "/" + mod_num,
+                            data: data,
+                            xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function(evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $("#progressbar_"+ week + "_" + mod_num).width(percentComplete + '%');
+                                        $("#progressbar_"+ week + "_" + mod_num).html(Math.round(percentComplete)+'%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            beforeSend: function(){
+                                $("#progressbar_"+ week + "_" + mod_num).width('0%');
+                            },                            
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: (data) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('saveCODetailsSC_' + week + '_' + mod_num).style.display = 'inline-block';
+                                if (data['status'] == 'success') {
+                                    document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = '<span style="color: green;">Uploaded Successfully</span>'
+                                    document.getElementById('upload_CO_file_' + week + '_' + mod_num).reset()
+                                    if (data['week']) {
+                                        if (data['week'] == 'success') {                                        
+                                            var prew = parseInt(week.match(/\d+/))
+                                            var newW = prew + 1
+                                            var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                            setTimeout(() => {
+                                                alert(newWid + ' Unlocked')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else if (data['week'] == 'complete') {
+                                            setTimeout(() => {
+                                                alert(week + ' Completed')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else {
+                                            document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br><span style="color: green;">Minimum requirement of ' + week + ' for course offerings is completed.</span>'
+                                        }
+                                    } else {
+                                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML += '<br>' + data['time'] + ' out of 90 minutes left for course offerings of ' + week + '.'
+                                    }
+                                } else {
+                                    console.log(data['error'])
+                                    document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                                }
+                            },
+                            error: (e) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('saveCODetailsSC_' + week + '_' + mod_num).style.display = 'inline-block';
+                                console.log(e)
+                                document.getElementById('COsuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                            }
+                        });
+                    } else if (file.size > limit) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = 'Max file size allowed is 1GB.'
+                    } else if (allowedExt.indexOf(extFile) == -1) {
+                        document.getElementById('COsuc_' + week + '_' + mod_num).innerHTML = 'Only the specified file formats are allowed'
+                    }
+                }
+            }
+        }
+
+        function upload_assignment_func(week, mod_num) {
+            if ($('#aboutAssn_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('aboutAssn_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else if ($('#timeAssn_' + week + '_' + mod_num).val() == '') {
+                document.getElementById('timeAssn_' + week + '_' + mod_num).style.borderBottom = '2px solid red'
+            } else {
+                var input = document.getElementById("assignment_file_" + week + '_' + mod_num);
+                var file = input.files[0];
+                var limit = 1073741824;
+                var allowedExt = ['.png', '.jpg', '.jpeg', '.docx', '.doc', '.pdf', '.xlsx', '.cvv', '.txt', '.ppt ']
+                if (!file) {
+                    document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = 'Please upload a file.'
+                } else {
+                    var idxDot = file.name.lastIndexOf(".") + 1;
+                    var extFile = '.' + file.name.substr(idxDot, file.name.length).toLowerCase();
+                    if ((allowedExt.indexOf(extFile) != -1) && file.size <= limit) {
+                        document.getElementById('assnSuc_' + week + '_' + mod_num).innerHTML = ''
+                        document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'block';
+                        document.getElementById('assignment_btn_' + week + '_' + mod_num).style.display = 'none';
+                        var form = $('#upload_assignment_' + week + '_' + mod_num)[0];
+                        var data = new FormData(form);
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/be-an-educator/upload/assignment/" + week + "/" + mod_num,
+                            data: data,
+                            xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function(evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $("#progressbar_"+ week + "_" + mod_num).width(percentComplete + '%');
+                                        $("#progressbar_"+ week + "_" + mod_num).html(Math.round(percentComplete)+'%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            beforeSend: function(){
+                                $("#progressbar_"+ week + "_" + mod_num).width('0%');
+                            },                            
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: (data) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('assignment_btn_' + week + '_' + mod_num).style.display = 'inline-block';
+                                if (data['status'] == 'success') {
+                                    document.getElementById('assnSuc_' + week + '_' + mod_num).innerHTML = '<span style="color: green;">Uploaded Successfully</span>'
+                                    document.getElementById('upload_assignment_' + week + '_' + mod_num).reset()
+                                    if (data['week']) {
+                                        if (data['week'] == 'success') {                                        
+                                            var prew = parseInt(week.match(/\d+/))
+                                            var newW = prew + 1
+                                            var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                            setTimeout(() => {
+                                                alert(newWid + ' Unlocked')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else if (data['week'] == 'complete') {
+                                            setTimeout(() => {
+                                                alert(week + ' Completed')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else {
+                                            document.getElementById('assnSuc_' + week + '_' + mod_num).innerHTML += '<br><span style="color: green;">Minimum requirement of ' + week + ' for assignments is completed.</span>'
+                                        }
+                                    } else {
+                                        document.getElementById('assnSuc_' + week + '_' + mod_num).innerHTML += '<br>' + data['time'] + ' out of 20 minutes left for assignments of ' + week + '.'
+                                    }
+                                } else {
+                                    console.log(data['error'])
+                                    document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                                }
+                            },
+                            error: (e) => {
+                                document.getElementById('progressdiv_' + week + '_' + mod_num).style.display = 'none';
+                                document.getElementById('assignment_btn_' + week + '_' + mod_num).style.display = 'inline-block';
+                                console.log(e)
+                                document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = 'Error while uploading !'
+                            }
+                        });
+                    } else if (file.size > limit) {
+                        document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = 'Max file size allowed is 1GB.'
+                    } else if (allowedExt.indexOf(extFile) == -1) {
+                        document.getElementById('assnSuc_' + week + '_' + mod_num).innerText = 'File type should be any one of these: .png / .jpg / .jpeg / .txt / .docx / .doc / .pdf / .ppt / .xlsx / .cvv'
+                    }
+                }
+            }
+        }
+
+        function upload_Wassignment_func(week) {
+            if ($('#aboutAssn_' + week).val() == '') {
+                document.getElementById('aboutAssn_' + week).style.borderBottom = '2px solid red'
+            } else if ($('#timeAssn_' + week).val() == '') {
+                document.getElementById('timeAssn_' + week).style.borderBottom = '2px solid red'
+            } else {
+                var input = document.getElementById("assignment_file_" + week);
+                var file = input.files[0];
+                var limit = 1073741824;
+                var allowedExt = ['.png', '.jpg', '.jpeg', '.docx', '.doc', '.pdf', '.xlsx', '.cvv', '.txt', '.ppt ']
+                if (!file) {
+                    document.getElementById('assnSuc_' + week).innerText = 'Please upload a file.'
+                } else {
+                    var idxDot = file.name.lastIndexOf(".") + 1;
+                    var extFile = '.' + file.name.substr(idxDot, file.name.length).toLowerCase();
+                    if ((allowedExt.indexOf(extFile) != -1) && file.size <= limit) {
+                        document.getElementById('assnSuc_' + week).innerHTML = ''
+                        document.getElementById('progressdiv_' + week).style.display = 'block';
+                        document.getElementById('assignment_btn_' + week).style.display = 'none';
+                        var form = $('#upload_assignment_' + week)[0];
+                        var data = new FormData(form);
+
+                        $.ajax({
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/be-an-educator/upload/assignment/" + week,
+                            data: data,
+                            xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function(evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $("#progressbar_"+ week).width(percentComplete + '%');
+                                        $("#progressbar_"+ week).html(Math.round(percentComplete)+'%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            beforeSend: function(){
+                                $("#progressbar_"+ week).width('0%');
+                            },                            
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: (data) => {
+                                document.getElementById('progressdiv_' + week).style.display = 'none';
+                                document.getElementById('assignment_btn_' + week).style.display = 'inline-block';
+                                if (data['status'] == 'success') {
+                                    document.getElementById('assnSuc_' + week).innerHTML = '<span style="color: green;">Uploaded Successfully</span>'
+                                    document.getElementById('upload_assignment_' + week).reset()
+                                    if (data['week']) {
+                                        if (data['week'] == 'success') {                                        
+                                            var prew = parseInt(week.match(/\d+/))
+                                            var newW = prew + 1
+                                            var newWid = week.match(/^(.*?)\d+/)[1] + newW.toString()
+                                            setTimeout(() => {
+                                                alert(newWid + ' Unlocked')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else if (data['week'] == 'complete') {
+                                            setTimeout(() => {
+                                                alert(week + ' Completed')
+                                                $("#gum-local").load("/be-an-educator/courseUpload");
+                                            }, 1000);
+                                        } else {
+                                            document.getElementById('assnSuc_' + week).innerHTML += '<br><span style="color: green;">Minimum requirement of ' + week + ' for assignments is completed.</span>'
+                                        }
+                                    } else {
+                                        document.getElementById('assnSuc_' + week).innerHTML += '<br>' + data['time'] + ' out of 20 minutes left for assignments of ' + week + '.'
+                                    }
+                                } else {
+                                    console.log(data['error'])
+                                    document.getElementById('assnSuc_' + week).innerText = 'Error while uploading !'
+                                }
+                            },
+                            error: (e) => {
+                                document.getElementById('progressdiv_' + week).style.display = 'none';
+                                document.getElementById('assignment_btn_' + week).style.display = 'inline-block';
+                                console.log(e)
+                                document.getElementById('assnSuc_' + week).innerText = 'Error while uploading !'
+                            }
+                        });
+                    } else if (file.size > limit) {
+                        document.getElementById('assnSuc_' + week).innerText = 'Max file size allowed is 1GB.'
+                    } else if (allowedExt.indexOf(extFile) == -1) {
+                        document.getElementById('assnSuc_' + week).innerText = 'File type should be any one of these: .png / .jpg / .jpeg / .txt / .docx / .doc / .pdf / .ppt / .xlsx / .cvv'
+                    }
+                }
+            }
+        }
+
+        function getallAdditions(week) {
+            $.ajax({
+                type: "GET",
+                data: JSON,
+                url: "/be-an-educator/get/allAdditions/" + week,
+                success: (data) => {
+                    console.log(data)
+                    document.getElementById('viewAdditionsbtn_' + week).style.marginBottom = '2%'
+                    document.getElementById('viewallassn_' + week).style.display = 'block'
+                    document.getElementById('viewallassn_' + week).innerHTML = ''
+                    document.getElementById('viewallassn_' + week).innerHTML += `<p style="margin-bottom: 2%"><span style="color: red;">* </span>Click on the bin to delete the particular resource or assignment.</p><p style="margin-bottom: 2%; color: red" id="viewallassnerror_${week}"></p>`
+                    var count = 0
+                    for (module in data) {
+                        if (module.includes('module')) {
+                            if (data[module]['resources']) {
+                                if (data[module]['resources']['downloadableFiles']) {
+                                    for (df in data[module]['resources']['downloadableFiles']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rdf_${df}">
+                                            <div class="viewassntype">
+                                                <h3>${module.toUpperCase()} Download File</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${df}</p>
+                                                    <p>${data[module]['resources']['downloadableFiles'][df]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['downloadableFiles'][df]['originalName']} &nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer" onclick="location.href='/be-an-educator/downloadMaterial/${week}/${data[module]['resources']['downloadableFiles'][df]['locationName']}'" class="fas fa-download"></i></p>
+                                            </div>
+                                            <div class="viewassndel">
+                                                <i onclick="deleteaddn('file', '${data[module]['resources']['downloadableFiles'][df]['locationName']}', '${week}::${module}::resources::downloadableFiles::${df}', ${data[module]['resources']['downloadableFiles'][df]['time']}, 'co', '${week}_${module}_rdf_${df}', '${week}')" class="fas fa-trash"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                                if (data[module]['resources']['url']) {
+                                    for (url in data[module]['resources']['url']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rurl_${url}">
+                                            <div class="viewassntype">
+                                                <h3>${module.toUpperCase()} URL</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${url}</p>
+                                                    <p>${data[module]['resources']['url'][url]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['url'][url]['link']} &nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer" onclick="window.open('${data[module]['resources']['url'][url]['link']}', '_blank')" class="fas fa-external-link-alt"></i></p>
+                                            </div>
+                                            <div class="viewassndel">
+                                                <i onclick="deleteaddn('url', 'none', '${week}::${module}::resources::url::${url}', ${data[module]['resources']['url'][url]['time']}, 'co', '${week}_${module}_rurl_${url}', '${week}')" class="fas fa-trash"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                                if (data[module]['resources']['sourceCodes']) {
+                                    for (sc in data[module]['resources']['sourceCodes']) {
+                                        count++
+                                        document.getElementById('viewallassn_' + week).innerHTML += `
+                                        <div class="viewallassnitem" id="${week}_${module}_rsc_${sc}">
+                                            <div class="viewassntype">
+                                                <h3>${module.toUpperCase()} Source Code</h3>
+                                            </div>
+                                            <div class="viewassndetails">
+                                                <div class="viewassntitle">
+                                                    <p>${sc}</p>
+                                                    <p>${data[module]['resources']['sourceCodes'][sc]['time']} min</p>
+                                                </div>
+                                                <p class="viewassnfilename">${data[module]['resources']['sourceCodes'][sc]['originalName']} &nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer" onclick="location.href='/be-an-educator/downloadMaterial/${week}/${data[module]['resources']['downloadableFiles'][df]['locationName']}'" class="fas fa-download"></i></p>
+                                            </div>
+                                            <div class="viewassndel">
+                                                <i onclick="deleteaddn('file', '${data[module]['resources']['sourceCodes'][sc]['locationName']}', '${week}::${module}::resources::sourceCodes::${sc}', ${data[module]['resources']['sourceCodes'][sc]['time']}, 'co', '${week}_${module}_rsc_${sc}', '${week}')" class="fas fa-trash"></i>
+                                            </div>
+                                        </div>`
+                                    }
+                                }
+                            }
+                            if (data[module]['assignments']) {
+                                for (assn in data[module]['assignments']) {
+                                    count++
+                                    document.getElementById('viewallassn_' + week).innerHTML += `
+                                    <div class="viewallassnitem" id="${week}_${module}_massn_${assn}">
+                                        <div class="viewassntype">
+                                            <h3>${module.toUpperCase()} Assignment</h3>
+                                        </div>
+                                        <div class="viewassndetails">
+                                            <div class="viewassntitle">
+                                                <p>${assn}</p>
+                                                <p>${data[module]['assignments'][assn]['time']} min</p>
+                                            </div>
+                                            <p class="viewassnfilename">${data[module]['assignments'][assn]['originalName']} &nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer" onclick="location.href='/be-an-educator/downloadMaterial/${week}/${data[module]['resources']['downloadableFiles'][df]['locationName']}'" class="fas fa-download"></i></p>
+                                        </div>
+                                        <div class="viewassndel">
+                                            <i onclick="deleteaddn('file', '${data[module]['assignments'][assn]['locationName']}', '${week}::${module}::assignments::${assn}', ${data[module]['assignments'][assn]['time']}, 'assn', '${week}_${module}_massn_${assn}', '${week}')" class="fas fa-trash"></i>
+                                        </div>
+                                    </div>`
+                                }
+                            }
+                        }
+                        if (module == 'assignments') {
+                            for (assn in data[module]) {
+                                count++
+                                document.getElementById('viewallassn_' + week).innerHTML += `
+                                    <div class="viewallassnitem" id="${week}_wassn_${assn}">
+                                        <div class="viewassntype">
+                                            <h3>${week.toUpperCase()} Assignment</h3>
+                                        </div>
+                                        <div class="viewassndetails">
+                                            <div class="viewassntitle">
+                                                <p>${assn}</p>
+                                                <p>${data[module][assn]['time']} min</p>
+                                            </div>
+                                            <p class="viewassnfilename">${data[module][assn]['originalName']} &nbsp;&nbsp;&nbsp;&nbsp;<i style="cursor: pointer" onclick="location.href='/be-an-educator/downloadMaterial/${week}/${data[module]['resources']['downloadableFiles'][df]['locationName']}'" class="fas fa-download"></i></p>
+                                        </div>
+                                        <div class="viewassndel">
+                                            <i onclick="deleteaddn('file', '${data[module][assn]['locationName']}', '${week}::${module}::${assn}', ${data[module][assn]['time']}, 'assn', '${week}_wassn_${assn}', '${week}')" class="fas fa-trash"></i>
+                                        </div>
+                                    </div>`
+                            }
+                        }
+                    }
+                    if(count == 0) {
+                        document.getElementById('viewallassn_' + week).innerHTML += `<p style="margin-bottom: 2%"><span style="color: red;">There are no additions yet !</p>`
+                    }
+                },
+                error: (err) => {
+                    console.log(err)
+                    document.getElementById('viewallassnerror_' + week).innerText = 'Something went wrong. Please try again later.'
+                }
+            });
+        }
+
+        function deleteaddn(type, filename, pathtodel, time, addnType, viewassnitem, week) {
+            $.ajax({
+                type: "POST",
+                data: {
+                    'path': pathtodel,
+                    'type': type, 
+                    'filename': filename,
+                    'time': time,
+                    'addnType': addnType
+                },
+                url: "/be-an-educator/delete/additional/"+week,
+                success: (data) => {
+                    if (data['status'] == 'success') {
+                        document.getElementById(viewassnitem).style.backgroundColor = 'transparent'
+                        document.getElementById(viewassnitem).style.border = '0'
+                        if(data['time'] != 'n') {
+                            if(addnType == 'co') {                            
+                                document.getElementById(viewassnitem).innerHTML = '<p style="color: red;"><span style="color: green;">Deleted successfully</span><br>'+ data['time'] + ' out of 90 minutes left for course offerings of ' + week + '.</p>'
+                            }
+                            else {
+                                document.getElementById(viewassnitem).innerHTML = '<p style="color: red;"><span style="color: green;">Deleted successfully</span><br>'+ data['time'] + ' out of 20 minutes left for assignments of ' + week + '.</p>'
+                            }
+                        } else {
+                            document.getElementById(viewassnitem).innerHTML = '<p style="color: green;">Deleted successfully</p>'
+                        }
+                        setTimeout(() => {
+                            document.getElementById(viewassnitem).innerHTML = ''
+                            document.getElementById(viewassnitem).style.display = 'none'
+                        }, 5000);
+                    } else
+                        document.getElementById('viewallassnerror_' + week).innerText = 'Error while deleting.'
+                },
+                error: (e) => {
+                    console.log(e)
+                    document.getElementById('viewallassnerror_' + week).innerText = 'Something went wrong. Please try again later.'
+                }
+
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Test Video</title>
+    <link rel="stylesheet" href="/uploadTestVideo.css">
+</head>
+
+<body>
+
+    <!-- <button class="backBtn" id="backBtn">Back</button> -->
+    <button class="scrollTop" id="backBtn"><i class="fas fa-chevron-circle-left"></i> Back</button>
+    <div class="utv_container">
+        <div class="utv_text">
+            <h2 class="top_heading">
+                Things to be taken <span class="data">care of while recording:</span>
+            </h2>
+            <div class="points_container">
+                <i class="fas fa-times-circle"></i>
+                <h4>There should not be any background sound or echo.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-check-circle"></i>
+                <h4>The video should be of HD quality and stable.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-times-circle"></i>
+                <h4>The recording device must not shake while capturing.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-check-circle"></i>
+                <h4>You must sit/stand in the proper light area and zoom in appropriately.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-check-circle"></i>
+                <h4>Stay enthusiastic and positive while teaching.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-check-circle"></i>
+                <h4>Choose the topic that you think you are expert in.</h4>
+            </div>
+            <div class="points_container">
+                <i class="fas fa-check-circle"></i>
+                <h4>While you edit your video, please ensure that you should appear for 15% time of the total length of video. Rest of the time only content synced with your aduio should appear.</h4>
+            </div>
+        </div>
+        <p style="color: red;" id="test_error_message"></p>
+        <form method="POST" id="upload_test_video_form" role="form" enctype="multipart/form-data">
+            <div class="file_upload" id="test_video_upload_file">
+                <div class="drop-zone">
+                    <span class="drop-zone__prompt"><i class="fas fa-cloud-upload-alt"></i><br>Drop file here or click to upload<br><h4>Max file size: 2GB<br>File type: .mp4/.mov</h4></span>
+                    <input type="file" accept="video/*" id="test_video" name="test_video" class="drop-zone__input">
+                </div>
+                <button type="button" style="margin-right: 0; padding: 1% 2%; font-size: 1.5rem;" class="cta" id="test_video_upload_btn">Upload</button>
+                <div>
+                    <div id="progressdiv" style="display: none;">
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <p id="uploadStatus" style="color: green; width: fit-content;">uploading your annexure-1</p>
+                    </div>    
+                    <center><button type="button" style="display: none; margin-right: 0; padding: 6% 10%; font-size: 1.5rem;" class="cta" id="test_video_abort_btn">Abort</button></center>
+                </div>
+            </div>
+        </form>
+        <div class="test_video_success_upload" id="test_video_upload_success">
+            <hr style="margin-bottom: 2%;">
+            <b>Your video has been successfully uploaded.</b>
+            <br><br> Keep in touch with our feedback column. We will review your file soon.
+            <br><br>Go to <a href="/be-an-educator/dashboard/Feedback" style="color: blue; text-decoration: underline;">Feedback</a> Panel.
+        </div>
+    </div>
+
+
+    <script>
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                }
+            });
+
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                }
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        function updateThumbnail(dropZoneElement, file) {
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+            // First time - there is no thumbnail element, so lets create it
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+            thumbnailElement.dataset.label = file.name;
+        }
+
+        document.getElementById('test_video_upload_btn').onclick = function() {
+            var input = document.getElementById("test_video");
+            var file = input.files[0];
+            var limit = 2147483648;
+            if (!file) {
+                document.getElementById('test_error_message').innerText = 'Please upload a file.'
+            } else {
+                var idxDot = file.name.lastIndexOf(".") + 1;
+                var extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+                if ((extFile == "mp4" || extFile == "mov") && file.size <= limit) {
+                    document.getElementById('test_error_message').innerText = ''
+                    document.getElementById('test_video_upload_btn').style.display = 'none';
+                    var form = $('#upload_test_video_form')[0];
+                    var data = new FormData(form)
+
+                    document.getElementById('test_video_abort_btn').style.display = 'block'
+                    document.getElementById('progressdiv').style.display = 'block'
+                    $.ajax({
+                        xhr: function() {
+                            var xhr = new window.XMLHttpRequest();
+                            xhr.upload.addEventListener("progress", function(evt) {
+                                $("#test_video_abort_btn").click(() => {
+                                    console.log('clicked')
+                                    xhr.abort()
+                                    document.getElementById('test_video_upload_btn').style.display = 'block';
+                                    document.getElementById('test_video_abort_btn').style.display = 'none'
+                                    document.getElementById('progressdiv').style.display = 'none'
+                                    document.getElementById('test_error_message').innerText = 'Upload cancelled.'
+                                })
+                                if (evt.lengthComputable) {
+                                    var percentComplete = ((evt.loaded / evt.total) * 100);
+                                    $(".progress-bar").width(percentComplete + '%');
+                                    $(".progress-bar").html(Math.round(percentComplete)+'%');
+                                    if(Math.round(percentComplete) == 100) {
+                                        document.getElementById('test_video_abort_btn').style.display = 'none'
+                                    }
+                                }
+                            }, false);
+                            return xhr;
+                        },
+                        type: "POST",
+                        enctype: "multipart/form-data",
+                        url: "/be-an-educator/upload/testDemoVideo",
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        cache: false,
+                        beforeSend: function(){
+                            $(".progress-bar").width('0%');
+                            document.getElementById('uploadStatus').innerText = 'Uploading your test video'
+                        },
+                        success: (data) => {
+                            if (data == 'success') {
+                                document.getElementById('test_video_upload_file').style.display = 'none';
+                                document.getElementById('test_video_upload_success').style.display = 'block'
+                            } else {
+                                console.log(data)
+                                document.getElementById('test_error_message').innerText = 'Error while uploading !'
+                                document.getElementById('test_video_upload_btn').style.display = 'block'
+                            }
+                            document.getElementById('test_video_abort_btn').style.display = 'none'
+                            document.getElementById('progressdiv').style.display = 'none'
+
+                        },
+                        error: (e) => {
+                            console.log(e)
+                            document.getElementById('test_video_abort_btn').style.display = 'none'
+                            document.getElementById('progressdiv').style.display = 'none'
+                            document.getElementById('test_error_message').innerText = 'Something went wrong. Please try again later.'
+                            document.getElementById('test_video_upload_btn').style.display = 'block'
+                        }
+                    });
+                } else if (file.size > limit) {
+                    document.getElementById('test_error_message').innerText = 'Max file size allowed is 2GB.'
+                } else if (extFile != "mp4" || extFile != "mov") {
+                    document.getElementById('test_error_message').innerText = 'Only .mp4 / .mov file is allowed.'
+                }
+            }
+        }
+
+
+        $('#backBtn').click(() => {
+            $("#gum-local").load("/be-an-educator/testVideoAndFeedback");
+        })
+        // document.getElementById('feedbackpanel').onclick = function() {
+        //     $("#gum-local").load("/be-an-educator/getFeedback");
+        // }
+    </script>
+</body>
+
+</html>
+
+</html>
+
+</html>

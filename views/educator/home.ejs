@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/home_style.css">
+    <link rel="stylesheet" href="/courses.css">
+</head>
+
+<body>
+    <h2 class="top_heading">
+        Welcome ! <br><br><span class="data">Dear Educator,</span>
+    </h2>
+    <h4>
+        Thank you for choosing OCera EdTech. Your Journey for creating an impact on New Educational Era begins from here. We hope, it remains easy throughout. So, to make it hassle free, please follow the steps in sequential manner. Here are a few steps that
+        you need to follow.
+    </h4><br>
+    <% if (tv != 'Y') { %>
+        <p style="color: red;">* Step 2 will open once you upload your test video.</p>
+        <%}%>
+    <% if (tv != 'Y' || fb != 'Y') { %>
+        <p style="color: red;">* Steps 3 & 5 will open after your test video is approved.</p>
+        <% } %>
+
+    <center>
+        <p class="approval_msg"></p>
+        <div class="flexbox">
+            <div class="flex flexbottom" id="testvideoflex">
+                <h1 class="stepNumber" id="step1">Step 1</h1>
+                <div class="textbox">
+                    <p class="data-name" id="testVideoAndFeedback">Send us the Test Video</p>
+                </div>
+                <div class="imgbox">
+                    <i class="fas fa-video i_style"></i>
+                </div>
+            </div>
+            <div class="flex flextop" id="feedbackflex">
+                <div class="imgbox">
+                    <i class="fas fa-comments i_style"></i>
+                </div>
+                <h1 class="stepNumber styling" id="step2">Step 2</h1>
+                <div class="textbox">
+                    <% if (tv == 'Y') { %>
+                        <p class="styling" id="getFeedback"><span class="data-name">Check Feedback<br>Status</span></p>
+                        <% } else { %>
+                            <p class="styling  approval_msg_1" style="cursor: not-allowed;" onmouseover="hover_TVtext_in()" onmouseout="hover_TVtext_out()"><span class="data-name" style="cursor: not-allowed; color: grey; text-decoration: none;">Check Feedback<br>Status</span></p>
+                            <% } %>
+                </div>
+
+            </div>
+            <div class="flex flexbottom">
+                <h1 class="stepNumber">Step 3</h1>
+                <div class="textbox">
+                    <% if (tv == 'Y' && fb == 'Y') { %>
+                        <p id="createNewCourse" class="data-name">Fill the Annexure-1</p>
+                        <% } else { %>
+                            <p class="data-name approval_msg_1" style="color: grey; cursor: not-allowed; text-decoration: none;" onmouseover="hover_text_in()" onmouseout="hover_text_out()">Fill the Annexure-1</p>
+                            
+                            <% } %>
+
+                </div>
+                <div class="imgbox">
+                    <i class="fas fa-file-excel i_style"></i>
+                </div>
+            </div>
+            <div class="flex flextop styling">
+                <div class="imgbox">
+                    <i class="fas fa-file-signature i_style"></i>
+                </div>
+                <h1 class="stepNumber styling">Step 4</h1>
+                <div class="textbox">
+                    <p class="styling approval_msg_1"><span id="signMOU" class="data-name">Sign the MoU</span></p>
+                </div>
+
+            </div>
+            <div class="flex flexbottom">
+                <h1 class="stepNumber">Step 5</h1>
+                <div class="textbox">
+                    <% if (tv == 'Y' && fb == 'Y') { %>
+                        <p id="courses" class="data-name">Make Vidoes as per Annexure-1</p>
+                        <% } else { %>
+                            <p class="data-name approval_msg_1" style="color: grey; cursor:not-allowed; text-decoration: none;" onmouseover="hover_text_in()" onmouseout="hover_text_out()">Make Vidoes as per Annexure-1</p>
+                            <% } %>
+                </div>
+                <div class="imgbox">
+                    <i class="fas fa-check-circle i_style"></i>
+                </div>
+            </div>
+        </div>
+        <!-- <p class="approval_msg"></p> -->
+    </center>
+
+    <hr style="margin: 4% 0;">
+    <h1 class="top_heading">
+        Course <span class="data">Structure</span>
+    </h1>
+
+
+    <div class="course_structure">
+        <img src="/be-an-educator/course_structure.png" alt="">
+    </div>
+
+    <hr style="margin: 4% 0;">
+    <% if (tv == 'Y' && fb == 'Y') { %>
+        <h1 class="top_heading">
+            Your <span class="data">Courses</span>
+        </h1>
+
+        <% var i = 0; %>
+            <% for (ct in courses) { %>
+                <% for (cs in courses[ct]) { %>
+                    <% i = i + 1 %>
+                        <% if (i <= 2) { %>
+                            <div class="courses_div" id="coursediv_<%=cs%>">
+                                <div class="contents" onclick="opencourse('<%=cs%>', '<%=ct%>')">
+                                    <div class="course_basic">
+                                        <div class="img_div">
+                                            <% catfolder = ct.replace(/ /g, "_") %>
+                                            <img class="img" src="/courseVideos/<%=catfolder%>/<%=cs%>/<%=courses[ct][cs]['thumbnail']%>" alt="No thumbnail yet !">
+                                        </div>
+                                        <div class="course_title">
+                                            <div class="ctitle">
+                                                <%=courses[ct][cs]['title']%>
+                                            </div>
+                                            <div class="course_status">
+                                                <div class="live">
+                                                    <% if(!courses[ct][cs]['courseStatus']) { %>
+                                                        <p>Draft</p>
+                                                        <% } else if (courses[ct][cs]['courseStatus'] == 'review') { %>
+                                                            <p>Review</p>
+                                                            <% } else { %>
+                                                                <p>Live</p>
+                                                                <% } %>
+                                                </div>
+                                                <% if (courses[ct][cs]['pricing']) { %>
+                                                    <p>
+                                                        <%=courses[ct][cs]['pricing'] %>
+                                                    </p>
+                                                    <% } %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="course_info">
+                                        <div class="course_info_item">
+                                            <h2>$0.00</h2>
+                                            <p>Earned this month</p>
+                                        </div>
+                                        <div class="course_info_item">
+                                            <h2>0</h2>
+                                            <p>Enrolled this month</p>
+                                        </div>
+                                        <div class="course_info_item2">
+                                            <h2><i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i></h2>
+                                            <p>Course Rating</p>
+                                        </div>
+                                    </div>    
+                                </div>
+                                <div class="coursebuttons">
+                                    <button onclick="downloadCA('<%=ct%>', '<%=cs%>')" class="cta">Download Course Annexure-1</button>
+                                    <button class="cta" onclick="deletecourse('<%=ct%>', '<%=cs%>')">Delete Course</button> 
+                                </div>                                                
+                            </div>
+                            <% } %>
+                                <% } %>
+                                    <% } %>
+                                        <% if (i == 0) { %>
+                                                <p> No courses yet</p>
+                                            <% } %>
+                                        <% if (i > 2) { %>
+                                            <button class="cta" id="viewmorecourses" style="display: block; float: right; margin-right: 5%;">VIEW MORE</button>
+                                            <% } %>
+                                                <% } %>
+                                                    <script>
+                        function downloadCA(category, cid) {
+                            location.href = '/be-an-educator/download/course-annexure-1/'+category + '/' + cid
+                        }
+                        function deletecourse(category, cid){
+                            $.ajax({
+                                method: 'GET',
+                                url: '/be-an-educator/deletecourse/'+category + '/' + cid,
+                                success: (data) => {
+                                    if(data == 'success') {
+                                        document.getElementById('coursediv_'+cid).innerHTML = '<p style="color: green; font-weight: bold;">Course deleted successfully</p>'
+                                        setTimeout(() => {
+                                            location.href = '/be-an-educator/dashboard/home'
+                                        }, 1000);
+                                    } else {
+                                        alert('Something went wrong. Please try again later.')
+                                    }
+                                }
+                            })
+                            // location.href = '/be-an-educator/deletecourse/'+category + '/' + cid
+                        }
+                                                        $(document).ready(function() {
+                                                            if ('<%=tv%>' == 'Y') {
+                                                                document.getElementById('testvideoflex').style.borderColor = 'green'
+                                                                document.getElementById('testvideoflex').style.color = 'green'
+                                                                document.getElementById('step1').style.borderColor = 'rgb(1, 56, 1)'
+                                                                document.getElementById('step1').style.background = 'rgb(1, 56, 1)'
+                                                            }
+                                                            if ('<%=fb%>' == 'Y') {
+                                                                document.getElementById('feedbackflex').style.borderColor = 'green'
+                                                                document.getElementById('feedbackflex').style.color = 'green'
+                                                                document.getElementById('step2').style.borderColor = 'rgb(1, 56, 1)'
+                                                                document.getElementById('step2').style.background = 'rgb(1, 56, 1)'
+                                                            }
+                                                        });
+
+                                                        $('#testVideoAndFeedback').click(function() {
+                                                            location.href = '/be-an-educator/dashboard/testVideoAndFeedback';
+                                                        })
+
+                                                        $('#getFeedback').click(function() {
+                                                            location.href = '/be-an-educator/dashboard/Feedback';
+                                                        })
+
+                                                        $('#createNewCourse').click(() => {
+                                                            location.href = '/be-an-educator/dashboard/createNewCourse';
+                                                        })
+                                                        $('#signMOU').click(() => {
+                                                            location.href = '/be-an-educator/dashboard/signMou-readonly';
+                                                        })
+                                                        $('#courses').click(() => {
+                                                            location.href = '/be-an-educator/dashboard/myCourses';
+                                                        })
+                                                        $('#viewmorecourses').click(() => {
+                                                            location.href = '/be-an-educator/dashboard/myCourses';
+                                                        })
+
+                                                        function opencourse(cid, cat) {
+                                                            location.href = '/be-an-educator/setCourseId/' + cid + '/' + cat;
+                                                        }
+    function hover_TVtext_in() {
+        if(window.innerWidth <= 768) {
+            alert('This link will open once you upload your test video')
+        }
+        document.querySelector('.approval_msg').style.visibility = "visible";
+        document.querySelector('.approval_msg').innerText = 'This link will open once you upload your test video'
+    }
+
+    function hover_TVtext_out() {
+        document.querySelector('.approval_msg').style.visibility = "hidden";
+    }
+
+    function hover_text_in() {
+        if(window.innerWidth <= 768) {
+            alert('This link will open after your test video approval')
+        }
+        document.querySelector('.approval_msg').style.visibility = "visible";
+        document.querySelector('.approval_msg').innerText = 'This link will open after your test video approval'
+    }
+
+    function hover_text_out() {
+        document.querySelector('.approval_msg').style.visibility = "hidden";
+    }
+</script>
+</body>
+
+</html>

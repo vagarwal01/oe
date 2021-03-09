@@ -1,0 +1,122 @@
+.progress {
+    margin: 10px 0px auto;
+}
+
+.progress .ul {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.progress .ul .li {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin: 30px;
+    position: relative;
+}
+
+.tick {
+    background: #ccc;
+    width: 16px;
+    height: 16px;
+    color: #fff;
+    border-radius: 50%;
+    padding: 5px;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+}
+
+.tick::after {
+    content: '';
+    height: 5px;
+    width: 320px;
+    display: flex;
+    position: absolute;
+    left: -50px;
+    top: 10px;
+    z-index: -1;
+}
+
+.progress .ul .li:nth-child(1) .tick,
+.progress .ul .li:nth-child(2) .tick,
+.progress .ul .li:nth-child(3) .tick,
+.progress .ul .li:nth-child(4) .tick,
+.progress .ul .li:nth-child(5) .tick {
+    background: #148e14;
+}
+
+.progress .ul .li:nth-child(1) .tick::after,
+.progress .ul .li:nth-child(2) .tick::after,
+.progress .ul .li:nth-child(3) .tick::after,
+.progress .ul .li:nth-child(4) .tick::after,
+.progress .ul .li:nth-child(5) .tick::after {
+    background: #148e14;
+}
+
+.progress .ul .li:first-child .tick::after {
+    width: 300px;
+    left: 20px;
+}
+
+.progress .ul .li:last-child .tick::after {
+    width: 0px;
+    right: 100px;
+}
+
+.icons {
+    position: absolute;
+    top: -70px;
+    left: 0px;
+    padding: 10px;
+    color: #161361;
+    text-align: center;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+.progress .ul .li:nth-child(3) .icons,
+.progress .ul .li:nth-child(4) .icons {
+    position: absolute;
+    top: 120px;
+}
+
+.icons::after {
+    content: '';
+    background-color: #161361;
+    height: 50px;
+    width: 5px;
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    left: 30px;
+    top: 70px;
+    z-index: -1;
+}
+
+.progress .ul .li:nth-child(3) .icons::after {
+    top: -50px;
+}
+
+.progress .ul .li:nth-child(4) .icons::after {
+    top: -50px;
+}
+
+.data-name {
+    position: absolute;
+    top: -120px;
+    left: -30px;
+    color: #161361;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.progress .ul .li:nth-child(3) .data-name,
+.progress .ul .li:nth-child(4) .data-name {
+    position: absolute;
+    top: 200px;
+}

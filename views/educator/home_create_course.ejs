@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course</title>
+    <link rel="stylesheet" href="/home_create_course.css">
+</head>
+
+<body>
+    <h2 class="top_heading">
+        Dear<span class="data"> Educator,</span>
+    </h2>
+    <h4>Congratulations for your journey so far!</h4>
+    <p style="margin-bottom: 4%;">
+        <br>
+        <br> Creating an effective online course is an art. Also ,you need to remain self motivated. It may be time consuming at the beginning but once accustomed, it's beautiful journey of dissementing the knowledge to every desirous learner who values
+        learning. What you would need to remain self motivated and meet the timelines is given for your reference.
+        <br>
+        <br> 1. Follow the Annexure-1
+        <br> 2. Plan your time for weekly recordings in three parts - Pre Production, Production and Post Production. In General, it follows:
+        <br>
+    </p>
+
+    <div class="infographic">
+        <div class="info">
+            <div class="info-heading">
+                <h1>Pre-production</h1>
+            </div>
+            <div class="info-body">
+                Prepare an Outline of content and presentation
+                <br> ~ 10 - 12 hrs of Efforts
+            </div>
+            <div class="info-footer">
+                Monday to Wednesday
+            </div>
+        </div>
+
+        <div class="arrow"></div>
+
+        <div class="info">
+            <div class="info-heading1">
+                <h1>Production</h1>
+            </div>
+            <div class="info-body1">
+                Record of the Lectures
+                <br> ~ 6 - 8 hrs of Efforts
+            </div>
+            <div class="info-footer1">
+                Thursday & Friday
+            </div>
+        </div>
+
+        <div class="arrow1"></div>
+
+        <div class="info">
+            <div class="info-heading2">
+                <h1>Post-production</h1>
+            </div>
+            <div class="info-body2">
+                Editing and Uploading
+                <br> ~ 6 - 8 hrs of efforts
+            </div>
+            <div class="info-footer2">
+                Saturday & Sunday
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="nextBtn" id="nextBtn">Next</button>
+
+    <script>
+        $('#nextBtn').click(() => {
+            document.getElementById('pageText').value = 'record_editingpage'
+            var page = '#' + document.getElementById('pageText').value
+            $('#sidebarmenu li .navbar_title.current').removeClass('current');
+            $(page).addClass('current')
+            $("#gum-local").load("/be-an-educator/record_editing");
+        })
+    </script>
+</body>
+
+</html>

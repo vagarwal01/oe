@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/css/admin/dashboard.css">
+    <link rel="stylesheet" href="/css/admin/admin_inner_styles.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.min.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".hamburger").click(function() {
+                $(".wrapper").toggleClass("collapse");
+                $(".wrapper").toggleClass("open");
+            });
+        });
+    </script>
+    <style>
+        .navbar_title.current {
+            background: #fff;
+            color: #161361;
+        }
+        
+        .navbar_title.current .icon i {
+            color: #161361;
+        }
+        
+        .navbar_title.current .titles {
+            color: #161361;
+        }
+    </style>
+</head>
+
+<body onload="myloadingfunc()">
+
+    <div class="wrapper">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo" onclick="ocerahomepage()" style="cursor: pointer;">OCera EdTech</div>
+            </div>
+            <div class="profile">
+                <div class="profile_image" id="profile_image" style="display: flex; align-items: center; height: 85%;">
+                    <!-- <img src="/be-an-educator/profiledp.jpg" style="border-radius: 50%;"> -->
+                    <a href="/logout"><i class="fas fa-3x fa-power-off" title="Logout"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar collapse">
+            <ul id="sidebarmenu">
+                <li>
+                    <div onclick="displayPage('educators')" id="educatorspage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-users"></i></span>
+                        <span class="titles">Educators</span></div>
+                </li>
+                <li>
+                    <div onclick="displayPage('blogs')" id="blogspage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-newspaper"></i></span>
+                        <span class="titles">Blogs</span></div>
+                </li>
+                <li>
+                    <div onclick="displayPage('testVideos')" id="testVideospage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-comment-dots"></i></span>
+                        <span class="titles">Test Videos</span>
+                    </div>
+                </li>
+                <li>
+                    <div onclick="displayPage('courses')" id="coursespage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-book-reader"></i></span>
+                        <span class="titles">Courses</span>
+                    </div>
+                </li>
+                <% if (active == 'Y') { %>
+                    <li>
+                        <div class="dropdown-container">
+                            <div onclick="displayInnerPage('courseBasicDetails')" id="courseBasicDetailspage" class="navbar_title courseMenu enabled_title">
+                                <span class="icon"><i class="fas fa-eye"></i></span>
+                                <span class="titles">Course Details</span>
+                            </div>
+                            <div onclick="displayInnerPage('courseMaterial')" id="courseMaterialpage" class="navbar_title courseMenu enabled_title">
+                                <span class="icon"><i class="fas fa-upload"></i></span>
+                                <span class="titles">Course Materials</span>
+                            </div>
+                            <div onclick="displayInnerPage('courseEducator')" id="courseEducatorpage" class="navbar_title courseMenu enabled_title">
+                                <span class="icon"><i class="fas fa-user"></i></span>
+                                <span class="titles">Course Educator</span>
+                            </div>
+                        </div>
+                    </li>
+                    <% } %>
+
+            </ul>
+        </div>
+
+        <div class="main_container" style="z-index: -1;">
+            <div id="loading"></div>
+            <div class="item" style="z-index: -1;" data-msc-theme="minimal-dark">
+                <div id="gum-local" style="z-index: -1;">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="text" id="pageText" value="homepage" hidden>
+    <script>
+        var preloader = document.getElementById("loading");
+
+        function myloadingfunc() {
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+        }
+
+
+
+        function displayPage(pageType) {
+            $(".wrapper").removeClass("collapse");
+            location.href = '/admin/dashboard/' + pageType;
+        }
+
+        function displayInnerPage(pageType) {
+            document.getElementById('pageText').value = pageType + 'page'
+            var page = '#' + document.getElementById('pageText').value
+            $('#sidebarmenu li .navbar_title.current').removeClass('current');
+            $(page).addClass('current')
+            $(".wrapper").removeClass("collapse");
+            $(".wrapper").removeClass("open");
+            $("#gum-local").load("/admin/" + pageType);
+        }
+
+        var activepage = '<%=wh%>'
+        if (activepage == 'eduCourses')
+            document.getElementById('pageText').value = 'coursespage'
+        else if (activepage == 'courseDetails')
+            document.getElementById('pageText').value = 'courseBasicDetailspage'
+        else
+            document.getElementById('pageText').value = activepage + 'page'
+        var page = '#' + document.getElementById('pageText').value
+        $('#sidebarmenu li .navbar_title.current').removeClass('current');
+        $(page).addClass('current')
+        if (activepage == 'eduCourses')
+            $("#gum-local").load("/admin/courses");
+        else if (activepage == 'courseDetails')
+            $("#gum-local").load("/admin/courseBasicDetails");
+        else
+            $("#gum-local").load("/admin/" + activepage);
+
+        $('#profile_image').click(function() {
+            if (document.getElementById('profile_menu').style.display == 'flex')
+                document.getElementById('profile_menu').style.display = 'none'
+            else {
+                document.getElementById('profile_menu').style.display = 'flex'
+                document.getElementById('profile_menu').style.zIndex = '1500'
+                document.getElementById('profile_menu').style.position = 'absolute'
+            }
+        })
+
+        function ocerahomepage() {
+            location.href = '/';
+        }
+    </script>
+
+</body>
+
+</html>

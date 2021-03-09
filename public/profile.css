@@ -1,0 +1,469 @@
+.ls-banner {
+    height: 60vh;
+    background-image: url('/index/joyful-business-team-joining-hands-together.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+#profile {
+    padding: 40px 0;
+    width: 100%;
+}
+
+.profile-container {
+    display: flex;
+    justify-content: center;
+    /* background-color: #33999e; */
+    width: 90%;
+    padding: 0;
+    /* border: 2px solid black; */
+}
+.profile_text{
+    color: white;
+    font-size: 1.3rem;
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
+.profile-container .profile-basic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5%;
+    background-color: #33999e;
+    border: 2px solid black;
+}
+
+.profile-container .profile-basic .pro-image {
+    position: relative;
+    border-radius: 50%;
+}
+
+.profile-container .profile-basic .pro-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.profile-container .profile-basic .pro-image .pro-image-edit {
+    position: absolute;
+    bottom: 3%;
+    right: 5%;
+    border-radius: 50%;
+    padding: 5%;
+    background-color: white;
+}
+
+.profile-container .profile-basic .pro-image .pro-image-edit i {
+    font-size: 4rem;
+}
+
+.profile-container .profile-basic .user-name {
+    padding: 2%;
+    font-size: 2.5rem;
+}
+
+.profile-container .profile-basic .user-email {
+    padding: 1%;
+    font-size: 1.8rem;
+}
+
+.btn-radio {
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    margin: 5px 50px;
+    text-align: left;
+}
+
+@media screen and (max-width: 480px) {
+    .btn-radio {
+        display: block;
+        float: none;
+    }
+    .btn-radio:not(:first-child) {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+}
+
+.btn-radio svg {
+    fill: none;
+    vertical-align: middle;
+}
+
+.btn-radio svg circle {
+    stroke-width: 2;
+    stroke: #C8CCD4;
+}
+
+.btn-radio svg path {
+    stroke: #33999e;
+}
+
+.btn-radio svg path.inner {
+    stroke-width: 6;
+    stroke-dasharray: 19;
+    stroke-dashoffset: 19;
+}
+
+.btn-radio svg path.outer {
+    stroke-width: 2;
+    stroke-dasharray: 57;
+    stroke-dashoffset: 57;
+}
+
+.btn-radio input {
+    display: none;
+}
+
+.btn-radio input:checked+svg path {
+    transition: all 0.4s ease;
+}
+
+.btn-radio input:checked+svg path.inner {
+    stroke-dashoffset: 38;
+    transition-delay: 0.3s;
+}
+
+.btn-radio input:checked+svg path.outer {
+    stroke-dashoffset: 0;
+}
+
+.btn-radio span {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.profile-container .additional-info {
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+}
+
+.additional-info-container {
+    width: 500px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #ecf0f3;
+}
+
+.additional-info-container form {
+    width: 500px;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    /* bottom: 20px; */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.additional-info-container .form-que {
+    text-align: center;
+    font-size: 2.5rem;
+    padding: 0 10px;
+}
+
+input[type='text'] {
+    border: none;
+    outline: none;
+    width: 90%;
+    font-size: 1.5rem;
+    margin: 3% 5% 0 5%;
+    /* margin-top: 2%;
+    margin-right: 2%; */
+    background-color: transparent;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+}
+
+.additional-info-container .form-que-options {
+    margin-top: 5%;
+    /* font-size: 2rem; */
+    background-color: transparent;
+    /* padding: 20px 0 20px 50px; */
+    font-size: 1.5rem;
+    border-radius: 20px;
+    box-shadow: inset 8px 8px 8px #cbced1, inset -8px -8px 8px #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.additional-info-container .form-btn-container {
+    margin: 5%;
+    width: 500px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.additional-info-container .form-btn {
+    display: inline-block;
+    /* margin-right: 20px; */
+    padding: 8px 20px;
+    color: white;
+    background-color: #161361;
+    border: 2px solid #161361;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    /* margin-top: 30px; */
+    text-align: center;
+    transition: .3s ease;
+    cursor: pointer;
+    transition-property: background-color, color;
+    outline: none;
+}
+
+.additional-info-container .form-btn:hover {
+    color: white;
+    font-weight: bold;
+    background-color: #29bde4;
+    border: 2px solid #29bde4;
+}
+
+.additional-info-container #form2,
+.additional-info-container #form3,
+.additional-info-container #form4,
+.additional-info-container #form5 {
+    left: 500px;
+}
+
+.additional-info-container .step-row {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #33999e;
+    align-items: center;
+    box-shadow: 0 -1px 5px -1px #000;
+    position: relative;
+}
+
+.additional-info-container .step-col {
+    width: 120px;
+    text-align: center;
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: bold;
+    position: relative;
+}
+
+.additional-info-container #progress {
+    position: absolute;
+    height: 100%;
+    width: 100px;
+    background: linear-gradient(to right, #29bde4, #161361);
+    transition: 1s;
+}
+
+.additional-info-container #progress::after {
+    content: '';
+    height: 0;
+    width: 0;
+    border-top: 25px solid transparent;
+    border-bottom: 25px solid transparent;
+    position: absolute;
+    top: 0;
+    right: -25px;
+    border-left: 25px solid #161361;
+}
+
+.data-name {
+    color: white;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .ls-banner {
+        height: 300px;
+    }
+}
+
+@media (max-width: 860px) {
+    .profile-basic {
+        width: 404px;
+    }
+    .additional-info-container {
+        width: 400px;
+        /* height: 100%; */
+    }
+    .additional-info-container form {
+        width: 400px;
+        height: 100%;
+    }
+    .additional-info-container .step-row {
+        width: 400px;
+        height: 50px;
+    }
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 70px;
+    }
+}
+
+@media (max-width: 780px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 97%;
+        margin: 10px;
+        padding: 0;
+    }
+    .profile-basic {
+        width: 504px;
+    }
+    .additional-info-container {
+        width: 500px;
+        height: 350px;
+    }
+    .additional-info-container form {
+        width: 500px;
+        height: 100%;
+    }
+    .additional-info-container .step-row {
+        width: 500px;
+        height: 50px;
+    }
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-basic {
+        width: 404px;
+    }
+    .additional-info-container {
+        width: 400px;
+        height: 390px;
+    }
+    .additional-info-container form {
+        width: 400px;
+        height: 100%;
+    }
+    .additional-info-container .step-row {
+        width: 400px;
+        height: 50px;
+    }
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 70px;
+    }
+    .additional-info-container .form-que-options {
+        /* margin: 0; */
+        width: 95%;
+        padding: 0;
+    }
+    label[for="te-rd1"] {
+        margin-left: 0;
+    }
+    label[for="oc-rd1"] {
+        margin-left: 0;
+    }
+    label[for="time-rd1"] {
+        margin-left: 0;
+    }
+    label[for="camera-rd1"] {
+        margin-left: 0;
+    }
+    .btn-radio {
+        padding: 0;
+        width: 100%;
+        /* padding-left: 10%; */
+        text-align: center;
+    }
+    /* .additional-info-container #form2,
+    .additional-info-container #form3,
+    .additional-info-container #form4,
+    .additional-info-container #form5 {
+        left: 100%;
+    } */
+}
+
+@media (max-width: 400px) {
+    .profile-basic {
+        width: 304px;
+    }
+    .profile-container .profile-basic .user-name {
+        padding: 2%;
+        font-size: 1.8rem;
+    }
+    .profile-container .profile-basic .user-email {
+        padding: 1%;
+        font-size: 1.5rem;
+    }
+    .additional-info-container .form-que {
+        font-size: 1.8rem;
+    }
+    .additional-info-container .form-btn-container {
+        justify-content: center;
+    }
+    .additional-info-container .form-btn-container .btn-margin {
+        margin-right: 2%;
+    }
+    .additional-info-container {
+        width: 300px;
+        height: 350px;
+    }
+    .additional-info-container form {
+        width: 300px;
+        height: 100%;
+    }
+    .additional-info-container .step-row {
+        width: 300px;
+        height: 50px;
+    }
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 40px;
+    }
+}
+
+
+/* @media (max-width: 600px) {
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        margin: 10px;
+    }
+    .additional-info-container {
+        width: 100%;
+        height: 400px;
+    }
+    .additional-info-container form {
+        width: 100%;
+        height: 100%;
+    }
+    .additional-info-container .step-row {
+        width: 100%;
+        height: 50px;
+    }
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 90px;
+    }
+}
+
+@media (max-width: 500px) {
+    .additional-info-container #progress {
+        position: absolute;
+        height: 100%;
+        width: 60px;
+    }
+} */

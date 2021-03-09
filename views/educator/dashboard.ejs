@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/dashboard.css">
+    <link rel="stylesheet" href="/inner_style.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.6/p5.min.js"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".hamburger").click(function() {
+                $(".wrapper").toggleClass("collapse");
+                $(".wrapper").toggleClass("open");
+            });
+        });
+    </script>
+    <style>
+        .navbar_title.current {
+            background: #fff;
+            color: #161361;
+        }
+        
+        .navbar_title.current .icon i {
+            color: #161361;
+        }
+        
+        .navbar_title.current .titles {
+            color: #161361;
+        }
+    </style>
+</head>
+
+<body onload="myloadingfunc()">
+
+    <div class="wrapper">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+            </div>
+            <div class="top_menu">
+                <div class="logo" onclick="ocerahomepage()" style="cursor: pointer;" title="Home">OCera EdTech</div>
+                <div class="info_container">
+                    <span class="tooltiptext">You are logged in as <br><%=email%></span>
+                    <% if(isDP != 'N') { %>
+                        <img src="/profile_photos/<%=isDP%>" class="edu_img" onclick="myFunction()">
+                        <% } else { %>
+                            <img src="/be-an-educator/profiledp.jpg" class="edu_img" onclick="myFunction()">
+                            <% } %>
+                                <!-- <img src="/be-an-educator/course_credit.png" class="edu_img" onclick="myFunction()"> -->
+                                <a href="/logout"><button class="button_remove"><i class="fas fa-2x fa-power-off" title="Logout"></i></button></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar collapse">
+            <ul id="sidebarmenu">
+                <li>
+                    <div onclick="displayPage('home')" id="homepage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-home"></i></span>
+                        <span class="titles">Home</span></div>
+                </li>
+                <li>
+                    <div onclick="displayPage('testVideoAndFeedback')" id="testVideoAndFeedbackpage" class="navbar_title enabled_title">
+                        <span class="icon"><i class="fas fa-comment-dots"></i></span>
+                        <span class="titles">Trial and Feedback</span>
+                    </div>
+                </li>
+                <% if (tv == 'Y' && fb == 'Y') { %>
+                    <li>
+                        <div onclick="displayPage('myCourses')" id="coursespage" class="navbar_title enabled_title">
+                            <span class="icon"><i class="fas fa-book-reader"></i></span>
+                            <span class="titles">Courses</span>
+                        </div>
+                    </li>
+                    <% if (cActive == 'T') {%>
+                        <li>
+                            <div class="dropdown-container">
+                                <div onclick="displayInnerPage('record_editing')" id="record_editingpage" class="navbar_title courseMenu enabled_title">
+                                    <span class="icon"><i class="fas fa-record-vinyl"></i></span>
+                                    <span class="titles">Recording & Editing</span>
+                                </div>
+                                <div onclick="displayInnerPage('courseUpload')" id="courseUploadpage" class="navbar_title courseMenu enabled_title">
+                                    <span class="icon"><i class="fas fa-upload"></i></span>
+                                    <span class="titles">Course Uploading</span>
+                                </div>
+                                <div onclick="displayInnerPage('courseLandingPage')" id="courseLandingPagepage" class="navbar_title courseMenu enabled_title">
+                                    <span class="icon"><i class="fas fa-eye"></i></span>
+                                    <span class="titles">Landing Page</span>
+                                </div>
+                                <div onclick="displayInnerPage('pricinginfo')" id="pricinginfopage" class="navbar_title courseMenu enabled_title">
+                                    <span class="icon"><i class="fas fa-rupee-sign"></i></span>
+                                    <span class="titles">Pricing</span>
+                                </div>
+                            </div>
+                        </li>
+                        <% } %>
+                            <li>
+                                <div onclick="displayPage('correspondence')" id="correspondencepage" class="navbar_title enabled_title">
+                                    <span class="icon"><i class="fab fa-quora"></i></span>
+                                    <span class="titles">Correspondence</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div onclick="displayPage('accomplishments')" id="accomplishmentspage" class="navbar_title enabled_title">
+                                    <span class="icon"><i class="fas fa-chart-line"></i></span>
+                                    <span class="titles">Accomplishments</span>
+                                </div>
+                            </li>
+                            <% } else { %>
+                                <li>
+                                    <div class="navbar_title disabled_title" onclick="if(window.innerWidth <= 768) {alert(this.title)}" title="This link will open after your test video approval">
+                                        <span class="icon"><i class="fas fa-desktop"></i></span>
+                                        <span class="titles">Courses</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="navbar_title disabled_title" onclick="if(window.innerWidth <= 768) {alert(this.title)}" title="This link will open after your test video approval">
+                                        <span class="icon"><i class="fas fa-pencil-ruler"></i></span>
+                                        <span class="titles">Correspondence</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="navbar_title disabled_title" onclick="if(window.innerWidth <= 768) {alert(this.title)}" title="This link will open after your test video approval">
+                                        <span class="icon"><i class="fab fa-quora"></i></span>
+                                        <span class="titles">Accomplishments</span>
+                                    </div>
+                                </li>
+                                <% } %>
+            </ul>
+        </div>
+
+        <div class="main_container" id="main_container_dashboard" style="z-index: -1;">
+            <div id="loading">
+                <img src="https://i.gifer.com/7zxq.gif" alt="">
+            </div>
+            <div class="item" style="z-index: -1;" data-msc-theme="minimal-dark">
+                <div id="gum-local" style="z-index: -1;">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="text" id="pageText" value="homepage" hidden>
+    <script>
+        var preloader = document.getElementById("loading");
+
+        function myloadingfunc() {
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+
+        }
+
+        var wh = '<%=where%>'
+        if (wh == 'courseCreation' || wh == 'myCourses' || wh == 'createNewCourse') {
+            document.getElementById('pageText').value = 'coursespage'
+            if (wh == 'myCourses')
+                $("#gum-local").load("/be-an-educator/courses");
+            else if (wh == 'createNewCourse')
+                $("#gum-local").load("/be-an-educator/createNewCourse");
+            else
+                $("#gum-local").load("/be-an-educator/home_create_course");
+        } else if (wh == 'Feedback') {
+            document.getElementById('pageText').value = 'testVideoAndFeedbackpage'
+            $("#gum-local").load("/be-an-educator/getFeedback");
+        } else if (wh.split("-")[0] == 'signMou') {
+            if (wh.split("-")[1] == 'newCourse') {
+                document.getElementById('pageText').value = 'coursespage'
+            }
+            $("#gum-local").load("/be-an-educator/signMou/" + wh.split("-")[1]);
+        } else if (wh == 'bookYourSlot') {
+            $("#gum-local").load("/be-an-educator/bookYourSlot");
+        } else {
+            document.getElementById('pageText').value = wh + 'page'
+            $("#gum-local").load("/be-an-educator/"+wh);
+        }
+
+        function displayPage(pageType) {
+            $(".wrapper").removeClass("collapse");
+            location.href = '/be-an-educator/dashboard/' + pageType;
+        }
+
+        function displayInnerPage(pageType) {
+            $(".wrapper").removeClass("collapse");
+            $(".wrapper").removeClass("open");
+            $("#gum-local").load("/be-an-educator/" + pageType);
+        }
+
+        var page = '#' + document.getElementById('pageText').value
+        $('#sidebarmenu li .navbar_title.current').removeClass('current');
+        $(page).addClass('current')
+        $('#sidebarmenu .enabled_title').on('click', function() {
+            $('#sidebarmenu .enabled_title.current').removeClass('current');
+            $(this).addClass('current');
+        });
+
+
+        $('#profile_image').click(function() {
+            if (document.getElementById('profile_menu').style.display == 'flex')
+                document.getElementById('profile_menu').style.display = 'none'
+            else {
+                document.getElementById('profile_menu').style.display = 'flex'
+                document.getElementById('profile_menu').style.zIndex = '1500'
+                document.getElementById('profile_menu').style.position = 'absolute'
+            }
+        })
+
+        function ocerahomepage() {
+            location.href = '/';
+        }
+
+
+        function myFunction() {
+            document.querySelector(".tooltiptext").style.display = "flex";
+            document.querySelector(".edu_img").style.display = "none";
+            setTimeout(function() {
+                document.querySelector(".tooltiptext").style.display = "none";
+                document.querySelector(".edu_img").style.display = "block";
+            }, 5000);
+        }
+    </script>
+
+</body>
+
+</html>
+
+</html>

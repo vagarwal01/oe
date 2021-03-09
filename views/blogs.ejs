@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link rel="stylesheet" href="/blogs.css">
+    <title>Blogs</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            $("#includeHeader").load("/header.html");
+            $("#includeFooter").load("/footer.html");
+        });
+    </script>
+</head>
+
+<body>
+
+    <div id="includeHeader"></div>
+
+
+    <!-- Hero Section  -->
+    <section id="hero">
+        <!-- <div class="hero container"> -->
+        <!-- <div class="heading">
+                <h1>We are pledged to reach every desirous learner to make their learning more meaningful at affordable cost.</h1>
+            </div> -->
+        <!-- </div> -->
+    </section>
+    <!-- End Hero Section  -->
+
+
+    <!-- Core Values -->
+    <section id="cv">
+        <div class="cv">
+            <div class="cv-header">
+                <h1 class="section-title">Our <span>Blogs</span></h1>
+            </div>
+            <div class="cv-container">
+                <% for (var i=0; i< blogs.length; i++) { %>
+                    <div class="cv-card">
+                        <div class="cv-imgBx">
+                            <img src="/blogs/<%=blogs[i]['bimage']%>" onerror="this.src='/be-an-educator/upload-test-video.svg'; this.style.background='#cccccc'">
+                        </div>
+                        <div class="cv-content">
+                            <p class="date"><i class="fas fa-calendar-day"></i> <%=blogs[i]['bdate'].toLocaleDateString("en-US", {day: "numeric", month: "short", year: "numeric"})%></p>
+                            <p><%=blogs[i]['btitle']%></p>
+                            <a href="/blogs/<%=blogs[i]['_id']%>"><button class="cta blogbtn">Explore</button></a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </section>
+    <!-- End Core Values -->
+
+    <div id="includeFooter"></div>
+</body>
+
+</html>

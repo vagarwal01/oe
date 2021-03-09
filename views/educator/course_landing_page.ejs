@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Landing Page</title>
+    <link rel="stylesheet" href="/course_landing_page.css">
+    <style>
+         :disabled {
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="course_name">
+        <%=title%>
+    </h1>
+
+    <h2 class="top_heading">
+        Course <span class="data">Landing Page</span>
+    </h2>
+
+    <form method="POST" id="saveLandingPageForm" enctype="multipart/form-data">
+        <input type="text" name="category" value="<%=category%>" hidden>
+        <div class="course_detail">
+            <p class="text_label">Course Title 
+                <i style="color: green;" class="fas fa-check-circle"></i>
+            </p>
+            <!-- <input type="text" disabled class="course_subname" style="cursor: not-allowed;" id="course_title" value="<%=title%>" onkeyup="charcountupdate(this.value)" maxlength="50"> -->
+            <div class="form__group field header_div">
+                <input type="text" class="form__field" name="title" disabled style="cursor: not-allowed;" id="course_title" value="<%=title%>" onkeyup="charcountupdate(this.value)" maxlength="50" required/>
+                <label for="title" class="form__label">Title</label>
+            </div>
+            <span id=charcount></span>
+        </div>
+        <div class="course_detail">
+            <p class="text_label">Course Description
+                <i id="cd-check" style="color: green;" class="fas fa-check-circle"></i>
+                <i id="cd-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+            </p>
+            <% if(isdoneclp == 'Y') { %>
+                <!-- <textarea disabled name="des" cols="30" rows="8" placeholder="Insert your course description"><%=des%></textarea> -->
+                <div class="form__group">
+                    <textarea disabled class="form__field" name="des" cols="30" rows="2" placeholder="Brief of the Course"><%=des%></textarea>
+                    <label for="des" class="form__label">Brief of the Course</label>
+                </div>
+                
+                <% } else { %>
+                    <!-- <textarea id="course_description" name="des" cols="30" rows="8" placeholder="Insert your course description"><%=des%></textarea> -->
+                    <div class="form__group">
+                        <textarea class="form__field" id="course_description" rows="2" name="des" placeholder="Brief of the Course"><%=des%></textarea>
+                        <label for="des" class="form__label">Brief of the Course</label>
+                    </div>
+                    <% } %>
+        </div>
+        <div class="course_detail">
+            <p class="text_label">Basic Information
+                <% if(isdoneclp == 'Y') { %>
+                    <i style="color: green;" class="fas fa-check-circle"></i>
+                    <% } else { %>
+                        <i id="bi-check" style="display: none; color: green;" class="fas fa-check-circle"></i>
+                        <i id="bi-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                        <% } %>
+            </p>
+            <div class="basic_course">
+                <!-- <input type="text" class="course_lang" id="course_language" value="<%=lang%>" disabled style="cursor: not-allowed;"> -->
+                <div class="form__group">
+                    <input type="text" class="form__field" id="course_language" placeholder="Language" value="<%=lang%>" disabled style="cursor: not-allowed;" required/>
+                    <label for="title" class="form__label">Language</label>
+                </div>
+                <% if(isdoneclp == 'Y') { %>
+                    <div class="select" style="cursor: not-allowed;">
+                        <select disabled name="level">
+                <option selected hidden value="none"><%=level%></option>
+                <option value="Beginner Level">Beginner Level</option>
+                <option value="Intermediate Level">Intermediate Level</option>
+                <option value="Advance Level">Advance Level</option>
+           </select>
+                    </div>
+                    <% } else { %>
+                        <div class="select" id="level">
+                            <select id="course_level" name="level">
+                    <option selected hidden value="none">Level</option>
+                    <option value="Beginner Level">Beginner Level</option>
+                    <option value="Intermediate Level">Intermediate Level</option>
+                    <option value="Advance Level">Advance Level</option>
+               </select>
+                        </div>
+                        <% } %>
+                            <!-- <input type="text" class="course_cat"> -->
+                            <div class="form__group">
+                                <input type="text" class="form__field" id="course_category" name="" value="<%=category%>" disabled style="cursor: not-allowed;" placeholder="Category Name" required/>
+                                <label for="title" class="form__label">Category Name</label>
+                            </div>
+            </div>
+        </div>
+        <div class="course_detail">
+            <p class="text_label">What is primarily taught in your course?
+                <% if(isdoneclp == 'Y') { %>
+                    <i id="pt-check" style="color: green;" class="fas fa-check-circle"></i>
+                    <% } else { %>
+                        <i id="pt-check" style="display: none; color: green;" class="fas fa-check-circle"></i>
+                        <i id="pt-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                                <% } %>
+            </p>
+            <% if(isdoneclp == 'Y') { %>
+                <div class="form__group field">
+                    <input type="text" name="primarily_taught" class="form__field" disabled value="<%=prim%>" required placeholder="* Do not skip this"/>
+                    <label for="primarily_taught" class="form__label">Primarily Taught</label>
+                </div>
+                <!-- <input type="text" name="primarily_taught" class="course_tut" disabled value="<%=prim%>" placeholder="* Do not skip this"> -->
+                <% } else { %>
+                    <!-- <input type="text" name="primarily_taught" class="course_tut" id="primarily_taught" placeholder="* Do not skip this"> -->
+                    <div class="form__group field">
+                        <input type="text" name="primarily_taught" class="form__field" id="primarily_taught" placeholder="* Do not skip this"/>
+                        <label for="primarily_taught" class="form__label">Primarily Taught</label>
+                    </div>
+                    <% } %>
+        </div>
+
+        <div class="course_detail">
+            <p class="text_label">Course Image
+                <% if(isdoneclp == 'Y') { %>
+                    <i style="color: green;" class="fas fa-check-circle"></i>
+                    <% } else { %>
+                        <i id="cimg-check" style="display: none; color: green;" class="fas fa-check-circle"></i>
+                        <i id="cimg-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                        <% } %>
+            </p>
+            <div class="course_detail_1">
+                <% if(isdoneclp == 'Y') { %>
+                    <div class="file_upload">
+                        <div class="drop-zone" style="cursor: auto; height: max-content;">
+                            <img style="object-fit: contain; border-radius: 10px;" src="/courseVideos/<%=category%>/<%=cid%>/<%=courseThumbnail%>">
+                        </div>
+                    </div>
+                    <% } else { %>
+                        <div class="file_upload" id="courseimage_upload_file">
+                            <div class="drop-zone" id="courseimagedrop">
+                                <span class="drop-zone__prompt"><i class="fas fa-cloud-upload-alt"></i><br>Drop file here or click to upload<br><h4>Max file size: 2MB<br>File type: .png, .jpg or .jpeg</h4></span>
+                                <input type="file" accept=".jpg, .jpeg, .png" id="courseimage" name="course_thumbnail" class="drop-zone__input">
+                            </div>
+                        </div>
+                        <% } %>
+                            <p class="data-stuff">
+                                Upload your course image here. It must meet our course image quality standards to be accepted. Important guidelines : 750x421 pixels; , .png, .jpg or .jpeg; no text on the image
+                            </p>
+            </div>
+        </div>
+        <div class="course_detail">
+            <p class="text_label">Promotional Video
+                <% if(isdoneclp == 'Y') { %>
+                    <i style="color: green;" class="fas fa-check-circle"></i>
+                    <% } else { %>
+                        <i id="pvid-check" style="display: none; color: green;" class="fas fa-check-circle"></i>
+                        <i id="pvid-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                        <% } %>
+            </p>
+            <div class="course_detail_2">
+                <div class="file_upload" id="promovideo_upload_file">
+                    <% if(isdoneclp == 'Y') { %>
+                        <div class="drop-zone" style="height: max-content;">
+                            <video controls="controls" style="border-radius: 10px;">
+                                <source src="/courseVideos/<%=category%>/<%=cid%>/<%=courseVideo%>">
+                            </video>
+                            <!-- <video controls="controls" style="border-radius: 10px;" src="/courseVideos/<%=category%>/<%=cid%>/promo_video.mp4">
+                                Your browser does not support the HTML5 Video element.
+                            </video> -->
+                        </div>
+                        <% } else { %>
+                            <div class="drop-zone" id="promovideodrop">
+                                <span class="drop-zone__prompt"><i class="fas fa-cloud-upload-alt"></i><br>Drop file here or click to upload<br><h4>Max file size: 2GB<br>File type: .mp4 or .mov</h4></span>
+                                <input type="file" accept=".mp4, .mov" id="promovideo" name="promo_video" class="drop-zone__input">
+                            </div>
+                            <% } %>
+                </div>
+                <p class="data-stuff">
+                    Students who watch a well-made promo video <b>are 5x more likely to get enrolled</b> in your course. We've seen that statstics go upto 10x for exceptionally awesome videos. </p>
+            </div>
+        </div>
+        <% if (isdoneclp == 'Y') { %>
+            <button type="button" class="cta upload" disabled id="saveLandingPage" style="cursor: not-allowed;">done</button>
+            <% } else { %>
+                <button type="button" class="cta upload" id="saveLandingPage">SAVE</button>
+                <% } %>
+                    <div class="progressdiv" id="progressdiv" style="display: none; margin-top: 1%; width: 50%;">
+                        <div class="progress">
+                            <div class="progress-bar" id="progressbar"></div>
+                        </div>
+                        <p id="uploadStatus" style="color: green; padding-top: 2%; width: fit-content;">Saving your data</p>
+                    </div>
+                    <!-- <div id="loading_circle" style="display: none; margin-top: 2%; width: max-content;">
+                        <div class="loading_circle">
+                            <p>Uploading...</p>
+                            <img src="/ajax-loader.gif" style="height: 13px; margin-left: 6%; width: 70%;"><br>
+                        </div>
+                    </div> -->
+                    <i id="savedsuccess" style="display: none; margin-top: 2%; margin-left: 2%; font-size: 3rem; color: green;" class="fas fa-check-circle"></i>
+                    <p id="errormssg" style="margin-left: 1%; color: red; display: inline-block;"></p>
+    </form>
+
+
+    <% if (isdoneclp == 'Y') { %>
+        <div class="ins_profile" id="ins_profile" style="display: block;">
+            <% } else { %>
+                <div class="ins_profile" id="ins_profile" style="display: none;">
+                    <% } %>
+                        <h2 class="instructor">Instructor profile(s)</h2>
+                        <h3 class="instructor_info"><i class="fas fa-exclamation-circle fa-1x"></i> For your course to be published, it's necessary to update and complete your profile.</h3>
+
+                        <form method="POST" id="updateprofile" enctype="multipart/form-data">
+                            <div class="course_details">
+                                <div class="image_file_label">
+                                    <% if (isDP != 'N') { %>
+                                        <img id="profileImage" style="cursor: pointer;" src="/profile_photos/<%=isDP%>" class="ins-img" alt="">
+                                        <% } else { %>
+                                            <img id="profileImage" style="cursor: pointer;" src="/be-an-educator/profiledp.jpg" class="ins-img" alt="">
+                                            <% } %>
+                                </div>
+                                <input type="file" accept=".jpg, .png, .jpeg" name="profile_photo" id="profile_photo" hidden>
+                                <div class="instructor_name">
+                                    <h2 style="padding-bottom: 2%;">
+                                        <%=name%>
+                                    </h2>
+                                    <h4>Click on the image to change the profile picture</h4>
+                                    <!-- <span class="ins_note">Click on the image to change the profile picture</span> -->
+                                </div>
+                            </div>
+                            <div class="course_detail" style="margin-top: 5px;">
+                                <label for="instructor_description" class="text_label">Tell us about yourself?</label>
+                                <textarea name="instructor_des" id="instructor_description" cols="30" rows="7" placeholder="Answer in minimum 50 and maximum 250 characters" onkeyup="aboutcharcountupdate(this.value)" maxlength="250" minlength="50"><%=about%></textarea>
+                                <span id=aboutcharcount></span>
+                            </div>
+                            <button type="button" class="cta upload" id="updateprofilebtn">UPDATE PROFILE</button>
+                            <div id="loading_circle2" style="display: none; margin-top: 2%; width: max-content;">
+                                <div class="loading_circle">
+                                    <p>Uploading...</p>
+                                    <img src="/ajax-loader.gif" style="height: 13px; margin-left: 6%; width: 70%;"><br>
+                                </div>
+                            </div>
+                            <i id="savedsuccess2" style="display: none; margin-top: 2%; margin-left: 2%; font-size: 3rem; color: green;" class="fas fa-check-circle"></i>
+                            <p id="errormssg2" style="margin-left: 1%; margin-top: 2%; color: red; display: inline-block;"></p>
+
+                        </form>
+                </div>
+
+
+
+                <script>
+                    $("#profileImage").click(function(e) {
+                        $("#profile_photo").click();
+                    });
+
+                    function fasterPreview(uploader) {
+                        if (uploader.files && uploader.files[0]) {
+                            $('#profileImage').attr('src',
+                                window.URL.createObjectURL(uploader.files[0]));
+                        }
+                    }
+                    $("#profile_photo").change(function() {
+                        fasterPreview(this);
+                    });
+
+
+
+                    document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+                        const dropZoneElement = inputElement.closest(".drop-zone");
+
+                        dropZoneElement.addEventListener("click", (e) => {
+                            inputElement.click();
+                        });
+
+                        inputElement.addEventListener("change", (e) => {
+                            if (inputElement.files.length) {
+                                updateThumbnail(dropZoneElement, inputElement.files[0]);
+                            }
+                        });
+
+                        dropZoneElement.addEventListener("dragover", (e) => {
+                            e.preventDefault();
+                            dropZoneElement.classList.add("drop-zone--over");
+                        });
+
+                        ["dragleave", "dragend"].forEach((type) => {
+                            dropZoneElement.addEventListener(type, (e) => {
+                                dropZoneElement.classList.remove("drop-zone--over");
+                            });
+                        });
+
+                        dropZoneElement.addEventListener("drop", (e) => {
+                            e.preventDefault();
+                            if (e.dataTransfer.files.length) {
+                                inputElement.files = e.dataTransfer.files;
+                                updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                            }
+                            dropZoneElement.classList.remove("drop-zone--over");
+                        });
+                    });
+
+                    function updateThumbnail(dropZoneElement, file) {
+                        let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+                        // First time - remove the prompt
+                        if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                            dropZoneElement.querySelector(".drop-zone__prompt").remove();
+                        }
+                        // First time - there is no thumbnail element, so lets create it
+                        if (!thumbnailElement) {
+                            thumbnailElement = document.createElement("div");
+                            thumbnailElement.classList.add("drop-zone__thumb");
+                            dropZoneElement.appendChild(thumbnailElement);
+                        }
+                        thumbnailElement.dataset.label = file.name;
+                    }
+
+
+                    document.getElementById('saveLandingPage').onclick = function() {
+                        console.log(document.querySelector('#course_level').value)
+                        if ($('#course_description').val() == '') {
+                            document.getElementById('cd-error').style.display = 'inline-block'
+                            document.getElementById('cd-check').style.display = 'none'
+                            document.getElementById('errormssg').innerText = 'Please provide course description.'
+                            return
+                        } else {
+                            document.getElementById('cd-check').style.display = 'inline-block'
+                            document.getElementById('cd-error').style.display = 'none'
+                            document.getElementById('errormssg').innerText = ''
+                        }
+                        if (document.querySelector('#course_level').value == 'none') {
+                            document.getElementById('level').style.border = '2px solid red'
+                            document.getElementById('bi-error').style.display = 'inline-block'
+                            document.getElementById('bi-check').style.display = 'none'
+                            document.getElementById('errormssg').innerText = 'Please specify the course level.'
+                            return
+                        } else {
+                            document.getElementById('level').style.border = '1px solid #161361'
+                            document.getElementById('bi-check').style.display = 'inline-block'
+                            document.getElementById('bi-error').style.display = 'none'
+                            document.getElementById('errormssg').innerText = ''
+                        }
+                        if ($('#primarily_taught').val() == '') {
+                            document.getElementById('pt-error').style.display = 'inline-block'
+                            document.getElementById('pt-check').style.display = 'none'
+                            document.getElementById('errormssg').innerText = 'Please specify what is primarily taught in your course.'
+                            return
+                        } else {
+                            document.getElementById('pt-check').style.display = 'inline-block'
+                            document.getElementById('pt-error').style.display = 'none'
+                            document.getElementById('errormssg').innerText = ''
+                        }
+                        var input1 = document.getElementById("courseimage");
+                        var input2 = document.getElementById("promovideo");
+                        var file1 = input1.files[0];
+                        var file2 = input2.files[0];
+                        var limit1 = 2000000;
+                        var limit2 = 2147483648;
+                        var correct = 0
+                        if (!file1) {
+                            document.getElementById('cimg-error').style.display = 'inline-block'
+                            document.getElementById('cimg-check').style.display = 'none'
+                            document.getElementById('errormssg').innerText = 'Please upload the Course Image.'
+                            return
+                        } else {
+                            var idxDot1 = file1.name.lastIndexOf(".") + 1;
+                            var extFile1 = file1.name.substr(idxDot1, file1.name.length).toLowerCase();
+                            if ((file1.size <= limit1) && (extFile1 == "png" || extFile1 == "jpg" || extFile1 == "jpeg")) {
+                                img = new Image();
+                                img.src = window.URL.createObjectURL(file1)
+                                img.onload = function() {
+                                    if (this.width == 750 && this.height == 421) {
+                                        document.getElementById('cimg-check').style.display = 'inline-block'
+                                        document.getElementById('cimg-error').style.display = 'none'
+                                        document.getElementById('errormssg').innerText = ''
+                                        if (!file2) {
+                                            console.log('not file')
+                                            document.getElementById('errormssg').innerText = 'Please upload the Course Promo Video.'
+                                            document.getElementById('pvid-error').style.display = 'inline-block'
+                                            document.getElementById('pvid-check').style.display = 'none'
+                                            return
+                                        } else if(file2) {
+                                            var idxDot = file2.name.lastIndexOf(".") + 1;
+                                            var extFile = file2.name.substr(idxDot, file2.name.length).toLowerCase();                            
+                                            if(extFile != "mp4" && extFile != "mov") {
+                                                document.getElementById('errormssg').innerText = 'Allowed Course Promo Video file format: .mp4 or .mov'
+                                                document.getElementById('pvid-error').style.display = 'inline-block'
+                                                document.getElementById('pvid-check').style.display = 'none'
+                                                return
+                                            } else if (file2.size > limit2) {
+                                                document.getElementById('errormssg').innerText = 'Allowed Course Promo Video file size: less than 2GB.'
+                                                document.getElementById('pvid-error').style.display = 'inline-block'
+                                                document.getElementById('pvid-check').style.display = 'none'
+                                                return                                
+                                            } else {
+                                                document.getElementById('pvid-check').style.display = 'inline-block'
+                                                document.getElementById('pvid-error').style.display = 'none'
+                                                document.getElementById('errormssg').innerText = ''
+                                                console.log('sc sahi h')
+                                                correct = 1
+                                                save_clp()
+                                            }
+                                        }
+                                    } else {
+                                        document.getElementById('cimg-error').style.display = 'inline-block'
+                                        document.getElementById('cimg-check').style.display = 'none'
+                                        document.getElementById('errormssg').innerText = 'Course Image dimensions should be 750x421 pixels.'
+                                        return
+                                    }
+                                };
+                            } else if (file1.size > limit1) {
+                                document.getElementById('cimg-error').style.display = 'inline-block'
+                                document.getElementById('cimg-check').style.display = 'none'
+                                document.getElementById('errormssg').innerText = 'Allowed Course Image file size: less than 2MB.'
+                                return
+                            } else if (extFile1 != "png" && extFile1 != "jpg" && extFile1 != "jpeg") {
+                                document.getElementById('cimg-error').style.display = 'inline-block'
+                                document.getElementById('cimg-check').style.display = 'none'
+                                document.getElementById('errormssg').innerText = 'Allowed Course Image file format: .png, .jpg or .jpeg'
+                                return
+                            }
+                        }
+                    }
+
+                    function save_clp() {
+                        document.getElementById('saveLandingPage').style.display = 'none';
+                        var form = $('#saveLandingPageForm')[0];
+                        var data = new FormData(form);
+                        console.log(data)
+
+                        document.getElementById('progressdiv').style.display = 'block'
+                        $.ajax({
+                            xhr: function() {
+                                var xhr = new window.XMLHttpRequest();
+                                xhr.upload.addEventListener("progress", function(evt) {
+                                    if (evt.lengthComputable) {
+                                        var percentComplete = ((evt.loaded / evt.total) * 100);
+                                        $("#progressbar").width(percentComplete + '%');
+                                        $("#progressbar").html(Math.round(percentComplete)+'%');
+                                    }
+                                }, false);
+                                return xhr;
+                            },
+                            type: "POST",
+                            enctype: "multipart/form-data",
+                            url: "/be-an-educator/save/courseLandingPage",
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            beforeSend: function(){
+                                $("#progressbar").width('0%');
+                                document.getElementById('errormssg').innerText = ''
+                            },
+                            success: (data) => {
+                                document.getElementById('progressdiv').style.display = 'none'
+                                if (data == 'success') {
+                                    document.getElementById('errormssg').innerHTML = '<span style="color: green;">Saved Successfully</span>';
+                                    document.getElementById('savedsuccess').style.display = 'block'
+                                    document.getElementById('ins_profile').style.display = 'block'
+                                    document.getElementById('course_description').disabled = 'true'
+                                    document.getElementById('primarily_taught').disabled = 'true'
+                                    document.getElementById('promovideo').disabled = 'true'
+                                    document.getElementById('courseimage').disabled = 'true'
+                                    document.getElementById('course_level').disabled = 'true'
+                                    document.getElementById('course_description').style.cursor = 'not-allowed'
+                                    document.getElementById('primarily_taught').style.cursor = 'not-allowed'
+                                    document.getElementById('promovideo').style.cursor = 'not-allowed'
+                                    document.getElementById('courseimage').style.cursor = 'not-allowed'
+                                    document.getElementById('course_level').style.cursor = 'not-allowed'
+                                    document.getElementById('level').style.cursor = 'not-allowed'
+                                    document.getElementById('courseimagedrop').style.cursor = 'not-allowed'
+                                    document.getElementById('promovideodrop').style.cursor = 'not-allowed'
+                                } else {
+                                    console.log(data)
+                                    document.getElementById('errormssg').innerText = 'Error while uploading !'
+                                    document.getElementById('saveLandingPage').style.display = 'block'
+                                }
+                            },
+                            error: (e) => {
+                                console.log(e)
+                                document.getElementById('progressdiv').style.display = 'none'
+                                document.getElementById('errormssg').innerText = 'Something went wrong. Please try again later.'
+                                document.getElementById('saveLandingPage').style.display = 'block'
+                            }
+                        });                        
+                    }
+                    document.getElementById('updateprofilebtn').onclick = function() {
+                        if ($('#instructor_description').val() == '') {
+                            document.getElementById('instructor_description').style.border = '2px solid red'
+                            document.getElementById('errormssg2').innerText = 'Please fill your about section.'
+                            return
+                        } else if ($('#instructor_description').val().length < 50) {
+                            document.getElementById('instructor_description').style.border = '2px solid red'
+                            document.getElementById('errormssg2').innerText = 'Answer in min 50 words'
+                            return
+                        } else {
+                            document.getElementById('instructor_description').style.border = '1px solid #161361'
+                            document.getElementById('errormssg2').innerText = ''
+                        }
+                        var input = document.getElementById("profile_photo");
+                        var file = input.files[0];
+                        var limit1 = 1073741824;
+                        var isDP = '<%=isDP%>'
+                        if (isDP == 'N' && !file) {
+                            console.log('hi')
+                            document.getElementById('errormssg2').innerText = 'Please upload a profile picture'
+                            return
+                        } else {
+                            if (file) {
+                                var idxDot1 = file.name.lastIndexOf(".") + 1;
+                                var extfile = file.name.substr(idxDot1, file.name.length).toLowerCase();
+                                if ((file.size <= limit1) && (extfile == "png" || extfile == "jpg" || extfile == "jpeg")) {
+                                    document.getElementById('errormssg2').innerText = ''
+                                } else if (file.size > limit1) {
+                                    document.getElementById('errormssg2').innerText = 'Image Size should be less than 1GB.'
+                                    return
+                                } else if (extfile != "png" && extfile != "jpg" && extfile != "jpeg") {
+                                    document.getElementById('errormssg2').innerText = 'Allowed Image file format: .png, .jpg or .jpeg'
+                                    return
+                                }
+                            }
+                        }
+                        document.getElementById('errormssg2').innerText = ''
+                        document.getElementById('loading_circle2').style.display = 'block';
+                        document.getElementById('updateprofilebtn').style.display = 'none';
+                        var form = $('#updateprofile')[0];
+                        var data = new FormData(form);
+
+                        var timer1 = setTimeout(function() {
+                            document.getElementById('errormssg2').innerText = 'Please wait, the data is being uploaded.';
+                        }, 30000);
+
+                        var timer2 = setTimeout(function() {
+                            document.getElementById('errormssg2').innerText = 'Saving your info...';
+                        }, 60000);
+
+                        if (file) {
+                            var enctype = "multipart/form-data"
+                        } else {
+                            var enctype = false
+                        }
+                        $.ajax({
+                            type: "POST",
+                            enctype: enctype,
+                            url: "/be-an-educator/update/educatorProfile",
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            cache: false,
+                            success: (data) => {
+                                document.getElementById('loading_circle2').style.display = 'none'
+                                if (data == 'success') {
+                                    document.getElementById('errormssg2').innerHTML = '<span style="color: green;">Saved Successfully</span>';
+                                    document.getElementById('pageText').value = 'pricinginfopage'
+                                    var page = '#' + document.getElementById('pageText').value
+                                    $('#sidebarmenu li .navbar_title.current').removeClass('current');
+                                    $(page).addClass('current')
+                                    $("#gum-local").load("/be-an-educator/pricinginfo")
+                                } else {
+                                    console.log(data)
+                                    document.getElementById('errormssg2').innerText = 'Error while saving !'
+                                    document.getElementById('updateprofilebtn').style.display = 'block'
+                                }
+                                clearTimeout(timer1)
+                                clearTimeout(timer2)
+                            },
+                            error: (e) => {
+                                console.log(e)
+                                document.getElementById('loading_circle2').style.display = 'none'
+                                document.getElementById('errormssg2').innerText = 'Something went wrong. Please try again later.'
+                                document.getElementById('updateprofilebtn').style.display = 'block'
+                                clearTimeout(timer1)
+                                clearTimeout(timer2)
+                            }
+                        });
+
+                    }
+
+                    function charcountupdate(str) {
+                        var lng = str.length;
+                        document.getElementById("charcount").innerHTML = lng + ' out of 50 characters';
+                    }
+
+                    function aboutcharcountupdate(str) {
+                        var lng = str.length;
+                        document.getElementById("aboutcharcount").innerHTML = lng + ' out of 250 characters';
+                    }
+
+                    // document.getElementById('feedbackpanel').onclick = function() {
+                    //     $("#gum-local").load("/be-an-educator/getFeedback");
+                    // }
+                </script>
+
+</body>
+
+</html>
+</body>
+
+</html>

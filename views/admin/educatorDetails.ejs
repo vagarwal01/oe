@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educator Details</title>
+    <link rel="stylesheet" href="/course_landing_page.css">
+    <style>
+        .video {
+            position: relative;
+        }
+        
+        .video video {
+            width: 50%;
+            display: block;
+            border-radius: 10px;
+        }
+        
+        .video video:focus {
+            outline: none;
+        }
+        
+        @media (max-width: 550px) {
+            .video video {
+                width: 60%;
+            }
+        }
+        
+        @media (max-width: 650px) {
+            .video video {
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 500px) {
+            .video video {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="ins_profile" id="ins_profile">
+        <h2 class="instructor" style="margin-top: 0;">Educator profile</h2>
+        <div>
+            <div class="course_details">
+                <div class="image_file_label">
+                    <img src="/profile_photos/<%=user['dp']%>" onerror="this.onerror=null; this.src='/be-an-educator/profiledp.jpg'" class="ins-img" alt="No Profile Yet">
+                </div>
+                <div class="instructor_name">
+                    <h2 style="padding-bottom: 2%;">
+                        <%=user['educatorName']%>
+                    </h2>
+                    <h3>
+                        <%=user['educatorEmail']%>
+                    </h3>
+                </div>
+            </div>
+            <div class="course_detail" style="margin-top: 5px;">
+                <label for="instructor_description" class="text_label">About Educator</label>
+                <% if (user['about']) { %>
+                    <div class="inputdata" style="cursor: not-allowed;">
+                        <%=user['about']%>
+                    </div>
+                    <% } else { %>
+                        <p>No Information Yet</p>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="alldetails">
+        <div class="course_detail">
+            <label class="text_label">Basic Information</label>
+            <div class="basic_course">
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Qualification</b>
+                    <br>
+                    <%=user['qualification']%>
+                </div>
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Organisation</b>
+                    <br>
+                    <%=user['organisation']%>
+                </div>
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Experience</b>
+                    <br>
+                    <%=user['experience']%>
+                </div>
+            </div>
+            <div class="basic_course" style="margin-top: 3%;">
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Online Courses ?</b>
+                    <br>
+                    <%=user['basicQuestions']['online_course']%>
+                </div>
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Time Investment</b>
+                    <br>
+                    <%=user['basicQuestions']['time_investment']%>
+                </div>
+                <div class="inputdata rowipdata" style="cursor: not-allowed;">
+                    <b>Camera Pro ?</b>
+                    <br>
+                    <%=user['basicQuestions']['camera_pro']%>
+                </div>
+            </div>
+        </div>
+        <div class="course_detail">
+            <label class="text_label">Test Video</label>
+            <% if (user['isVerified'] > 0 && user['testVideo']) { %>
+                <div class="basic_course" style="align-items: center;">
+                    <div class="video">
+                        <video controls="controls">
+                        <source src="/test_videos/<%=user['educatorEmail']%>.mp4" type="video/mp4">
+                    </video>
+                    </div>
+                    <% if (!user['isVerified'] || user['isVerified'] != 2) { %>
+                        <button onclick="gotofeedback()" class="cta" style="height: max-content;">Give Feedback</button>
+                        <% } %>
+                </div>
+                <% } else { %>
+                    Test Video not yet uploaded
+                    <% } %>
+        </div>
+
+        <% if (user['isVerified'] && user['isVerified'] == 2) { %>
+            <div class="course_detail">
+                <% var eid = user['educatorEmail'] %>
+                    <button class="cta" onclick="viewEduCourses('<%=eid%>')" style="width: max-content;">View Courses</button>
+            </div>
+            <% } %>
+    </div>
+
+    <script>
+        function gotofeedback() {
+            location.href = '/admin/dashboard/testVideos'
+        }
+
+        function viewEduCourses(eduid) {
+            location.href = '/admin/setEduIdforCourses/' + eduid;
+        }
+    </script>
+
+</body>
+
+</html>
+</body>
+
+</html>

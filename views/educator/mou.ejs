@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign MoU</title>
+    <link rel="stylesheet" href="/mou.css">
+    <style>
+
+    </style>
+</head>
+
+<body>
+    <br>
+    <form method="POST" class="completemou" id="submitmouform" role="form" enctype="multipart/form-data">
+        <% if (type != 'readonly') { %>
+            <p style="color: red; font-weight: 900;">* Fill out the basic details and provide atleast 2 witnesses to proceed further.</p><br>
+        <% } %>
+        <p>This service agreement is executed at Greater Noida on <span id="demo" class="text-bold"></span> by and between:</p>
+        <p><span class="text-bold">OCera EdTech, CIN No. U80903UP2020PTC136140</span> a company incorporated under the provisions of the Companies Act, 2013, having its Registered office at A-3/211, Tower-10, Purvanchal Silver City-2, Greater Noida, 201310
+        </p>
+        <br>
+        <p>Hereinafter referred to as <span class="text-bold">“OCera EdTech”</span> (which expression shall, unless repugnant to the context or meaning thereof, mean and include its successors and assigns and further deem to mean and include its subsidiaries
+            & affiliates, if any) on the first part
+        </p><br>
+        <center><span class="text-bold">AND</span></center><br>
+        <!-- <i class="fas fa-question-circle"></i> -->
+        <p id="inputdetails">
+            <input type="text" hidden name="salutation" id="salutation">
+            <span class="span_hover" id="mr">Mr. </span> /
+            <span class="span_hover" id="ms">Ms. </span>
+            <i class="fas fa-question-circle"></i>
+            <input type="text" name="name" value="<%=name%>" class="input_details" disabled>
+            <input type="text" hidden id="relation_type" name="relation_type">
+            <span class="span_hover" id="son">S/O </span> /
+            <span class="span_hover" id="daug"> D/O</span>/
+            <span class="span_hover" id="wife">W/O</span>
+            <i class="fas fa-question-circle"></i>
+            <input type="text" name="family_name" placeholder="Family Name" class="input_details">
+            <input type="text" hidden id="organisation_type" name="organisation_type">
+            <span class="span_hover" id="indi">Individual </span>/
+            <span class="span_hover" id="resp">representative of Company </span> /
+            <span class="span_hover" id="inst">institute</span>
+            <i class="fas fa-question-circle"></i>
+            <input type="text" name="organisation_name" placeholder="Organisation Name" class="input_details"> having his
+            <span class="span_hover" id="resi">residence</span> /
+            <span class="span_hover" id="off">office</span> <i class="fas fa-question-circle"></i>
+            &nbsp;&nbsp;at
+            <input type="text" hidden id="address_type" name="address_type">
+            <input type="text" style="width: 30%;" name="address" placeholder="Address" class="input_details">
+            <!-- <i class="fas fa-question-circle fa-2x question_icon"></i> -->
+            <!-- <i class="fas fa-question-circle fa-2x question_icon" data-tooltip="Place your mouse over the grey text to select one"></i> -->
+        </p>
+        <br>
+        <% if (type != 'readonly') { %>
+            <p><i class="fas fa-question-circle"></i> <span class="tooltip_data">Place your mouse over the grey text to select one</span></p><br><br>
+            <% } %>
+        <p>here-in-after referred to as <span class="text-bold">“Educator”</span> (which expression shall unless it be repugnant to the context or meaning hereof, shall be deemed to mean and include the heirs, administrators, executors, legal representatives
+            and permitted assigns) on the second part.
+        </p>
+        <br>
+        <p>(The parties i.e. OCera EdTech and the Educator may referred to individually as a <span class="text-bold">‘Party’</span> and collectively as <span class="text-bold">‘Parties’</span> in this agreement)
+        </p>
+        <br>
+        <p>
+            <span class="text-bold">WHEREAS, OCera EdTech</span> is a venture for providing online education through its website <a href="/">www.oceraedtech.com</a> . OCera EdTech is an online platform to provide online courses, to the learners who have
+            paid for the appropriate charges and obtained access to the course. This is also an e-forum to promote the curated courses and teaching skills from the Educator members/educational institutions, in partnership with <span class="text-bold">OCera EdTech</span>            .
+        </p>
+        <br>
+        <p><span class="text-bold">WHEREAS, Educator</span> intends to join the <span class="text-bold">OCera EdTech</span> in developing and providing content for the e-course(s) to OCera EdTech for use by Learners (“End Users”) at its website <a href="/">www.oceraedtech.com</a>            .
+        </p>
+        <br>
+        <p>
+            <span class="text-bold">WHEREAS, OCera EdTech</span> offers multiple services through or associated with its Platform ("Services"), and Educator wants to avail these Services, subject to the terms and conditions contained herein; and
+        </p>
+        <br>
+        <p>
+            NOW, THEREFORE, in consideration of the mutual promises set forth herein, the sufficiency of which are hereby acknowledged, the Parties hereby agree as follows:
+        </p>
+        <br>
+        <p>
+            <h4>1. Key Words : </h4>
+            <span class="text-bolds">“OCera EdTech”</span> is an online learning forum for knowledge providers/seekers, Faculty members and Learners.
+            <br>
+            <br>
+            <span class="text-bolds">“Platform”</span> means <span class="text-bold">OCera EdTech’s</span> proprietary internet gateway and software programs/tools accustomed to host, disseminate and put up for sale via the web on computers, smartphones,
+            Tablets or in offline mode. It further includes the offer of related services and functionalities such as automatic grading or facilitating peer-to-peer interactive activities. Platform will include all digital marketing media such as Youtube,
+            Facebook, Instagram, Pinterest and the other channels chosen by OCera EdTech to promote these products/ courses.
+            <br>
+            <br>
+            <span class="text-bolds">“Services”</span> means, collectively, the services provided by <span class="text-bold">OCera EdTech</span> to educators and learners with respect to offering and monetizing the Content and other services offered on
+            OCera EdTech’s platform.
+            <br>
+            <br>
+            <span class="text-bolds">“Course”</span> means the series of lectures or lessons in a particular subject delivered in text, photographic, audio, visual or audio-visual format, including videos, lectures, quizzes, assignments and course materials,
+            leading to an examination and subsequent qualification based on the performance in the examination.
+            <br>
+            <br>
+            <span class="text-bolds">“Content”</span> means any information, data, works of authorship or other materials delivered in text, photographic, audio, visual or audio-visual format, including videos, lectures, quizzes, assignments and course
+            materials and syllabi.
+            <br>
+            <br>
+            <span class="text-bolds">“Course Validity”</span> means the time duration for which a learner will be able to access the hosted course material provided by <span class="text-bold">OCera EdTech</span> and during which the learner will be allowed
+            to undergo the examination to qualify the course undertaken and obtain certification.
+            <br>
+            <br>
+            <span class="text-bolds">“Course Offerings”</span> means the learning resources to be delivered to the learner on subscription/purchase of a course which may include video lectures, study material (soft-copy), discussion forums, Quizzes, Mock
+            tests, content updates etc. Before launching a course on OCera EdTech, Educators shall provide the list of course offerings that will be made available to the End-User/ learners on course subscription/purchase.
+            <br>
+            <br>
+            <span class="text-bolds">“Intellectual Property Rights”</span> means all rights worldwide in, to and under copyrights, copyright registrations and applications, trademarks (including trade dress, service marks and trade names), trademark registrations
+            and applications, domain names, patent, patent applications and all patents issued thereon, inventions, whether or not patentable, trade secrets, author rights, moral rights, rights in goodwill, and other proprietary rights, as may exist now
+            and hereafter come into existence, and all renewals and extensions thereof.
+            <br>
+            <br>
+            <span class="text-bolds">“Net Revenue”</span> is the amount actually received from Users/ learners for Courses offered, less the financial charges paid by
+            <span class="text-bold">OCera EdTech</span> to payment gateway, less any discounts given and less applicable taxes (if any). <span class="text-bold"> “Gross Revenue”</span> is the aggregate amount, including applicable service tax or other
+            taxes (if any), received from the leaners for Courses/other supportive material offered on the website or in classroom mode.
+            <br>
+            <br> This list, along with the schedule of delivery of these offerings by the Educator to OCera EdTech, will be provided as a part of the Course Details Form, the content of which is broadly defined and to be filled in <a href="/be-an-educator/download/annexure-1">Annexure 1</a>.
+        </p>
+        <br>
+        <p>
+            <h4>2. COURSE CONTENT : </h4>
+            Courses submitted by the educator to OCera EdTech must meet the following standards with respect to its contents in order to make OCera EdTech liable for paying any remuneration to the Educator. That the course submitted by the educator will be scrutinized
+            by an authorized representative of OCera EdTech and in case of failing to meet required standards; Educator will be liable to make necessary changes till the satisfaction of OCera EdTech. At the foremost, Educator will formulate a prologue
+            along with syllabus that shall include the following but not restricted to the following:
+            <br>
+            <span class="text-bolds">Course instructor :</span> A biographical sketch of the educator or educators on record along with other participants, if any, involved in creation of the course including activities to be undergone during the course
+            for qualification.
+            <br>
+            <span class="text-bolds">Course description :</span> A brief summary regarding the nature of the course and the significant learning experience provided to the learner. It shall outline an overview of course activities as well such as assignments,
+            projects, quizzes, etc.
+            <br>
+            <span class="text-bolds">Course objectives and Learning Outcomes :</span> The course objectives shall state unambiguously the expected learning outcomes of the course altogether as well as separately for each module of the course. That course
+            objective shall appreciate the learnings offered by the course as well as each module.
+            <br>
+            <span class="text-bolds">Prerequisites for the course :</span> A list of a prerequisites for the course to be ensured by the learner with a statement of reason for its requirement.
+            <br>
+            <span class="text-bolds">Textbook :</span> The educator shall provide a list of textbooks to be referred by the learner in respect of the course with the details including but not limited to author, title, publisher, edition, date and ISBN
+            number.
+            <br>
+            <span class="text-bolds">Supplementary material :</span> The educator shall provide a list of other published material which the learner is required to purchase along with the course including lab manuals, lab kits, software, etc
+            <br>
+            <span class="text-bolds">Assignments and Project :</span> The educator shall give a sequenced list of assignments and projects arranged by course section or module with due dates if applicable.
+            <br>
+            <span class="text-bolds">Grading procedure and grading scale :</span> The educator shall provide a detailed statement with respect to grading of the expected learning outcomes. Further the statement shall state the criteria for high achievement
+            in the course.
+            <br>
+            <span class="text-bolds">Punctuality :</span> A statement of milestones in the course to keep the students on track in an asynchronous environment which would help students to visualize their growth in the course. Further the educator will
+            provide a list of any synchronous events such as chat sessions, audio conferences.
+            <br>
+            <br> * The Educator shall include study guides, lecture summaries, presentation slides, audio, and/or video or any activity that summarizes and enhances the textbook material, making it more understandable to the distant learners.
+            <br> The educator shall arrange the entire study material as well as assignments, projects and quizzes into weekly modules
+            <a href="/be-an-educator/download/annexure-1">in the format shared</a> that clearly relates to the course’s expected learning outcomes in the total duration of the course.
+        </p>
+        <br>
+        <p>
+            <h4>3. LECTURE RECORDING : </h4>
+            <div>
+                <i class="fas fa-circle"></i> Educators shall record the content for the recorded classes as agreed between the parties using his/her own equipment at his/her own premises.
+            </div>
+            <div>
+                <i class="fas fa-circle"></i> The Educator shall record the videos for recorded classes in professional ethical attire with sober colors for a better video quality as detailed <span id="rec" style="color: blue; cursor: pointer;
+                text-decoration: underline;">here</span>.
+            </div>
+            <div>
+                <i class="fas fa-circle"></i> The Educator shall be well-prepared with the content before recording the class and content to be taught should be preferably in form of PowerPoint slides or using digital writing pad or using conventional
+                white board or <span id="rec2" style="color: blue; cursor: pointer; text-decoration: underline;">light board</span> with prior permission of OCera EdTech (as per <a href="/be-an-educator/download/annexure-1"> Annexure 1</a> ).
+            </div>
+            <div>
+                <i class="fas fa-circle"></i> Any digital copies shared by OCera EdTech for the reference of Educator on request of the Educator shall be the property of OCera EdTech and must not be used, without prior written permission of OCera EdTech,
+                for any kind of commercial purposes including but not limited to online distribution on any website other than OCera EdTech, offline distribution through CDs/DVDs/other media, showing to students in a classroom or on a PC/Laptop etc.
+            </div>
+            <div>
+                <i class="fas fa-circle"></i> Further, Educators shall be responsible for reviewing and obtaining any necessary licenses, waivers or permissions with respect to any third-party rights to Content used.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>4. CONTENT LICENSE : </h4>
+            Subject to the terms and conditions of this Agreement, Educator grants to OCera EdTech an exclusive, worldwide license to reproduce/ edit, sell, distribute, enhance, modify, adapt and translate content provided by Educator for use on
+            <a href="/">www.oceraedtech.com</a>, its related sites/ the sales channels in connection with the Platform and on social media channels of OCera EdTech /of related sites like Youtube, Facebook, Linked in, Instagram or any other social media
+            channel used by the company.
+        </p>
+        <br>
+        <p>
+            <h4>5. CONTENT SECURITY : </h4>
+            OCera EdTech shall take all reasonable measures to preserve the Content of Educator, to prevent any corruption, loss, damage or destruction to such Content and to ensure its security from getting downloaded from OCera EdTech’s servers without permission.
+            <br> However, OCera EdTech does not ensure any protection against piracy of videos using various tools, including but not limited to screen capture etc.
+            <br> Further, OCera EdTech shall not undertake any unauthorized copying of the printed study material, if any provided by Educator.
+        </p>
+        <br>
+        <p>
+            <h4>6. NON-EXCLUSIVITY : </h4> This Agreement forms a non-exclusive relationship between the Parties. Nothing in this Agreement
+            <div>
+                <span class="text-bold">i) </span> Limits OCera EdTech’s right to host, distribute or otherwise make available content obtained from any third party/ies, including other educator/s and/or educational institutions, whether in connection
+                with the Platform or otherwise, and
+            </div>
+            <div>
+                <span class="text-bold">ii) </span> Limits Educator’s right to host, distribute or otherwise share any of his/her Content, except the specific course content including but not limited to the syllabus, assignments, quizzes, projects, developed
+                for and submitted to OCera EdTech of the specific subject in any mode whatsoever through third parties in each case except as otherwise expressly agreed to in writing by the Parties.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>7. SERVICES & REVENUE SHARING : </h4>
+            <div>
+                <span class="text-bold">i)</span> Educator shall develop, produce and submit Courses, in a <a href="/be-an-educator/download/annexure-1">format</a> that may be hosted by OCera EdTech. OCera EdTech shall host and make any such courses available,
+                provided that course fully satisfies the parameters set out in the course details Form.
+            </div>
+
+            <div>
+                <span class="text-bold">ii)</span> In order to get started with OCera EdTech as an online Educator for live/ recorded classes, Educators need to
+                <span class="text-bold">Sign up MoU</span> with OCera EdTech after <a href="/be-an-educator/dashboard/testVideoAndFeedback">getting the test video approval</a> . OCera EdTech’s team will
+                <% if(fb=='Y') { %>
+                    <a href="/be-an-educator/dashboard/bookYourSlot">guide</a> the Educator through this process.
+                    <% } else { %>
+                        <span class="text-bold">guide</span> the Educator through this process.
+                        <% } %>
+            </div>
+
+            <div>
+                <span class="text-bold">iii)</span> OCera EdTech shall determine, in consultation with the Educator, the fee to be charged for his/her Courses plus the applicable taxes. As between OCera EdTech and the Educator, OCera EdTech shall be solely
+                responsible for monetizing and otherwise generating revenue from the offering of Educator’s courses or Quizzes through the Platform and collecting such revenue. However, the educator may request to know the number of paid users enrolled
+                in their course. OCera EdTech shall notify Educators on every refund of Educator’s Course(s) made through the platform. Further, OCera EdTech shall pay a share income of fifty percent (50%) of the net income for the paid
+                user from the Educator’s recorded courses offered through its or through its partner’s online portal or through any other offline media.
+            </div>
+            <div>
+                <span class="text-bold">iv)</span> Educator shall raise an Invoice to claim his/her share of the payment for each paid user, as per above mentioned clause 6 (iii) at the end of each month/quarterly (as agreed between the parties) through
+                email to OCera EdTech. That OCera EdTech, subject to receipt of the invoice, and after deduction of applicable taxes, shall remit the applicable share to Educator, via cheque/NEFT or any other mode as agreed to by the Parties, by the 15th
+                of the month following the month in which the fee for Educators Course is received by OCera EdTech.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>8. EXPLICIT OBLIGATIONS OF EDUCATOR: Educator represents warrants and covenants that he/she : </h4>
+            <div>
+                <i class="fas fa-circle"></i> Shall be responsible for all of his/her submitted content, that he/she owns or has the necessary licenses, rights, consents, and permissions and have the authority to authorize OCera EdTech to reproduce, distribute,
+                publicly perform /display (including by means of a digital transmission), communicate to the public, promote, market and otherwise use and exploit any of their Submitted Content on and through the Platform, in the manner contemplated by
+                this Agreement and as may be agreed between the Parties from time to time, and that no submitted content shall infringe or misappropriate any intellectual property right of a third party;
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall submit complete course including the study materials and recording of one course within 3 months (Three Months) from the date of signing of this agreement along with all modules or topics, question papers,
+                practice module or whatever agreed at the time of signing this agreement and elaborated in <a href="/be-an-educator/download/annexure-1">Annexure-I</a> . Educators need to submit 1/3rd of the total number of modules at the end of each
+                month without fail else the course will be transferred to the other interested educators with the retained content, as mentioned in clause 14.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall not take the agreed course in online/offline digital mode with any other company involved in learning business unless agreed in written with OCera EdTech.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall provide all the updates with respect to the course on a regular basis to ensure that the content provided to the students is always updated.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall have the required qualifications, training, knowledge, credentials and expertise, to teach and offer the services they offer, on and through the platform;
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall be available regularly as required for resolution of queries of the learners, if any, through online chat or email as decided by OCera EdTech.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall not use any inappropriate, offensive, racist, hateful, sexist, sex-related, false, misleading, infringing, defamatory or libelous content;
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall not use OCera EdTech for any activity other than for providing tutoring, teaching and instructional/educational services to learners of OCera EdTech;
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall not engage in any activity that will require OCera EdTech to obtain any licenses from or pay any payments to any third party.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Shall not interfere with or prevent other Instructors from providing their services or Courses;
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>9. INTELLECTUAL PROPERTY : </h4>
+
+            <div>
+                <span class="text-bold">i) </span>All rights, title, and interest in and to content (except for digital copies created as per Clause 4 of the Agreement, created by the Educator either independently or in association with OCera EdTech and
+                provided to OCera EdTech under this Agreement) and all Intellectual Property Rights relating thereto shall remain with the Educator.
+            </div>
+
+            <div>
+                <span class="text-bold">ii) </span>Educator authorizes OCera EdTech to make enhancements to the Content in the form of translations, adaptations, captioning, encoding, transcripts, or video annotations produced in response to accessibility
+                requests
+                <span class="text-bold">(“Content Enhancements”).</span> As between OCera EdTech and Educator, such Content Enhancements shall be solely owned by OCera EdTech
+            </div>
+
+            <div>
+                <span class="text-bold">iii) </span>All rights, title, and interest in and to the Platform, related documentation, the OCera EdTech Website and all updates, modifications, enhancements, improvements, upgrades or corrections thereof, including
+                any assessment features added thereto, and all related Intellectual Property Rights shall be exclusively held by OCera EdTech.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>10. CONFIDENTIALITY : </h4>
+            Educator acknowledges that, in the course of activities under this Agreement, he/she shall be obtaining information relating to OCera EdTech and the service which is restricted in nature (“Confidential Information”), including, but not limited to, the
+            Service features, pricing details, operational details, other features and technical information about the site’s operations.
+            <br> OCera EdTech acknowledges that it may obtain Confidential Information relating to the Educator, including, but not limited to, his/her courses.
+            <br> Each Party will use the other Party’s Confidential Information solely to carry out its obligations under this Agreement and for no other purpose. Each party (“Recipient”) agrees that they shall not disclose Confidential Information of
+            the other party (“Discloser”) without the prior written consent of Discloser.
+            <br>
+            <br>
+            <span class="text-bold">Student’s Information/Communication : </span> OCera EdTech shall not disclose any End User (learner) data (name, city, user emails, contact numbers, address etc.) and Educator will not sell, provide or otherwise disclose
+            any End User (learner) data collected in connection with Courses offered through the Platform. Further, Educators shall not, during the term of the course or anytime thereafter, solicit any personally identifiable information (user emails,
+            contact numbers, address etc.) from the End-Users/ learners.
+        </p>
+        <br>
+        <p>
+            <h4>11. PENALTY : </h4>
+            The Educator agrees to reimburse to OCera EdTech an amount of Rs. 2000/- (Rupees Two Thousand Only) per hour of the recordings (subject to total hours of recording done) by the educator as a cost of resources spent by OCera EdTech, in case of failure
+            to record and complete the particular module /class /subject by the educator within three months from the date of signing this agreement or within the time period specifically agreed between the parties,
+            <span class="text-bold">if recording takes place in the studio of OCera EdTech.</span>
+            <br> In case the educator completes its recording on time then the educator is not required to reimburse any amount as a cost to OCera EdTech. The educator also agrees to reimburse at the above mentioned amount on hourly basis for the full
+            course (total number of hours of the course) in case the course is put on sale and educator doesn’t provide the updates/enhancements to the course as required from time to time to keep the course updated till the term of this agreement.
+        </p>
+        <br>
+        <p>
+            <h4>12. MARKETING : </h4>
+
+            <div>
+                <i class="fas fa-circle"></i> Marketing activities by OCera EdTech shall enable Educators to increase exposure and sales of the courses. These marketing activities shall include deals/discounts (in agreement with Educator) and Paid Advertising
+                promotions among others. Such promotions shall be carried on by OCera EdTech and Educator agrees to authorize OCera EdTech to run marketing activities for the courses submitted to OCera EdTech online portal, related website, sales channels
+                and social media channels like Youtube, Facebook, Pinterest etc. or through any other means.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> OCera EdTech does not guarantee any minimum or maximum level of success in connection with any marketing activities and its selection of courses shall not be an endorsement of those courses, or of Educator.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Educator shall provide OCera EdTech all information about him/her and authorizes it for hosting all such information on its online portal or on other means of digital content distribution in online and offline
+                mode.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Since all these Sales channels (Partners, distributors, resellers, affiliates, Network marketers) and Marketing channels including Social media channels like Youtube, Facebook etc are used to grow business
+                and interaction with them always has a predefined context.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Under no circumstances Educator will interact independently with any of these, without prior written permission of OCera EdTech’s concerned representative.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> Any violation of this can lead to business loss thus is liable to legal action by OCera EdTech at the cost of the educator.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> If needed for marketing purposes OCera EdTech’s representative will interact with Educator and in their presence, they will coordinate this interaction with sales and marketing channels.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>13. TERM : </h4>
+
+            <div>
+                <span class="text-bold">a. </span>This Agreement shall commence from the date of its execution for five years. More updates to the course or any new courses can be added under the same agreement as and when the Educator develops them.
+            </div>
+            <div>
+                <span class="text-bold">b. </span>Nevertheless OCera EdTech shall withdraw the course from all of its platforms, if no paid users get registered for the course within a duration of 3 months from date of launch of the course on the website.
+            </div>
+
+            <div>
+                <span class="text-bold">c. </span>The agreement can be extended further, subject to the terms and conditions contained in this agreement and mutual agreements between parties. Though in case there is any need to make changes to these terms
+                of the agreement, the same can be done by mutual discussion subject to approval by OCera EdTech, however any changes shall be done only in writing.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>14. CONTENT PULLOUT BY EDUCATOR/OCERA EDTECH : </h4>
+            <div>
+                <i class="fas fa-circle"></i> Educators may request OCera EdTech to remove, block or suspend access to a course or part thereof submitted by Educator, only if any portion of such course is materially erroneous or has become out-of-date
+                in ways that cannot be promptly corrected.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> The same has to be done by giving prior notice via email to OCera EdTech at least 30 days in advance. However, OCera EdTech shall have the discretion to entertain such a request or may continue to market the
+                course if the reasons provided for removal are not strong enough to remove the course.
+            </div>
+
+            <div>
+                <i class="fas fa-circle"></i> In case of such removal of the course from sales on OCera EdTech, Educator will support all the students as defined in the agreement till the validity of the sold courses.
+            </div>
+
+            If OCera EdTech receive a written notice from a third party alleging infringement of its Intellectual Property Rights arising from the provision of Educator supplied Content to the Platform; Or subject to any adverse inquiry or claim or governmental investigation
+            or Determine, in its sole discretion that the Content violates any applicable law, regulation or rights of any third party, OCera EdTech shall have the right, with at least three business days prior notice to the Educator, to remove or suspend
+            any content pertaining to such claim from the Platform pending further evaluation or resolution of such claim with Educator.
+        </p>
+        <br>
+        <p>
+            <h4>15. TERMINATION : </h4>
+            <div>
+                <span class="text-bold">i) </span>Either Party may terminate this Agreement, upon giving a written notice of 45 days to the other Party; subject to following terms.
+            </div>
+            <div>
+                <span class="text-bold">ii) </span>In case of breach of agreement by the educator in the following manner or even otherwise, OCera Edtech reserves the right to terminate the agreement with immediate effect by giving a written notice:
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">a. </span>The content of the course is inappropriate or substandard and the educator does not intends to make necessary changes as per the satisfaction of OCera Edtech</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">b. </span>If OCera Edtech finds from its own sources or receives information from any source, that the content of the course has been copied from any other similar platform or the
+                same content has been shared with any other similar platform prior to or subsequent to sharing with OCera Edtech</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">c. </span>In case of inappropriate conduct including but not limited to the use of inappropriate language or gestures with any representative of OCera Edtech or any educator connected
+                with OCera Edtech during the subsistence of present agreement</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">d. </span>Sharing the course submitted to OCera Edtech on paid or unpaid basis on any other website except platforms related to OCera Edtech</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">e. </span>In case of non-submission of the course content within the scheduled times or deadlines.</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">f. </span>If any kind of complaint is received with respect to the Educator from any paid or registered learner of OCera Edtech which is of such nature so as to adversely or negatively
+                cause or result in material damage to or loss of reputation to OCera Edtech</span>
+                <br>
+                <span style="margin-left: 20px;"><span class="text-bold">g. </span>If the acts or omissions of educators adversely or negatively cause or result in material damage to or loss of reputation to OCera Edtech. Any disagreements or disputes
+                regarding any material damage or loss to reputation will be resolved by the dispute resolution procedures set forth in this Agreement.</span>
+            </div>
+            <div>
+                <span class="text-bold">iii) </span> Either Party may withdraw the termination notice if the breach is cured within 30 days of receipt of written notice of such breach from the non-breaching Party subject to the discretion and approval
+                of OCera Edtech.
+            </div>
+
+            <div>
+                <span class="text-bold">iv) </span> <span class="text-bold">Consequences of Termination : </span> Termination of this Agreement for any reason does not relieve either Party of its obligation to pay any amounts owed to the other Party that
+                became due prior to such termination or to provide the same standards of customer service to the students who have bought the course prior to this termination.
+                <br> Upon any termination of this Agreement, each Party will promptly return all Confidential Information (other than this Agreement), of the other Party in its possession or control. In the event of termination of this Agreement by either
+                Party, all rights and obligations under this Agreement shall immediately cease, and OCera EdTech shall discontinue providing any of the Services with immediate effect.
+                <br> Notwithstanding the foregoing, OCera EdTech may continue to host and make the Course available, throughout the course validity period, to learners.
+            </div>
+            <div>
+                <span class="text-bold">v) </span>In case the Educator stops recording the lectures or providing updates as agreed under this agreement, and does not provide the updated course content for the students or leave the course incomplete, the
+                Educator forfeit his/her Intellectual property rights over the contents/lectures submitted earlier. The OCera EdTech shall be entitled to use the material/recorded lectures provided by the Educator without paying any payment to the Educator.
+            </div>
+        </p>
+        <br>
+        <p>
+            <h4>16. ASSIGNMENT : </h4>
+            Neither this Agreement nor any of the rights, interests or obligations hereunder shall be assigned by the Educator (whether by operation of law or otherwise) without the prior written consent of OCera EdTech.
+        </p>
+        <br>
+        <p>
+            <h4>17. DISCLAIMER OF CONSEQUENTIAL DAMAGES : </h4>
+            EXCEPT for damages or liability arising from a breach of a party’s confidentiality and the obligations under this agreement or a party’s willful misconduct, neither party shall be liable to the other party for any indirect, consequential, incidental or
+            punitive damages (including damages for loss of business or information or business interruption) arising out of this agreement or arising from or relating to the platform, regardless of whether such liability is based on breach of contract,
+            tort, strict liability, breach of warranties or otherwise, and even if such party has been advised of the possibility of such damages. This exclusion and limitation shall apply even if any remedy fails of its essential purpose.
+        </p>
+        <br>
+        <p>
+            <h4>18. LIMITATION ON LIABILITY : </h4>
+            Except for damages or liability arising from a party’s indemnification obligations under this agreement, a party’s total aggregate liability arising out of or relating to this agreement shall in no event exceed the total amount of net profits such party
+            received in connection with the monetization of Educator’s courses under this agreement in the twelve months preceding the date on which the claim for damages or liability arose, regardless of the form of the cause of action, whether in contract,
+            tort, statute or otherwise.
+        </p>
+        <br>
+        <p>
+            <h4>19. INDEMNIFICATION : </h4>
+            To the extent permitted by law, Educator shall indemnify, defend and hold harmless OCera EdTech, its affiliates and each of their officers, directors, employees and agents from and against any and all losses, damages, costs, expenses (including reasonable
+            attorneys’ fees and expenses) or other liabilities (“Losses”), arising out of or resulting from Instructor’s or any third-party claims asserted against OCera EdTech to the extent relating to any Content provided by Educator, Instructors or
+            any guest presenters for use with the Services or Platform, including any violation or infringement of Instructor’s or any third-party Intellectual Property Rights, claims of defamation, invasion of privacy, right to publicity or unfair competition;
+            provided, however, that Educator shall not be obligated to indemnify OCera EdTech for any claims that arise from the Content being made available on the Platform, through no fault of Educator.
+        </p>
+        <br>
+        <p>
+            <h4>20. PLATFORM CAPABILITIES: </h4>
+            OCera EdTech reserves the right, in its sole discretion, to change, add or remove capabilities/features of OCera EdTech and/or any Course without notice but will make all reasonable effort to give Educator advance notice before doing so.
+        </p>
+        <br>
+        <p>
+            <h4>21. GENERAL TERMS</h4>
+            <span class="text-bolds">Dispute Resolution :</span> The provisions of this Agreement shall be governed by and construed in accordance with Indian law. In the event of any disputes/ differences among the Parties hereto (“Disputing Parties”),
+            whether before or after the termination of this Agreement, regarding the interpretation of any provision of this Agreement or regarding any claim of one Party against the other or regarding any other matter arising out of this Agreement, the
+            Disputing Parties shall promptly and in good faith endeavor to settle the matter by mutual conciliation. The courts of New Delhi, India shall have the exclusive jurisdiction in relation to any disputes arising out of this Agreement.
+            <br>
+            <span class="text-bolds">Independent Contractors :</span> The relationship between OCera EdTech and Educator under this Agreement is that of independent contractors. Nothing in this Agreement shall be construed so as to constitute OCera EdTech
+            and Educator as partners or joint ventures, or either Party as the employee or agent of the other Party, or in any other manner other than as independent contractors. Neither Party will have any power or authority to bind the other Party in
+            any transaction with a third party.
+            <br>
+            <span class="text-bolds">Amendment :</span> No amendment, modification or discharge of this Agreement, and no waiver hereunder, shall be valid or binding unless set forth in a writing signed by both Parties. Any waiver, concession or extra
+            time allowed or granted by either Party to the other shall be limited and applicable to the specific instance in which it was given without setting any precedent and the same shall not affect the waiving Party’s rights under these terms and
+            conditions in any way (whether in that or any other instance).
+            <br>
+            <span class="text-bolds">Severability :</span> If any provision of this Agreement, or portion thereof, is held by a court of competent jurisdiction to be contrary to law or otherwise unenforceable, the provision shall be totally ineffective
+            to that extent, and the remaining provisions of this Agreement will remain in full force and effect.
+            <br>
+            <span class="text-bolds">Waiver :</span> Neither the waiver by any of the parties of a breach of or a default under any of the provisions of this Agreement, nor the failure of any of the parties, on one or more occasions, to enforce any of
+            the provisions of this Agreement or to exercise any right or privilege here under shall thereafter be construed as a waiver of any subsequent breach or default of a similar nature, or as a waiver of any of such provisions, rights or privileges
+            hereunder.
+            <br>
+            <span class="text-bolds">Entire Agreement :</span> This Agreement constitutes the entire understanding of the parties and supersedes all prior communications or agreements, whether oral or written, between the parties.
+            <br>
+            <span class="text-bolds">Notices :</span> Any notice pertaining to this Agreement shall be in writing sent through registered post or email at the address provided in this agreement. Further it shall be the obligation of each party to update
+            in case of any change in the address of either party.
+        </p>
+        <br>
+        <p>
+            IN WITNESS WHEREOF, the Parties have executed this Agreement as of the effective Date.
+        </p>
+        <br>
+        <% if (type == 'readonly') { %>
+            <p class="text-bold">
+                For OCera EdTech Pvt. Ltd.
+            </p>
+            <div>
+                Signature ………………………………… (Seal of company)
+                <br> Authorized Representative Name:…………………….
+                <br> Designation:………………………..
+            </div>
+            <p class="text-bold">
+                <br>Your Details<br>
+            </p>
+            <div>
+                Signature …………………………………
+                <br> Name:…………………….
+                <br> Title:………………………..
+                <br> Course:………………………..
+            </div>
+            <p class="text-bold">
+                <br>Witness 1<br>
+            </p>
+            <div>
+                Signature …………………………………
+                <br> Name:…………………….
+                <br> Address:………………………..
+            </div>
+            <p class="text-bold">
+                <br>Witness 2<br>
+            </p>
+            <div>
+                Signature …………………………………
+                <br> Name:…………………….
+                <br> Address:………………………..
+            </div>
+            <% } else { %>
+                <p class="text-bold">
+                    For OCera EdTech Pvt. Ltd.
+                </p>
+                <div>
+                    Signature ………………………………… (Seal of company)
+                    <br> Authorized Representative Name:…………………….
+                    <br> Designation:………………………..
+                </div>
+                <div>
+                    <br><br> Your details <i id="your-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                    <div class="labelling">
+                        <label for="sign">Signature</label>
+                        <div class="signatureImagediv" style="display: flex; align-items: center; justify-content: center;">
+                            <a style="cursor: pointer;" id="user-signatureUpload">Upload Signature</a>
+                            <img id="user-signatureImage" class="signatureImage" style="cursor: pointer; display: none;" src="" alt="Upload Signature">
+                        </div>
+                        <input type="file" hidden accept="image/*" id="user_signature" name="signatures">
+                    </div>
+                    <p style="font-weight: 600;">Max File Size: 20KB, File Type: .png/.jpg/.jpeg</p>
+                    <div class="labelling">
+                        <label for="name">Name</label> &nbsp;&nbsp;
+                        <input type="text" disabled name="course" style="cursor: not-allowed;" placeholder="<%=name%>" class="input_details">
+                    </div>
+                    <div class="labelling">
+                        <label for="name">Title</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" disabled name="course" style="cursor: not-allowed;" placeholder="Educator" class="input_details">
+                    </div>
+                    <div class="labelling">
+                        <label for="course">Course</label> &nbsp;
+                        <input type="text" disabled name="course" style="cursor: not-allowed;" placeholder="<%=course%>" class="input_details">
+                    </div>
+                </div>
+                <div>
+                    <br><br> Witness No. 1: <i id="w1-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                    <div class="labelling">
+                        <label for="sign">Signature</label>
+                        <div class="signatureImagediv" style="display: flex; align-items: center; justify-content: center;">
+                            <a style="cursor: pointer;" id="w1-signatureUpload">Upload Signature</a>
+                            <img id="w1-signatureImage" class="signatureImage" style="cursor: pointer; display: none;" src="" alt="Upload Signature">
+                        </div>
+                        <input type="file" hidden accept="image/*" id="w1_signature" name="signatures">
+                    </div>
+                    <p style="font-weight: 600;">Max File Size: 20KB, File Type: .png/.jpg/.jpeg</p>
+                    <div class="labelling">
+                        <label for="name1">Name</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" required name="w1_name" placeholder="Witness Name" class="input_details">
+                    </div>
+                    <div class="labelling">
+                        <label for="add1">Address</label>
+                        <input type="text" required name="w1_add" placeholder="Witness Address" class="input_details">
+                    </div>
+                    <br>
+                    <br> Witness No. 2: <i id="w2-error" style="display: none; color: red;" class="fas fa-exclamation-circle"></i>
+                    <div class="labelling">
+                        <label for="sign">Signature</label>
+                        <div class="signatureImagediv" style="display: flex; align-items: center; justify-content: center;">
+                            <a style="cursor: pointer;" id="w2-signatureUpload">Upload Signature</a>
+                            <img id="w2-signatureImage" class="signatureImage" style="cursor: pointer; display: none;" src="" alt="Upload Signature">
+                        </div>
+                        <input type="file" hidden accept="image/*" id="w2_signature" name="signatures">
+                    </div>
+                    <p style="font-weight: 600;">Max File Size: 20KB, File Type: .png/.jpg/.jpeg</p>
+                    <div class="labelling">
+                        <label for="name2">Name</label> &nbsp;&nbsp;&nbsp;&nbsp;
+                        <input type="text" required name="w2_name" placeholder="Witness Name" class="input_details">
+                    </div>
+                    <div class="labelling">
+                        <label for="add2">Address</label>
+                        <input type="text" required name="w2_add" placeholder="Witness Address" class="input_details">
+                    </div>
+                    <input type="text" hidden name="username" value="<%=name%>">
+                    <div class="buttons">
+                        <button class="cta" type="button" id="submitmou" style="text-transform: none;">SIGN MoU</button>
+                        <a href="/be-an-educator/download/mou"><button type="button" class="cta" style="text-transform: none;">DOWNLOAD MoU</button></a>
+                    </div>
+                    <br>
+                    <p style="text-align: center; font-weight: 700; color: red;" id="errormssg"></p><br>
+
+                </div>
+                <% } %>
+    </form>
+    <script>
+        $(':text').keyup(function() {
+            $(this).attr('size', $(this).val().length)
+        })
+        $("#user-signatureUpload").click(function(e) {
+            $("#user_signature").click();
+        });
+        $("#user-signatureImage").click(function(e) {
+            $("#user_signature").click();
+        });
+        $("#w1-signatureUpload").click(function(e) {
+            $("#w1_signature").click();
+        });
+        $("#w1-signatureImage").click(function(e) {
+            $("#w1_signature").click();
+        });
+        $("#w2-signatureUpload").click(function(e) {
+            $("#w2_signature").click();
+        });
+        $("#w2-signatureImage").click(function(e) {
+            $("#w2_signature").click();
+        });
+        $("#user_signature").change(function() {
+            fasterPreviewU(this);
+        });
+        $("#w1_signature").change(function() {
+            fasterPreview1(this);
+        });
+        $("#w2_signature").change(function() {
+            fasterPreview2(this);
+        });
+
+        function fasterPreviewU(uploader) {
+            if (uploader.files && uploader.files[0]) {
+                document.getElementById('user-signatureUpload').style.display = 'none'
+                document.getElementById('user-signatureImage').style.display = 'block'
+                $('#user-signatureImage').attr('src',
+                    window.URL.createObjectURL(uploader.files[0]));
+            }
+        }
+
+        function fasterPreview1(uploader) {
+            if (uploader.files && uploader.files[0]) {
+                document.getElementById('w1-signatureUpload').style.display = 'none'
+                document.getElementById('w1-signatureImage').style.display = 'block'
+                $('#w1-signatureImage').attr('src',
+                    window.URL.createObjectURL(uploader.files[0]));
+            }
+        }
+
+        function fasterPreview2(uploader) {
+            if (uploader.files && uploader.files[0]) {
+                document.getElementById('w2-signatureUpload').style.display = 'none'
+                document.getElementById('w2-signatureImage').style.display = 'block'
+                $('#w2-signatureImage').attr('src',
+                    window.URL.createObjectURL(uploader.files[0]));
+            }
+        }
+
+
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        var d = new Date();
+        document.getElementById("demo").innerHTML = days[d.getDay() - 1] + ' of ' + d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+        document.getElementById("mr").addEventListener("click", function() {
+            document.getElementById("mr").style.color = "black";
+            document.getElementById("mr").style.fontWeight = "bold";
+            document.getElementById("ms").style.color = "grey";
+            $('#salutation').val('Mr')
+        });
+        document.getElementById("ms").addEventListener("click", function() {
+            document.getElementById("ms").style.color = "black";
+            document.getElementById("ms").style.fontWeight = "bold";
+            document.getElementById("mr").style.color = "grey";
+            $('#salutation').val('Ms')
+        });
+        document.getElementById("son").addEventListener("click", function() {
+            document.getElementById("son").style.color = "black";
+            document.getElementById("son").style.fontWeight = "bold";
+            document.getElementById("daug").style.color = "grey";
+            document.getElementById("wife").style.color = "grey";
+            $('#relation_type').val('son')
+        });
+        document.getElementById("daug").addEventListener("click",
+            function() {
+                document.getElementById("son").style.color = "grey";
+                document.getElementById("daug").style.color = "black";
+                document.getElementById("daug").style.fontWeight = "bold";
+                document.getElementById("wife").style.color = "grey";
+                $('#relation_type').val('daughter')
+            });
+        document.getElementById("wife").addEventListener("click", function() {
+            document.getElementById("son").style.color = "grey";
+            document.getElementById("daug").style.color = "grey";
+            document.getElementById("wife").style.color = "black";
+            document.getElementById("wife").style.fontWeight = "bold";
+            $('#relation_type').val('wife')
+        });
+        document.getElementById("indi").addEventListener("click", function() {
+            document.getElementById("indi").style.color = "black";
+            document.getElementById("indi").style.fontWeight = "bold";
+            document.getElementById("resp").style.color = "grey";
+            document.getElementById("inst").style.color = "grey";
+            $('#organisation_type').val('individual')
+        });
+        document.getElementById("resp").addEventListener("click", function() {
+            document.getElementById("indi").style.color = "grey";
+            document.getElementById("resp").style.color = "black";
+            document.getElementById("resp").style.fontWeight = "bold";
+            document.getElementById("inst").style.color = "grey";
+            $('#organisation_type').val('company')
+        });
+        document.getElementById("inst").addEventListener("click",
+            function() {
+                document.getElementById("indi").style.color = "grey";
+                document.getElementById("resp").style.color = "grey";
+                document.getElementById("inst").style.color = "black";
+                document.getElementById("inst").style.fontWeight = "bold";
+                $('#organisation_type').val('institute')
+            });
+        document.getElementById("resi").addEventListener("click", function() {
+            document.getElementById("resi").style.color = "black";
+            document.getElementById("resi").style.fontWeight = "bold";
+            document.getElementById("off").style.color = "grey";
+            $('#address_type').val('residence')
+        });
+        document.getElementById("off").addEventListener("click", function() {
+            document.getElementById("resi").style.color = "grey";
+            document.getElementById("off").style.color = "black";
+            document.getElementById("off").style.fontWeight = "bold";
+            $('#address_type').val('office')
+        });
+        var type = '<%=type%>'
+        document.getElementById('rec').onclick = function() {
+            $("#gum-local").load('/be-an-educator/setupForVideoRecording/' + type);
+        }
+        document.getElementById('rec2').onclick = function() {
+            $("#gum-local").load('/be-an-educator/setupForVideoRecording/' + type);
+        }
+
+        $('#submitmou').click(() => {
+            var form = $("#submitmouform")[0]
+            var data = new FormData(form)
+            var limit = 20000
+            if ($('input[name="salutation"]').val() != '' && $('input[name="relation_type"]').val() != '' && $('input[name="family_name"]').val() != '' && $('input[name="organisation_type"]').val() != '' && $('input[name="organisation_name"]').val() != '' && $('input[name="address_type"]').val() != '' && $('input[name="address"]').val() != '') {
+                document.getElementById('inputdetails').style.border = '0'
+                document.getElementById('inputdetails').style.padding = '0'
+                document.getElementById('errormssg').innerText = ''
+                document.getElementById('your-error').style.display = 'none'
+                var input1 = document.getElementById("user_signature");
+                var file1 = input1.files[0];
+                if (!file1) {
+                    document.getElementById('your-error').style.display = 'inline-block'
+                    document.getElementById('errormssg').innerText = 'Please upload your signature'
+                } else {
+                    var idxDot1 = file1.name.lastIndexOf(".") + 1;
+                    var extFile1 = file1.name.substr(idxDot1, file1.name.length).toLowerCase();
+                    if ((extFile1 == "jpg" || extFile1 == "jpeg" || extFile1 == "png") && (file1.size <= limit)) {
+                        document.getElementById('your-error').style.display = 'none'
+                        if ($('input[name="w1_name"]').val() != '' && $('input[name="w1_add"]').val() != '') {
+                            document.getElementById('w1-error').style.display = 'none'
+                            var input2 = document.getElementById("w1_signature");
+                            var file2 = input2.files[0];
+                            if (!file2) {
+                                document.getElementById('w1-error').style.display = 'inline-block'
+                                document.getElementById('errormssg').innerText = 'Please upload witness 1 signature'
+                            } else {
+                                var idxDot2 = file2.name.lastIndexOf(".") + 1;
+                                var extFile2 = file2.name.substr(idxDot2, file2.name.length).toLowerCase();
+                                if ((extFile2 == "jpg" || extFile2 == "jpeg" || extFile2 == "png") && (file2.size <= limit)) {
+                                    document.getElementById('w1-error').style.display = 'none'
+                                    if ($('input[name="w2_name"]').val() != '' && $('input[name="w2_add"]').val() != '') {
+                                        document.getElementById('w2-error').style.display = 'none'
+                                        var input3 = document.getElementById("w2_signature");
+                                        var file3 = input3.files[0];
+                                        if (!file3) {
+                                            document.getElementById('w2-error').style.display = 'inline-block'
+                                            document.getElementById('errormssg').innerText = 'Please upload witness 2 signature'
+                                        } else {
+                                            var idxDot3 = file3.name.lastIndexOf(".") + 1;
+                                            var extFile3 = file3.name.substr(idxDot3, file3.name.length).toLowerCase();
+                                            if ((extFile3 == "jpg" || extFile3 == "jpeg" || extFile3 == "png") && (file3.size <= limit)) {
+                                                document.getElementById('w2-error').style.display = 'none'
+                                                document.getElementById('errormssg').innerText = ''
+                                                $.ajax({
+                                                    method: "POST",
+                                                    enctype: "multipart/form-data",
+                                                    url: '/be-an-educator/save/mou',
+                                                    data: data,
+                                                    processData: false,
+                                                    contentType: false,
+                                                    cache: false,
+                                                    success: (data) => {
+                                                        if (data == 'success') {
+                                                            document.getElementById('annexure_upload_success').style.display = 'block'
+                                                            document.getElementById('submitmouform').style.display = 'none'
+                                                        } else {
+                                                            document.getElementById('errormssg').innerText = data
+                                                        }
+                                                    },
+                                                    error: (e) => {
+                                                        console.log(e)
+                                                        document.getElementById('errormssg').innerText = 'An unexpected error occured'
+                                                    }
+                                                })
+                                            } else if (file3.size > limit) {
+                                                document.getElementById('w2-error').style.display = 'inline-block'
+                                                document.getElementById('errormssg').innerText = 'File size should be less than 20KB'
+                                            } else {
+                                                document.getElementById('w2-error').style.display = 'inline-block'
+                                                document.getElementById('errormssg').innerText = 'Only image formats allowed'
+
+                                            }
+                                        }
+                                    } else {
+                                        document.getElementById('w2-error').style.display = 'inline-block'
+                                        document.getElementById('errormssg').innerText = 'Please provide witness 2 details'
+                                    }
+                                } else if (file2.size > limit) {
+                                    document.getElementById('w1-error').style.display = 'inline-block'
+                                    document.getElementById('errormssg').innerText = 'File size should be less than 20KB'
+                                } else {
+                                    document.getElementById('w1-error').style.display = 'inline-block'
+                                    document.getElementById('errormssg').innerText = 'Only image formats allowed'
+                                }
+                            }
+                        } else {
+                            document.getElementById('w1-error').style.display = 'inline-block'
+                            document.getElementById('errormssg').innerText = 'Please provide witness 1 details'
+                        }
+                    } else if (file1.size > limit) {
+                        document.getElementById('your-error').style.display = 'inline-block'
+                        document.getElementById('errormssg').innerText = 'File size should be less than 20KB'
+                    } else {
+                        document.getElementById('your-error').style.display = 'inline-block'
+                        document.getElementById('errormssg').innerText = 'Only image formats allowed'
+                    }
+                }
+            } else {
+                document.getElementById('inputdetails').style.border = '2px solid red'
+                document.getElementById('inputdetails').style.padding = '2% 0'
+                document.getElementById('errormssg').innerText = 'Please fill out the basic details at the top.'
+            }
+
+            // $('html, body').animate({
+            //     scrollTop: $("#inputdetails").offset().top
+            // }, 1000);
+        })
+    </script>
+
+</body>
+
+</html>
+
+</html>
+
+</html>
+
+</html>

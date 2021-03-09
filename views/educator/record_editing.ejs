@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recording and Editing</title>
+    <link rel="stylesheet" href="/testVideoAndFeedback.css">
+    <!-- <link rel="stylesheet" href="/record_editing.css"> -->
+    <style>
+        .far {
+            font-size: 2rem;
+            color: #29bde4;
+            margin-top: 15px;
+        }
+
+        .data {
+            color: #29bde4;
+        }
+
+        .cta {
+            display: inline-block;
+            margin-right: 20px;
+            padding: 10px 15px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: .1rem;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="course_name">
+        <%=coursetitle%>
+    </h1>
+
+    <h2 class="top_heading">
+        Dear <span class="data">Educator,</span>
+    </h2>
+
+    <div id="courses">
+        <main class="page-content">
+            <div class="card">
+                <img src="/be-an-educator/video_setup.jpeg" alt="Video Recording Setup">
+                <div class="content">
+                    <h2 class="titlesRE">Setup for Video Recording</h2>
+                    <button id="videoRecording" class="cta">View</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/be-an-educator/audio_video.jpeg" alt="Audio Visual Recording">
+                <div class="content">
+                    <h2 class="titlesRE">Audio Visual(AV) Recording</h2>
+                    <button id="audioVisualRecording" class="cta">View</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/be-an-educator/editing.jpg" alt="Video Editing">
+                <div class="content">
+                    <h2 class="titlesRE">Video Editing</h2>
+                    <button id="videoEditing" class="cta">View</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <div class="test-feedback">
+        <p class="data-stuff">
+            <br>
+            <i class="far fa-dot-circle"></i>
+            <span class="spacing">
+                After every 2-3 modules, give one hour of discussion
+            </span>
+            <br>
+            <i class="far fa-dot-circle"></i>
+            <span class="spacing">
+                75% of the total duration of each course should use innovative learning
+            </span>
+            <br>
+            <i class="far fa-dot-circle"></i>
+            <span class="spacing">
+                Teacher should be dressed in formals
+            </span>
+            <br>
+            <i class="far fa-dot-circle"></i>
+            <span style="color: red;" class="spacing">
+                Less than 15% of the total duration - direct lectures focussed on the teacher can be used i.e. for maximum of 
+                3 hours teacher can be focussed
+            </span>
+            <br>
+            <i class="far fa-dot-circle"></i>
+            <span class="spacing">
+                Video edit files @ 10 MbPS and 2.5 MbPs will be required for transmission
+            </span>
+        </p>
+    </div>
+
+    <button type="button" class="cta" id="nextBtn">Next</button>
+
+    <script>
+        document.getElementById('videoRecording').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForVideoRecording/CU");
+        }
+        document.getElementById('audioVisualRecording').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForAudioVisualRecording/CU");
+        }
+        document.getElementById('videoEditing').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForVideoEditing/CU");
+        }
+        $('#nextBtn').click(() => {
+            document.getElementById('pageText').value = 'courseUploadpage'
+            var page = '#' + document.getElementById('pageText').value
+            $('#sidebarmenu li .navbar_title.current').removeClass('current');
+            $(page).addClass('current')
+            $("#gum-local").load("/be-an-educator/courseUpload");
+        })
+    </script>
+</body>
+
+</html>

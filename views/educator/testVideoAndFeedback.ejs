@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Video and Feedback</title>
+    <link rel="stylesheet" href="/testVideoAndFeedback.css">
+
+</head>
+
+<body>
+    <h2 class="top_heading">
+        Dear<span class="data"> Educator,</span>
+    </h2>
+    <h4>It is always important to start a journey with enthusiam. To make a test video, if you are proficient or know a little bit or even don't know, you may us the suggestions indicated below.</h4>
+
+    <div id="courses">
+        <main class="page-content">
+            <div class="card">
+                <img src="/be-an-educator/video_setup.jpeg" alt="Video Recording Setup">
+                <div class="content">
+                    <h2 class="titlesRE">Setup for Video Recording</h2>
+                    <button id="videoRecording" class="cta">View</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/be-an-educator/audio_video.jpeg" alt="Audio Visual Recording">
+                <div class="content">
+                    <h2 class="titlesRE">Audio Visual(AV) Recording</h2>
+                    <button id="audioVisualRecording" class="cta">View</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="/be-an-educator/editing.jpg" alt="Video Editing">
+                <div class="content">
+                    <h2 class="titlesRE">Video Editing</h2>
+                    <button id="videoEditing" class="cta">View</button>
+                </div>
+            </div>
+        </main>
+    </div>
+    <br>
+    <h4>
+        Even after following the resources, you are not feeling confident, you may contact us to get support from our team by writing mail - <span class="email">oceraedtech@gmail.com</span>. We shall be happy to help you.
+    </h4>
+    <div class="video-block">
+        <iframe src="https://www.youtube.com/embed/tgbNymZ7vqY">
+        </iframe>
+        <% if (tv == 'N') { %>
+            <button class="cta upload" id="uploadTestVideo">UPLOAD YOUR TEST VIDEO</button>
+            <% } else if (tv == 'A') { %>
+                <div class="done2" style="display: flex; flex-direction: column; align-items: center;">
+                    <br>
+                    <h3 style="text-align: center;">Your <a style="color: blue; text-decoration: underline;" href="/be-an-educator/download/testvideo/<%=video%>">uploaded test video</a> was not approved.</h3>
+                    <button class="cta upload" onclick="gotofb()">CHECK FEEDBACK STATUS</button>
+                    <button class="cta upload" id="uploadTestVideo">UPLOAD YOUR TEST VIDEO</button>
+                </div>
+                <% } else { %>
+                    <div class="done2" style="display: flex; flex-direction: column;">
+                        <br>
+                        <h3>You have already uploaded a test video.</h3>
+                        <button class="cta upload" onclick="gotofb()">CHECK FEEDBACK STATUS</button>
+                    </div>
+                    <% } %>
+    </div>
+    <section id="faqs">
+        <div class="container-fluid" style="margin-top: 0; padding-top: 0;">
+            <div>
+                <br><h1 class="top_heading">Frequently Asked Questions <span style="color: #29bde4;">(FAQs)</span></h1>
+            </div>
+            <!-- Accordion Starts-->
+            <div class="acc">
+                <h3>What is the necessity of recording the Trial Video?</h3>
+                <div class="contents">
+                    <div class="content-inner">
+                        <p>To ensure the quality and uniformity of the content delivery throughout the website important to review the trail video.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Accordian -->
+            <div class="acc">
+                <h3>What is re-reviewing of the course?</h3>
+                <div class="contents">
+                    <div class="content-inner">
+                        <p>
+                            The course should be focused on imparting knowledge to students instead of personal branding. The course needs to maitain some course review guidelines, if found violated the course can be re-reveiwed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc">
+                <h3>Can multiple instructor teach a particular course?</h3>
+                <div class="contents">
+                    <div class="content-inner">
+                        <p>
+                            Yes, so as to make the course interactive and interesting. But details of all the instructors need to be shared.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- faq -->
+    <script>
+        $(document).ready(function() {
+            $('.acc h3').click(function() {
+                $(this).next('.contents').slideToggle();
+                $(this).parent().toggleClass('active');
+                $(this).parent().siblings().children('.contents').slideUp();
+                $(this).parent().siblings().removeClass('active');
+            });
+        });
+
+        var tv = '<%=tv%>'
+        if (tv == 'N' || tv == 'A') {
+            document.getElementById('uploadTestVideo').onclick = function() {
+                $("#gum-local").load("/be-an-educator/uploadTestVideo");
+            }              
+        }
+        document.getElementById('videoRecording').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForVideoRecording/TV");
+        }
+        document.getElementById('audioVisualRecording').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForAudioVisualRecording/TV");
+        }
+        document.getElementById('videoEditing').onclick = function() {
+            $("#gum-local").load("/be-an-educator/setupForVideoEditing/TV");
+        }
+        function gotofb() {
+            location.href = '/be-an-educator/dashboard/Feedback'
+        }
+    </script>
+</body>
+
+</html>

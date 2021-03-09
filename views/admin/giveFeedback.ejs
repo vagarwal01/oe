@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <!-- <link rel="stylesheet" href="/extra_info.css"> -->
+    <title>Test Video Feedback</title>
+</head>
+
+<style>
+    html {
+        font-family: 'Montserrat', sans-serif;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+        background-color: #c5d5cb;
+    }
+    
+    .top_heading {
+        padding-bottom: 15px;
+        color: #161361;
+        font-size: 2rem;
+        text-transform: uppercase;
+    }
+    
+    .data {
+        color: #29bde4;
+    }
+    
+    .fbtable {
+        margin: 2% 3%;
+    }
+    
+    .fbvideo {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        height: max-content;
+        border: 2px solid black;
+        margin-bottom: 3%;
+        margin-left: 1%;
+        padding: 1% 0;
+    }
+    
+    .fbvideo:hover {
+        box-shadow: 3px 3px 5px 6px #000;
+    }
+    
+    .fbvideo .nv {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .email {
+        margin-top: 1%;
+        margin-bottom: 3%;
+    }
+    
+    .fbvideo .video {
+        position: relative;
+    }
+    
+    .fbvideo .video video {
+        width: 450px;
+        display: block;
+        border-radius: 10px;
+    }
+    
+    .fbvideo .video video:focus {
+        outline: none;
+    }
+    
+    .fbvideo form {
+        flex: 1;
+    }
+    
+    .fbvideo form .fbques {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .fbque1 .score {
+        flex: 2.5;
+    }
+    
+    .fbque1 .space {
+        flex: 0.5;
+    }
+    
+    .fbque1 {
+        display: flex;
+        align-items: center;
+    }
+    
+    .fbque1 h4 {
+        flex: 1;
+    }
+    
+    input[type='radio'] {
+        display: none;
+    }
+    
+    .score label {
+        font-size: 30px;
+        color: #444;
+        padding: 10px;
+        float: right;
+        cursor: pointer;
+    }
+    
+    input:not(:checked)~label:hover,
+    input:not(:checked)~label:hover~label {
+        color: #33999e;
+    }
+    
+    input:checked~label {
+        color: #33999e;
+        text-shadow: 0 0 20px #54eef7;
+    }
+    
+    input[type='text'] {
+        width: 90%;
+        margin: 5% 0;
+        float: right;
+        background-color: transparent;
+        border: 0;
+        border-bottom: 2px solid black;
+    }
+    
+    input[type='text']:focus {
+        border: 0;
+        outline: none;
+        border-bottom: 2px solid black;
+    }
+    
+    .cta {
+        display: inline-block;
+        max-width: fit-content;
+        /* margin-right: 20px; */
+        padding: 10px 15px;
+        color: white;
+        background-color: #161361;
+        border: 2px solid #161361;
+        font-size: 1rem;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        /* margin-top: 30px; */
+        text-align: center;
+        transition: .3s ease;
+        cursor: pointer;
+        transition-property: background-color, color;
+    }
+    
+    .cta:hover {
+        color: #fff;
+        font-weight: bold;
+        background-color: #29bde4;
+        border: 2px solid #29bde4;
+    }
+    
+    .final {
+        display: flex;
+        align-items: center;
+    }
+    
+    .final h4 {
+        flex: 1;
+    }
+    
+    .final .fradio {
+        flex: 2;
+    }
+    
+    .final button {
+        flex: 2;
+    }
+
+    .score p {
+        cursor: pointer;
+    }
+    .score p:nth-child(1):hover {
+        color: green;
+    }
+    .score p:nth-child(2):hover {
+        color: red;
+    }
+    
+    @media (max-width:1265px) {
+        .fbque1 .space {
+            flex: 0.1;
+        }
+    }
+    
+    @media (max-width:1140px) {
+        .fbque1 {
+            margin-left: 3%;
+        }
+        .score label {
+            font-size: 30px;
+        }
+        .fbvideo .video video {
+            width: 350px;
+        }
+    }
+    
+    @media (max-width:1000px) {
+        .score label {
+            font-size: 20px;
+        }
+        .fbvideo .video video {
+            width: 300px;
+        }
+    }
+    
+    @media (max-width:825px) {
+        .fbvideo .video video {
+            width: 400px;
+            margin-bottom: 2%;
+        }
+        .fbvideo {
+            flex-direction: column;
+        }
+        .fbque1 {
+            /* background-color: burlywood; */
+            width: 100%;
+        }
+        .fbvideo form {
+            width: 100%;
+        }
+    }
+    
+    @media (max-width:600px) {
+        .fbvideo .video video {
+            width: 300px;
+            margin-bottom: 2%;
+        }
+    }
+    
+    @media (max-width:430px) {
+        .fbque1 {
+            flex-direction: column;
+        }
+        .fv {
+            width: 60%;
+        }
+    }
+    
+    @media (max-width:395px) {
+        .fbtable {
+            margin: 2% 0;
+        }
+        .fbvideo .video video {
+            width: 250px;
+            margin-bottom: 2%;
+        }
+    }
+</style>
+
+<body>
+    <div class="header">Uploaded Test Videos</div>
+
+    <div class="fbtable">
+        <% if (data.length == 0) { %>
+            <h3 style="text-align: center;  margin: 5%; color: red;">
+                There are no pending test videos !</h3>
+            <% } else { %>
+                <% for (var i=0; i< data.length; i++) { %>
+                    <% var _id= data[i]['_id']%>
+                        <% var edu = data[i]['educatorEmail']%>
+                            <div class="fbvideo" id="div_<%=_id%>">
+                                <div class="nv">
+                                    <div class="name"><b>Educator</b> -
+                                        <%=data[i]['educatorName']%>
+                                    </div>
+                                    <div class="email"><i><%=data[i]['educatorEmail']%></i></div>
+                                    <div class="video">
+                                        <video controls="controls">
+                                            <% var ext = data[i]['testVideo'].substr(data[i]['testVideo'].lastIndexOf('.') + 1)%>
+                                <source src="/test_videos/<%=data[i]['educatorEmail']%>.<%=ext%>" type="video/mp4">
+                            </video>
+                                    </div>
+                                </div>
+                                <form method="POST" role="form" id="form_<%=_id%>">
+                                    <div class="fbques">
+                                        <div class="fbque1">
+                                            <h4>Audio Quality</h4>
+                                            <div class="score" id="audQual_<%=_id%>">
+                                                <input type="radio" value="5" name="rate1_<%=_id%>" id="rate-15_<%=_id%>">
+                                                <label for="rate-15_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="4" name="rate1_<%=_id%>" id="rate-14_<%=_id%>">
+                                                <label for="rate-14_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="3" name="rate1_<%=_id%>" id="rate-13_<%=_id%>">
+                                                <label for="rate-13_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="2" name="rate1_<%=_id%>" id="rate-12_<%=_id%>">
+                                                <label for="rate-12_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="1" name="rate1_<%=_id%>" id="rate-11_<%=_id%>">
+                                                <label for="rate-11_<%=_id%>" class="fas fa-star"></label>
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <div class="fbque1">
+                                            <h4>Video Quality</h4>
+                                            <div class="score" id="vidQuality_<%=_id%>">
+                                                <input type="radio" value="5" name="rate2_<%=_id%>" id="rate-25_<%=_id%>">
+                                                <label for="rate-25_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="4" name="rate2_<%=_id%>" id="rate-24_<%=_id%>">
+                                                <label for="rate-24_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="3" name="rate2_<%=_id%>" id="rate-23_<%=_id%>">
+                                                <label for="rate-23_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="2" name="rate2_<%=_id%>" id="rate-22_<%=_id%>">
+                                                <label for="rate-22_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="1" name="rate2_<%=_id%>" id="rate-21_<%=_id%>">
+                                                <label for="rate-21_<%=_id%>" class="fas fa-star"></label>
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <div class="fbque1">
+                                            <h4>Video Editing</h4>
+                                            <div class="score" id="vidScore_<%=_id%>">
+                                                <input type="radio" value="5" name="rate3_<%=_id%>" id="rate-35_<%=_id%>">
+                                                <label for="rate-35_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="4" name="rate3_<%=_id%>" id="rate-34_<%=_id%>">
+                                                <label for="rate-34_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="3" name="rate3_<%=_id%>" id="rate-33_<%=_id%>">
+                                                <label for="rate-33_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="2" name="rate3_<%=_id%>" id="rate-32_<%=_id%>">
+                                                <label for="rate-32_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="1" name="rate3_<%=_id%>" id="rate-31_<%=_id%>">
+                                                <label for="rate-31_<%=_id%>" class="fas fa-star"></label>
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <div class="fbque1">
+                                            <h4>Presentation</h4>
+                                            <div class="score" id="ppt_<%=_id%>">
+                                                <input type="radio" value="5" name="rate4_<%=_id%>" id="rate-45_<%=_id%>">
+                                                <label for="rate-45_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="4" name="rate4_<%=_id%>" id="rate-44_<%=_id%>">
+                                                <label for="rate-44_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="3" name="rate4_<%=_id%>" id="rate-43_<%=_id%>">
+                                                <label for="rate-43_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="2" name="rate4_<%=_id%>" id="rate-42_<%=_id%>">
+                                                <label for="rate-42_<%=_id%>" class="fas fa-star"></label>
+                                                <input type="radio" value="1" name="rate4_<%=_id%>" id="rate-41_<%=_id%>">
+                                                <label for="rate-41_<%=_id%>" class="fas fa-star"></label>
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <div class="fbque1">
+                                            <h4>Comments</h4>
+                                            <div class="score">
+                                                <input type="text" id="remarks_<%=_id%>">
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <div class="fbque1" style=" margin-bottom: 3%;">
+                                            <h4>Final Verdict</h4>
+                                            <div class="score fv" style="display: flex; justify-content: space-around;">
+                                                <p onclick="$('#final_<%=_id%>').val('y'); $(this).css('color', 'green'); $('#no_<%=_id%>').css('color', 'black')" id="yes_<%=_id%>">Yes</p>
+                                                <p onclick="$('#final_<%=_id%>').val('n'); $(this).css('color', 'red'); $('#yes_<%=_id%>').css('color', 'black')" id="no_<%=_id%>">No</p>
+                                                <input type="text" hidden id="final_<%=_id%>">
+                                            </div>
+                                            <div class="space"></div>
+                                        </div>
+                                        <center><button type="button" onclick="saveFeedback('<%=edu%>', '<%=_id%>')" class="cta">SAVE</button></center>
+                                    </div>
+                                </form>
+                            </div>
+                            <% }} %>
+    </div>
+
+
+    <script>
+        function saveFeedback(edu, id) {
+            if($("input[type=radio][name=rate1_" + id + "]:checked").val() != '' && $("input[type=radio][name=rate2_" + id + "]:checked").val() != '' && $("input[type=radio][name=rate3_" + id + "]:checked").val() != '' && $("input[type=radio][name=rate4_" + id + "]:checked").val() != '' && $("#remarks_" + id).val() != '' && $("#final_" + id).val() != '') {
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/saveFeedback",
+                    data: {
+                        'email': edu,
+                        'audQual': $("input[type=radio][name=rate1_" + id + "]:checked").val(),
+                        'vidQual': $("input[type=radio][name=rate2_" + id + "]:checked").val(),
+                        'vidEditing': $("input[type=radio][name=rate3_" + id + "]:checked").val(),
+                        'ppt': $("input[type=radio][name=rate4_" + id + "]:checked").val(),
+                        'remarks': $("#remarks_" + id).val(),
+                        'final': $("#final_" + id).val()
+                    },
+                    success: (data) => {
+                        alert('saved successfully');
+                        document.getElementById('div_' + id).style.display = 'none';
+                    },
+                    error: (e) => {
+                        alert(e.responseText)
+                    }
+                });
+            } else {
+                alert('please fill out all the details');
+            }
+        }
+    </script>
+</body>
+
+</html>
+
+</html>

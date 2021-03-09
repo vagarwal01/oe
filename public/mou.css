@@ -1,0 +1,173 @@
+* {
+    font-weight: lighter;
+}
+
+p {
+    font-weight: lighter;
+}
+
+.text-bold {
+    font-weight: 900;
+}
+
+.text-bolds {
+    font-weight: 900;
+    font-style: italic;
+}
+
+h4 {
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+a {
+    color: blue;
+    text-decoration: underline;
+}
+
+.tooltip_data {
+    font-size: 1.5rem;
+    font-weight: 900;
+    width: max-content;
+    /* background-color: #29bde4; */
+    color: red;
+    padding: 4rem 1rem;
+}
+.fa-question-circle {
+    /* color: red; */
+    /* font-size: 1rem; */
+}
+.span_hover {
+    color: grey;
+}
+
+.span_hover:hover {
+    color: #161361;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.input_details {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid black;
+    color: black;
+    outline: none;
+    padding: 5px;
+    margin: 0 2%;
+}
+
+.input_details::placeholder {
+    color: black;
+    opacity: 0.6;
+}
+
+.input_details:focus {
+    background: transparent;
+    border-bottom: 2px solid #161361;
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+    color: #161361;
+    outline: none;
+}
+.input_details_focus {
+    background: transparent;
+    border-bottom: 2px solid #161361;
+    border-color: dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+    color: #161361;
+    outline: none;
+}
+
+.buttons {
+    position: block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    top: 400px;
+    left: 20%;
+}
+
+.cta {
+    display: inline-block;
+    margin-right: 20px;
+    padding: 10px 15px;
+    color: white;
+    background-color: #161361;
+    border: 2px solid #161361;
+    font-size: 1.3rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: .1rem;
+    margin-top: 30px;
+    transition: .3s ease;
+    outline: none;
+    transition-property: background-color, color;
+}
+
+.cta:hover {
+    color: white;
+    background-color: #29bde4;
+    border: 2px solid #29bde4;
+}
+
+.labelling {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+label {
+    margin: 10px;
+    font-weight: bold;
+}
+
+label::-webkit-scrollbar {
+    width: 0px;
+}
+
+.info_details {
+    background: #33999e;
+    color: white;
+    border: none;
+    outline: none;
+    padding: 10px;
+    margin: 10px;
+}
+
+.info_details:hover,
+.info_details:focus {
+    background: #33999e;
+    color: white;
+    border: 1px solid #161361;
+    outline: none;
+    padding: 10px;
+}
+
+.info_details::placeholder {
+    color: white;
+}
+
+.signatureImagediv {
+    height: 50px;
+    width: 180px;
+}
+
+.signatureImage {
+    object-fit: contain;
+    object-position: left;
+    line-height: 50px;
+}
+
+.fa-circle {
+    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}

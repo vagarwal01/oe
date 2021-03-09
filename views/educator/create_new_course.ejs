@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Course Creation</title>
+    <link rel="stylesheet" href="/create_new_course.css">
+
+    <style>
+        .active {
+            border: 2px solid red;
+        }
+        
+        select optgroup {
+            background-color: #000;
+        }
+        
+        select option {
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2 class="top_heading">
+        New <span class="data">Course Creation</span>
+    </h2>
+    <h4>Your Journey of creating a Course is a few steps away.</h4>
+    <div class="wrappers">
+        <div class="card">
+            <img src="/index/Mainstream_Courses.jpg" alt="Mainstream_Courses.jpg">
+            <div class="info">
+                <h1>Main Stream Courses</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/index/Value_Based_Courses.jpg" alt="Value_Based_Courses.jpg">
+            <div class="info">
+                <h1>Value Based Courses</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/index/Skill_Development.jpg" alt="Skill_Development.jpg">
+            <div class="info">
+                <h1>Value Added and Skill Development Courses</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/index/Personality_Development_Courses.jpg" alt="Personality_Development_Courses.jpg">
+            <div class="info">
+                <h1>Personality Development Courses</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/index/Professional_Education_Courses.jpg" alt="Professional_Education_Courses.jpg">
+            <div class="info">
+                <h1>Professional Education Courses</h1>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="/index/Stem_Courses.jpg" alt="Stem_Courses.jpg">
+            <div class="info">
+                <h1>STEM Courses</h1>
+            </div>
+        </div>
+    </div>
+    <div class="newcourseform" id="newcourseform">
+        <form method="POST" id="upload_annexure_form" role="form" enctype="multipart/form-data">
+            <h3 class="course-info">STEP 1 : Choose the category your course would fit in</h3>
+            <div class="select" id="coursecategorydiv">
+                <select id="coursecategory" name="coursecategory" >
+                    <option hidden selected value="none">Category</option>
+                    <option value="Main Stream Courses">Main Stream Courses</option>
+                    <option value="Value Based Courses">Value Based Courses</option>
+                    <option value="Value Added and Skill Development Courses">Value Added and Skill Development Courses</option>
+                    <option value="Personality Development Courses">Personality Development Courses</option>
+                    <option value="Professional Education Courses">Professional Education Courses</option>
+                    <option value="STEM Courses">STEM Courses</option>
+                </select>
+                <span class="focus"></span>
+            </div>
+
+            <div class="course-info">
+                <h3>STEP 2 : Choose the sub category of the course</h3>
+                <p style="margin-left: 6%;">
+                    <span style="color: red;">*</span> If the sub categories given in the options dont match your needs, then select other and enter the preferred course sub category.</p>
+            </div>
+
+            <div class="courseTitleDiv">
+                <div class="select noselect" id="coursesubcatdiv">
+                    <select id="coursesubcat" name="coursesubcat">
+                        <option selected disabled value="none">* Choose Category First</option>
+                    </select>
+                </div>
+                <div class="form__group" style="">
+                    <input class="form__field" placeholder="Create your own sub category here" style="display: none;" name="otherCSC" id="otherCSC"/>
+                    <label for="otherCSC" class="form__label">Create your own sub category here</label>
+                </div>
+                <!-- <input type="text" class="courseTitleDivinput" name="otherCSC" id="otherCSC" style="display: none; padding: 10px 5px;" placeholder="Enter sub category here"> -->
+            </div>
+
+
+            <div class="course-info">
+                <h3>STEP 3 : Choose the title of the course</h3>
+                <p style="margin-left: 6%;">
+                    <span style="color: red;">*</span> If the titles given in the options dont match your needs, then select other and enter the preferred course title.</p>
+            </div>
+
+            <div class="courseTitleDiv">
+                <div class="select noselect" id="coursetitlediv">
+                    <select id="coursetitle" name="coursetitle">
+                        <option selected disabled value="none">* Choose Sub Category First</option>
+                    </select>
+                </div>
+                <div class="form__group" style="">
+                    <input class="form__field" placeholder="Create your own title here" style="display: none;" name="otherCT" id="otherCT"/>
+                    <label for="otherCT" class="form__label">Create your own title here</label>
+                </div>
+            </div>
+
+
+
+            <h3 class="course-info">STEP 4 : Select the language of the course</h3>
+            <div class="select" id="courselanguagediv">
+                <select id="courselanguage" name="courselanguage">
+                    <option hidden selected value="none">Language</option>
+                    <option value="Hindi">Hindi</option>
+                    <option value="English">English</option>
+                    <option value="Hinglish">Hinglish</option>
+                    <option value="Sanskrit">Sanskrit</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Telugu">Telugu</option>
+                    <option value="Kannada">Kannada</option>
+                    <option value="Malayalam">Malayalam</option>
+                    <option value="Odia">Odia</option>
+                    <option value="Pali">Pali</option>
+                    <option value="Persian">Persian</option>
+                    <option value="Prakrit">Prakrit</option>
+                </select>
+                <span class="focus"></span>
+            </div>
+            <h3 class="course-info">STEP 5 : Upload the Annexure-1</h3>
+            <p class="courseinfo-p">1. Make sure you prepare the Annexure-1 wisely. Based on this Annexure-1 only, the course uploading process will proceed further.</p>
+            <p class="courseinfo-p">2. Plan your course structure before heading towards uploading the Annexure-1.</p><br>
+            <p class="courseinfo-p"><a class="a-link" href="/be-an-educator/download/annexure-1" target="_blank">Download</a> the Annexure-1 format, prepare your course structure in the format specified and upload the Annexure-1 below.</p><br>
+            <p class="courseinfo-p">Have Some Doubts ?
+                <a href="/be-an-educator/dashboard/bookYourSlot" target="_blank" class="a-link">Book your seat</a> now to get the personal training.
+            </p>
+            <div class="file_upload" id="annexure_upload_file">
+                <div class="drop-zone">
+                    <span class="drop-zone__prompt"><i class="fas fa-cloud-upload-alt"></i><br>Drop file here or click to upload<br><h4>Max file size: 2GB<br>File type: .xlsx</h4></span>
+                    <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" id="annexure" name="annexure" class="drop-zone__input">
+                </div>
+                <div class="upload_btn" style="width: 100%;">
+                    <button type="button" class="cta" id="annexure_upload_btn">Upload</button>
+                    <div id="test_error_message"></div>
+                    <div id="progressdiv" style="display: none;">
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <div class="uploadstatus" style="width: 100%; display: flex; align-items: center; padding: 2% 0; justify-content: space-around; overflow-x: hidden;">
+                            <p id="uploadStatus" style="color: green; width: fit-content;">uploading your annexure-1</p>
+                            <img src="/ajax-loader.gif" id="loaderimg" style="width: 50px">
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- <button class="cta" style="margin-right: 0; padding: 1% 2%; font-size: 1.5rem;" id="annexurReturnToPP">RETURN TO PREVIOUS PAGE</button> -->
+    </div>
+    <div class="test_video_success_upload" id="annexure_upload_success">
+        <hr style="margin-bottom: 2%;">
+        <b>Your Annexure-1 has been successfully uploaded.</b>
+        <!-- <br><br> You are now ready to upload the course videos. -->
+        <!-- <i class="fas fa-smile-wink" style="color: orangered;"></i> -->
+        <br><br>Please <a href="/be-an-educator/dashboard/signMou-newCourse" style="color: blue; text-decoration: underline;">Sign the MoU</a> now.
+    </div>
+
+    <!-- <button class="cta">CREATE NOW</button> -->
+
+
+    <script>
+        var subcat = {
+            'Main Stream Courses': ['Art and Literature', 'Languages', 'Philosophy', 'Indology', 'Dance and Theatre', 'Pure and Applied Sciences', 'Mathematics', 'Statistics', 'Sociology', 'Economics', 'Translation and Interpretation', 'Sports'],
+            'Value Based Courses': ['Human Values', 'Indology', 'Yoga and Meditation'],
+            'Value Added and Skill Development Courses': ['Career Development', 'Business Skills', 'Industry 4.0 Skills', 'HealthCare', 'Designing Skills', 'Academic Writing', 'Entrepreneurship and Innovation', 'Software Trainings'],
+            'Personality Development Courses': ['Personal Development', 'Communication Skills', 'Parenting Skills', 'Psychology', 'Stress Management'],
+            'Professional Education Courses': ['Agriculture Education', 'Legal Education', 'Health Care Education', 'Technical Education'],
+            'STEM Courses': ['Science', 'Technology', 'Engineering', 'Mathematics']
+        };
+        var ttles = {
+            'Languages': ['English', 'Hindi','Korean', 'Japenese', 'Thai', 'French', 'German', 'Spanish', 'Portugese', 'Russian'],
+            'Human Values': ['Know Indian Constitution', 'Gender Equality', 'Human Value & Ethics', 'Intercultural Competencies', 'Intercultural Sports & North East', 'Legal Awareness', 'vision of Happiness & Perfect Society'],
+            'Indology': ['Study of Indology', 'Ancient Indian Art & Culture', 'Ancient Indian Literature', 'Ancient Indian Science & Technology'],
+            'Career Development': ['Soft Skills', 'Career Guidance', 'Technical Skills for Resume, Cover letters and Interview', 'Preparing for Aptitude Test', 'Employable Skills'],
+            'Business Skills': ['Business Storytelling Skills', 'Professional Writings', 'Problem solving Skills', 'Emotional intelligence'],
+            'Industry 4.0 Skills': ['Machine Learning', 'Artificial Intelligence', 'Soft skills for Industry 4.0', 'Cloud Computing', 'Augmented Reality', 'Advanced Robotics', 'IoT', 'Data Analysis'],
+            'HealthCare': ['AI in Healthcare', 'Healthcare Management', 'Overcoming Anxiety & Shyness', 'Nutrition Course', 'Digital Well Being', 'Understanding Mental Health-Continuum, Culture & Social Media', 'Speech Therapy'],
+            'Designing Skills': ['Product Designing', 'Web Designing', 'Graphic Designing', 'Video Editing'],
+            'Academic Writing': ['Research Methodology'],
+            'Entrepreneurship and Innovation': ['Fundamentals of IPR', 'Digital marketing'],
+            'Personal Development': ['Personal Branding', 'Leadership', 'Life Coaching'],
+            'Communication Skills': ['Creative Writing', 'Content Writing', 'Spoken English'],
+            'Parenting Skills': ['Parental Role in Career Guidance and Counseling'],
+            'Technical Education': ['Engineering', 'Pharmacy', 'Catering Technology', 'Hotel Management', 'Management', 'Architecture', 'Town Planning', 'Computer Education', 'Biotechnology', 'Genomics', 'Nanotechnology', 'Neuroscience']
+        }
+        document.getElementById('coursecategory').addEventListener('change', function populate_child(e) {
+            var coursesubcat = document.getElementById('coursesubcat')
+            $('#coursesubcatdiv').removeClass('noselect')
+            $('#coursetitlediv').addClass('noselect')
+            coursesubcat.innerHTML = '<option value="none" hidden selected>Sub Category</option>';
+            itm = e.target.value;
+            if (itm in subcat) {
+                document.getElementById('otherCSC').style.display = 'none'
+                document.getElementById('otherCT').style.display = 'none'
+                var coursetitle = document.getElementById('coursetitle')
+                coursetitle.innerHTML = '<option selected disabled value="none">* Choose Sub Category First</option>'
+                for (i = 0; i < subcat[itm].length; i++) {
+                    coursesubcat.innerHTML = coursesubcat.innerHTML + '<option>' + subcat[itm][i] + '</option>';
+                }
+                coursesubcat.innerHTML = coursesubcat.innerHTML + '<option value="Other">Other</option>';
+            }
+        });
+        document.getElementById('coursesubcat').addEventListener('change', function populate_child(e) {
+            var coursetitle = document.getElementById('coursetitle')
+            itm = e.target.value;
+            if (itm in ttles) {
+                $('#coursetitlediv').removeClass('noselect')
+                document.getElementById('otherCSC').style.display = 'none'
+                document.getElementById('otherCT').style.display = 'none'
+                coursetitle.innerHTML = '<option value="none" hidden selected>Title</option>';
+                for (i = 0; i < ttles[itm].length; i++) {
+                    coursetitle.innerHTML = coursetitle.innerHTML + '<option>' + ttles[itm][i] + '</option>';
+                }
+                coursetitle.innerHTML = coursetitle.innerHTML + '<option value="Other">Other</option>';
+            } else if (itm == 'Other') {
+                $('#coursetitlediv').addClass('noselect')
+                document.getElementById('otherCSC').style.display = 'block'
+                document.getElementById('otherCT').style.display = 'block'
+                coursetitle.innerHTML = '<option hidden selected value="Other">Other</option>';
+            } else {
+                $('#coursetitlediv').addClass('noselect')
+                document.getElementById('otherCT').style.display = 'block'
+                coursetitle.innerHTML = '<option value="Other" disabled selected>No Defined Titles Yet</option>';
+            }
+        });
+        document.getElementById('coursetitle').addEventListener('change', () => {
+            var t = document.getElementById('coursetitle').value
+            if (t == 'Other') {
+                document.getElementById('otherCT').style.display = 'block'
+            } else {
+                document.getElementById('otherCT').style.display = 'none'
+            }
+        })
+
+
+        $(document).ready(() => {})
+
+
+        document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
+            const dropZoneElement = inputElement.closest(".drop-zone");
+
+            dropZoneElement.addEventListener("click", (e) => {
+                inputElement.click();
+            });
+
+            inputElement.addEventListener("change", (e) => {
+                if (inputElement.files.length) {
+                    updateThumbnail(dropZoneElement, inputElement.files[0]);
+                }
+            });
+
+            dropZoneElement.addEventListener("dragover", (e) => {
+                e.preventDefault();
+                dropZoneElement.classList.add("drop-zone--over");
+            });
+
+            ["dragleave", "dragend"].forEach((type) => {
+                dropZoneElement.addEventListener(type, (e) => {
+                    dropZoneElement.classList.remove("drop-zone--over");
+                });
+            });
+
+            dropZoneElement.addEventListener("drop", (e) => {
+                e.preventDefault();
+                if (e.dataTransfer.files.length) {
+                    inputElement.files = e.dataTransfer.files;
+                    updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+                }
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        function updateThumbnail(dropZoneElement, file) {
+            let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
+            // First time - remove the prompt
+            if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+                dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            }
+            // First time - there is no thumbnail element, so lets create it
+            if (!thumbnailElement) {
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("drop-zone__thumb");
+                dropZoneElement.appendChild(thumbnailElement);
+            }
+            thumbnailElement.dataset.label = file.name;
+        }
+
+        document.getElementById('annexure_upload_btn').onclick = function() {
+            var input = document.getElementById("annexure");
+            var file = input.files[0];
+            var limit = 2147483648;
+            if ($('#coursecategory').val() == 'none') {
+                $('#coursecategorydiv').addClass('active')
+                document.getElementById('test_error_message').innerHTML = '<h4>Please choose the category.</h4>'
+                return
+            } else {
+                $('#coursecategorydiv').removeClass('active')
+            }
+            if (document.getElementById('coursesubcat').value == 'none') {
+                $('#coursesubcatdiv').addClass('active')
+                document.getElementById('test_error_message').innerHTML = '<h4>Please choose the sub category.</h4>'
+                return
+            } else if (document.getElementById('coursesubcat').value == 'Other') {
+                if ($('#otherCSC').val() == '') {
+                    document.getElementById('otherCSC').style.border = '2px solid red'
+                    document.getElementById('test_error_message').innerHTML = '<h4>Please mention a sub category.</h4>'
+                    return
+                } else
+                    document.getElementById('otherCSC').style.border = '1px solid #161361'
+                $('#coursesubcatdiv').removeClass('active')
+            } else {
+                document.getElementById('otherCSC').style.border = '1px solid #161361'
+                $('#coursesubcatdiv').removeClass('active')
+                $('#otherCSC').removeClass('active')
+            }
+            console.log('titl')
+            console.log(document.getElementById('coursetitle').value)
+            console.log('other titl')
+            console.log($('#otherCT').val())
+            if (document.getElementById('coursetitle').value == 'none') {
+                $('#coursetitlediv').addClass('active')
+                document.getElementById('test_error_message').innerHTML = '<h4>Please choose the title.</h4>'
+                return
+            } else if (document.getElementById('coursetitle').value == 'Other') {
+                if ($('#otherCT').val() == '') {
+                    document.getElementById('otherCT').style.border = '2px solid red'
+                    document.getElementById('test_error_message').innerHTML = '<h4>Please mention a title.</h4>'
+                    return
+                } else
+                    document.getElementById('otherCT').style.border = '1px solid #161361'
+                $('#coursetitlediv').removeClass('active')
+            } else {
+                document.getElementById('otherCT').style.border = '1px solid #161361'
+                $('#coursetitlediv').removeClass('active')
+                $('#otherCT').removeClass('active')
+            }
+            if ($('#courselanguage').val() == 'none') {
+                $('#courselanguagediv').addClass('active')
+                document.getElementById('test_error_message').innerHTML = '<h4>Please choose the language.</h4>'
+                return
+            } else {
+                $('#courselanguagediv').removeClass('active')
+            }
+            if (!file) {
+                document.getElementById('test_error_message').innerHTML = '<h4>Please upload a file.</h4>'
+                return
+            } else {
+                document.getElementById('test_error_message').innerHTML = ''
+            }
+            var idxDot = file.name.lastIndexOf(".") + 1;
+            var extFile = file.name.substr(idxDot, file.name.length).toLowerCase();
+            if (extFile == "xlsx" && file.size <= limit) {
+                document.getElementById('test_error_message').innerHTML = ''
+                // document.getElementById('loading_circle').style.display = 'block';
+                document.getElementById('annexure_upload_btn').style.display = 'none';
+                var form = $('#upload_annexure_form')[0];
+                var data = new FormData(form);
+                
+                document.getElementById('progressdiv').style.display = 'block'
+                console.log(document.getElementById('coursetitle').value)
+                console.log($('#otherCT').val())
+
+                $.ajax({
+                    xhr: function() {
+                        var xhr = new window.XMLHttpRequest();
+                        xhr.upload.addEventListener("progress", function(evt) {
+                            if (evt.lengthComputable) {
+                                document.getElementById('loaderimg').style.display = 'none'
+                                var percentComplete = ((evt.loaded / evt.total) * 100);
+                                $(".progress-bar").width(percentComplete + '%');
+                                $(".progress-bar").html(percentComplete+'%');
+                                if(percentComplete == 100 || percentComplete == '100') {
+                                    document.getElementById('uploadStatus').innerText = 'Creating your course.'
+                                    document.getElementById('loaderimg').style.display = 'inline-block'
+                                }
+                            }
+                        }, false);
+                        return xhr;
+                    },
+                    type: "POST",
+                    enctype: "multipart/form-data",
+                    url: "/be-an-educator/upload/annexure",
+                    data: data,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    beforeSend: function(){
+                        $(".progress-bar").width('0%');
+                        document.getElementById('loaderimg').style.display = 'none'
+                        document.getElementById('uploadStatus').innerText = 'Uploading your Annexure-1'
+                    },
+                    success: (data) => {
+                        if (data == 'success') {
+                            document.getElementById('newcourseform').style.display = 'none';
+                            document.getElementById('annexure_upload_success').style.display = 'block'
+                        } else {
+                            console.log(data)
+                            document.getElementById('annexure_upload_btn').style.display = 'block';
+                            document.getElementById('test_error_message').innerHTML = '<h4>Error while creating new course !</h4>'
+                        }
+                        document.getElementById('progressdiv').style.display = 'none'
+                        document.getElementById('uploadStatus').innerText = ''
+                    },
+                    error: (e) => {
+                        console.log(e)
+                        document.getElementById('test_error_message').innerHTML = '<h4>Something went wrong. Please try again later.</h4>'
+                        document.getElementById('progressdiv').style.display = 'none'
+                        document.getElementById('uploadStatus').innerText = ''
+                        document.getElementById('annexure_upload_btn').style.display = 'block';
+                    }
+                });
+            } else if (file.size > limit) {
+                document.getElementById('test_error_message').innerHTML = '<h4>Max file size allowed is 2GB.</h4>'
+                return
+            } else if (extFile != "mp4" || extFile != "mov") {
+                document.getElementById('test_error_message').innerHTML = '<h4>Only .xlsx file is allowed.</h4>'
+                return
+            }
+        }
+    </script>
+
+</body>
+
+
+</html>
